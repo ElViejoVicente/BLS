@@ -269,7 +269,6 @@
     <Content Include="Content\all.css" />
     <Content Include="Content\generic\pageStyle.css" />
     <Content Include="Content\generic\StylesMovil.css" />
-    <Content Include="headerMovil.aspx" />
     <Content Include="imagenes\menu\configuracion.ico" />
     <Content Include="imagenes\menu\controlProduccion.ico" />
     <Content Include="imagenes\menu\controlProduccionLarge.ico" />
@@ -291,13 +290,12 @@
     <Content Include="imagenes\pages\edit-delete.png" />
     <Content Include="imagenes\pages\edit-find.png" />
     <Content Include="imagenes\pages\excel-icon.jpg" />
-    <Content Include="indexMovil.aspx" />
-    <Content Include="menuMovil.aspx" />
     <Content Include="Controles\Usuario\InfoMsgBox.ascx" />
     <Content Include="Global.asax" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <Content Include="PLD\ActiviadesVulnerables.aspx" />
+    <Content Include="RegistroClientes\demoBS.aspx" />
     <Content Include="Reportes\reporteAcuseConsultaListaNegra.aspx" />
     <Content Include="Reportes\reporteAcuseConsultaListaNegraSimple.aspx" />
     <Content Include="Reportes\reporteAvisoNotarial.aspx" />
@@ -443,6 +441,35 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="SwitcherResources\Content\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Cerulean\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Cosmo\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Cyborg\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Darkly\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Flatly\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Journal\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\litera\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Lumen\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\lux\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\materia\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\minty\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\pages.css" />
+    <Content Include="SwitcherResources\Content\pulse\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Sandstone\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Simplex\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\sketchy\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Slate\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\solar\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Spacelab\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Superhero\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\themes.css" />
+    <Content Include="SwitcherResources\Content\United\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Content\Yeti\bootstrap.min.css" />
+    <Content Include="SwitcherResources\Scripts\bootstrap.min.js" />
+    <Content Include="SwitcherResources\Scripts\jquery-3.1.1.js" />
+    <Content Include="SwitcherResources\Scripts\popper.min.js" />
+    <Content Include="SwitcherResources\Themes.xml" />
+    <Content Include="Themes.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -614,27 +641,6 @@
     <Compile Include="Configuracion\usuarios.aspx.designer.cs">
       <DependentUpon>usuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="headerMovil.aspx.cs">
-      <DependentUpon>headerMovil.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="headerMovil.aspx.designer.cs">
-      <DependentUpon>headerMovil.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="indexMovil.aspx.cs">
-      <DependentUpon>indexMovil.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="indexMovil.aspx.designer.cs">
-      <DependentUpon>indexMovil.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="menuMovil.aspx.cs">
-      <DependentUpon>menuMovil.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="menuMovil.aspx.designer.cs">
-      <DependentUpon>menuMovil.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Controles\Servidor\PageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -688,6 +694,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroClientes\demoBS.aspx.cs">
+      <DependentUpon>demoBS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroClientes\demoBS.aspx.designer.cs">
+      <DependentUpon>demoBS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reportes\reporteAcuseConsultaListaNegra.aspx.cs">
       <DependentUpon>reporteAcuseConsultaListaNegra.aspx</DependentUpon>
@@ -831,8 +844,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fonts\" />
+    <Folder Include="NewFolder1\" />
     <Folder Include="Produccion\" />
-    <Folder Include="RegistroClientes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -841,6 +854,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
     <Content Include="Scripts\umd\popper-utils.js.map" />
     <Content Include="Scripts\README.md" />
+    <Content Include="SwitcherResources\Content\LICENSE" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -39,6 +39,10 @@
                                     <RequiredField IsRequired="True" ErrorText="El campo 'Usuario' es obligatorio" />
                                 </ValidationSettings>
                             </dx:ASPxTextBox>
+
+                            
+
+
                         </div>
 
                         <div class="form-row">
