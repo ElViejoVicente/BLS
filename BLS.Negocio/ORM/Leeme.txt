@@ -1,0 +1,20 @@
+﻿Hola colega programador. 
+
+me da gusto que tengas la curiosidad de mirar este archivo
+
+es importante comentar que estas clases derivan directamente de las tablas de las base de datos QHSE ,  para respetar el ORM no se permite agregar campos extra en  
+
+estas clases a menos que el campo nueva exista en la tabla, y por qué esta restricción, bueno estamos tratando de usar Dapper para modelar y consultar nuestros datos.
+
+Si necesitas una propiedad calculada, extra crear una clase Bean+ el nombre de clase y usa herencia para obtener los campos de la clase ORM.
+
+Por último, no olvidemos el correcto “naming Convertion” del código 
+
+-Class usar -> PascalCase
+-Methods / Funcion usar -> PascalCase
+-Arguments usar ->    camelCase
+-Local Variables usar -> camelCase
+
+Hay que ponernos chingones 
+
+VHG 2023-12-22

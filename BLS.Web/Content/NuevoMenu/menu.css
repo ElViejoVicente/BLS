@@ -1,0 +1,169 @@
+﻿/* =========================
+   ⚙️ Variables (paleta base)
+   ========================= */
+:root {
+    /* Color base */
+    --brand: #054f77;
+    /* Tonos más oscuros (derivados de #054f77) */
+    --brand-600: #043f5f;
+    --brand-700: #033048;
+    --brand-800: #022030;
+
+    --on-brand: #ffffff;
+    --muted: #6b7c6b;
+    --text: #1f2a1a;
+}
+
+/* Reset mínimo */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--text);
+    background: #f6f7f5;
+}
+
+/* ===== Raíz del menú (dentro del iframe) ===== */
+.menu-wrap {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 🔒 evita que asome contenido cuando colapsa */
+}
+
+/* Cuerpo del menú (altura la ajusta JS) */
+.menu-body {
+    height: 100vh;
+    overflow: hidden; /* scroll vive en .menu-panel */
+    padding: 10px 10px 14px;
+}
+
+/* ===== Credenciales ultracompactas (sin avatar) ===== */
+.user-card.compact {
+    background: transparent;
+    padding: 4px 6px;
+    border-left: 3px solid var(--brand-600);
+    border-radius: 6px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.user-role, .user-name, .user-mail {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user-role {
+    font-weight: 700 !important;
+    color: var(--brand-700);
+    font-size: 12.5px;
+}
+
+.user-name {
+    font-weight: 700 !important;
+    color: #2a2f29;
+    font-size: 12.5px;
+}
+
+.user-mail {
+    font-weight: 600 !important;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* Separador fino */
+.menu-sep {
+    border: none;
+    height: 1px;
+    margin: 6px 0 8px;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,.12), transparent);
+}
+
+/* Panel del árbol: aquí vive el scroll */
+.menu-panel {
+    overflow: auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.04), 0 6px 14px rgba(0,0,0,.06);
+    padding: 6px;
+    height: calc(100% - 120px); /* valor inicial; JS lo corrige con precisión */
+}
+
+/* ===== ASPxTreeView – suavizado ===== */
+.treMenu {
+    width: 100%;
+}
+
+    .treMenu a, .treMenu span {
+        font-size: 12px;
+    }
+
+    .treMenu .dxtv-ndSel, .treMenu .dx-treeselected {
+        background: rgba(72,118,46,.14) !important;
+        border-radius: 8px;
+    }
+
+    .treMenu .dxtv-ndHov, .treMenu .dx-treehover {
+        background: rgba(72,118,46,.08) !important;
+        border-radius: 8px;
+    }
+
+/* Scrollbar sutil */
+.menu-panel {
+    scrollbar-width: thin;
+    scrollbar-color: var(--brand-600) #f1f3f1;
+}
+
+    .menu-panel::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .menu-panel::-webkit-scrollbar-thumb {
+        background: linear-gradient(var(--brand-600), var(--brand));
+        border-radius: 6px;
+    }
+
+    .menu-panel::-webkit-scrollbar-track {
+        background: #f1f3f1;
+        border-radius: 6px;
+    }
+
+/* ===== ESTADO COLAPSADO (activado por el header) ===== */
+/* El header agrega .is-collapsed a .menu-wrap dentro del iframe del menú.
+   Con esto ocultamos TODO el contenido interno, sin “rebanadas” visibles. */
+.menu-wrap.is-collapsed .menu-body,
+.menu-wrap.is-collapsed .user-card,
+.menu-wrap.is-collapsed .menu-sep,
+.menu-wrap.is-collapsed #menuPanel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0 !important;
+    height: 100vh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    overflow: hidden !important;
+}
+
+/* Responsivo mínimo */
+@media (max-width: 520px) {
+    .user-role, .user-name {
+        font-size: 12px;
+    }
+
+    .user-mail {
+        font-size: 11.5px;
+    }
+}

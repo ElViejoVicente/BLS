@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configurationSnapshot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:schemas-microsoft-com:xml-wcfconfigurationsnapshot">
+  <behaviors />
+  <bindings>
+    <binding digest="System.ServiceModel.Configuration.CustomBindingElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data name=&quot;ZWS_SAPLETRA_GGB_BND&quot;&gt;&lt;httpsTransport authenticationScheme=&quot;Basic&quot; /&gt;&lt;textMessageEncoding messageVersion=&quot;Soap11&quot; /&gt;&lt;/Data&gt;" bindingType="customBinding" name="ZWS_SAPLETRA_GGB_BND" />
+  </bindings>
+  <endpoints>
+    <endpoint normalizedDigest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;http://sapjr-ds.grupoag.es:8080/sap/bc/srt/rfc/sap/zws_sapletra_ggb/100/zws_sapletra_ggb/zws_sapletra_ggb_bnd&quot; binding=&quot;customBinding&quot; bindingConfiguration=&quot;ZWS_SAPLETRA_GGB_BND&quot; contract=&quot;WS_SAP.ZWS_SAPLETRA_GGB&quot; name=&quot;ZWS_SAPLETRA_GGB_BND&quot; /&gt;" digest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;http://sapjr-ds.grupoag.es:8080/sap/bc/srt/rfc/sap/zws_sapletra_ggb/100/zws_sapletra_ggb/zws_sapletra_ggb_bnd&quot; binding=&quot;customBinding&quot; bindingConfiguration=&quot;ZWS_SAPLETRA_GGB_BND&quot; contract=&quot;WS_SAP.ZWS_SAPLETRA_GGB&quot; name=&quot;ZWS_SAPLETRA_GGB_BND&quot; /&gt;" contractName="WS_SAP.ZWS_SAPLETRA_GGB" name="ZWS_SAPLETRA_GGB_BND" />
+  </endpoints>
+</configurationSnapshot>

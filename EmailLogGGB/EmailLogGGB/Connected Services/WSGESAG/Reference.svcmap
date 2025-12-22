@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="71dcc1a9-fed4-4ebe-bb6a-603f156b872c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WsGesag.xsd" MetadataType="Schema" ID="9a701a67-4483-42a0-9298-276c416cfbaa" SourceId="1" SourceUrl="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?xsd=xsd4" />
+    <MetadataFile FileName="WsGesag1.xsd" MetadataType="Schema" ID="e2f708e5-d6af-4f47-8ce2-71bfede1fd02" SourceId="1" SourceUrl="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?xsd=xsd2" />
+    <MetadataFile FileName="WsGesag.disco" MetadataType="Disco" ID="42dd6402-77e1-4193-ad34-38d4aef54e33" SourceId="1" SourceUrl="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?disco" />
+    <MetadataFile FileName="WsGesag.wsdl" MetadataType="Wsdl" ID="f31b96da-fa5c-487e-8856-f4ea87457e99" SourceId="1" SourceUrl="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?wsdl" />
+    <MetadataFile FileName="WsGesag2.xsd" MetadataType="Schema" ID="b51acc2a-1d3a-49c8-a290-652765b42557" SourceId="1" SourceUrl="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?xsd=xsd1" />
+    <MetadataFile FileName="WsGesag3.xsd" MetadataType="Schema" ID="3e0d81e6-5329-4104-a860-c5eb96ed13da" SourceId="1" SourceUrl="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?xsd=xsd0" />
+    <MetadataFile FileName="WsGesag4.xsd" MetadataType="Schema" ID="ba173d0b-7308-419f-adac-d039b9c5fca5" SourceId="1" SourceUrl="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

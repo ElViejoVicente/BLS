@@ -1,0 +1,72 @@
+﻿
+@font-face {
+    font-family: "Engschrift";
+    src: url("../../fonts/DINEngschrift.ttf");
+}
+
+@font-face {
+    font-family: "DIN";
+    src: url("../../fonts/DINRegular.ttf");
+}
+
+html, body {
+    width: 100%;
+    height:100%;
+    margin-left: 1px;
+    margin-top: 1px;
+}
+
+.Principal {
+    width: 100%;
+    height: 100%;
+}
+
+.CLPageHeader {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #a52a2a;
+    padding-left: 10px;
+    padding-top: 8px;
+}
+
+.titleHeader {
+    font-family: DIN;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.imagenLogo {
+    border: 1px solid #9e311c;
+    border-radius: 50%;
+}
+
+.version {
+    font-family: DIN;
+    float: right;
+    font-size: 15px;
+    margin-right: 20px;
+}
+
+.CLPageContent {
+    width: 100%;
+    height: 99%;
+    margin-top: 10px;
+}
+
+.CLPageFooter {
+    width: 100%;
+    height: 3%;
+    font-family: DIN;
+    font-size: 8px;
+    font-weight: 100;
+}
+
+
+@media screen and (orientation:portrait) {
+  
+}
+
+@media screen and (orientation:landscape) {
+
+}
+

@@ -1,0 +1,177 @@
+﻿/* ===== Variables ===== */
+:root {
+    /* Color base */
+    --brand: #054f77;
+    /* Tonos más oscuros (derivados de #054f77) */
+    --brand-600: #043f5f;
+    --brand-700: #033048;
+    --brand-800: #022030;
+
+    --on: #fff;
+    --header-h: 50px; /* alto compacto */
+}
+
+/* Reset */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header compacto, full width */
+.app-header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand-800) 0%, var(--brand-700) 50%, var(--brand-800) 100%);
+    color: var(--on);
+    box-shadow: 0 4px 12px rgba(0,0,0,.18);
+    height: var(--header-h);
+    overflow: hidden;
+}
+
+/* Grid */
+/* Cambiamos a auto 1fr auto para reservar solo el espacio necesario a icono+logo y permitir que el título se alinee a la izquierda dentro de su propia columna expansible */
+.header-grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px;
+    height: 100%;
+}
+
+.header-left {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+/* Más espacio antes del título */
+.header-grid > .header-left:nth-of-type(2) {
+    grid-column: 2;
+    margin-left: 95px;
+    gap: 4px;
+}
+
+.header-right {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-center {
+    grid-column: 2;
+    justify-self: center;
+    min-width: 0;
+    text-align: center;
+}
+
+.header-right {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo + badge */
+.brand-logo {
+    height: calc(var(--header-h) - 20px);
+    width: auto;
+    display: block;
+}
+
+.brand-badge {
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-600) 55%, var(--brand) 100%);
+    color: var(--on);
+    white-space: nowrap;
+}
+
+/* Título centrado */
+.page-title {
+    color: #ffffff;
+    font-weight: 200;
+    font-size: 16px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0,0,0,.55);
+    margin: 0;
+}
+
+/* Botón toggle (hamburguesa) */
+.h-toggle {
+    width: 38px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    color: var(--on);
+    background: linear-gradient(135deg, var(--brand), var(--brand-600));
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(72,118,46,.30);
+    transition: transform .12s ease, box-shadow .22s ease, filter .22s ease;
+}
+
+    .h-toggle:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 18px rgba(72,118,46,.45);
+        filter: brightness(1.05);
+    }
+
+/* Botón salir */
+.btn-logout {
+    --size: 36px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: var(--size) !important;
+    height: var(--size) !important;
+    border-radius: 10px !important;
+    border: none !important;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-600) 55%, var(--brand) 100%) !important;
+    color: var(--on) !important;
+    box-shadow: 0 6px 16px rgba(72,118,46,.35);
+    transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
+    cursor: pointer;
+}
+
+    .btn-logout * {
+        color: var(--on) !important;
+    }
+
+    .btn-logout i {
+        font-size: 16px;
+        line-height: 1;
+    }
+
+    .btn-logout:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 22px rgba(72,118,46,.48);
+        filter: brightness(1.04);
+    }
+
+@media (max-width: 680px) {
+    :root {
+        --header-h: 46px;
+    }
+
+    .brand-badge {
+        display: none;
+    }
+
+    .page-title {
+        font-size: 16px;
+    }
+}

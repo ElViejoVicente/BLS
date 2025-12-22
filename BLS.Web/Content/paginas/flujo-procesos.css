@@ -1,0 +1,128 @@
+﻿.headertext {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+}
+
+.boxbordered {
+    background: #ffffff;
+    border: 1px dashed #a2d2ff;
+    border-radius: 5px;
+    justify-content: center;
+}
+
+.boxheader {
+    background: #ffffff;
+    padding: 0.5rem;
+    gap: 5px;
+}
+
+.boxbody {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-self: center;
+    flex-grow: 1;
+    background: #ffffff;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0.4rem;
+    gap: 0.4rem;
+    height: 80%;
+}
+
+.boxbodyparentsemi {
+    min-width: 10em;
+    align-self: center;
+    background: #ffffff;
+    padding: 8px;
+    gap: 5px;
+}
+
+.boxbodyparentarrow {
+    align-self: center;
+    background: #ffffff;
+    padding: 8px;
+    gap: 5px;
+}
+
+.boxbodysemi {
+    min-width: 5em;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    flex-grow: 0.5;
+    background: #ffffff;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0.4rem;
+    gap: 0.4rem;
+    margin-bottom: 0.2em;
+}
+
+.boxarrow {
+    width: 1em;
+    align-self: center;
+    align-content: center;
+    flex-grow: 0.5;
+    height: 5%;
+    background: #ffffff;
+    padding: 0;
+    gap: 0;
+    min-width: 2em;
+    max-width: 2em;
+}
+
+
+
+.flex-container > div {
+    flex-grow: 0.8;
+    display: flex;
+    padding: 0.2rem;
+    gap: 1rem;
+}
+
+.flujo {
+    display: flex;
+    flex-direction: row;
+    height: 75%;
+}
+
+.btnpill {
+    padding: 0.2em;
+    background-color: indianred;
+    color: white;
+    border: 2px solid black;
+}
+
+.infopill {
+    text-align: center;
+    align-items: center;
+    background-color: aliceblue;
+    border: 1px solid black;
+}
+
+b {
+    font-size: 0.7rem;
+}
+
+em {
+    font-size: 0.5rem;
+    padding-left: 0.7rem;
+}
+
+#flujo1 > .boxbody .boxbodyparentsemi {
+    min-width: 20%;
+}
+
+
+#flujo1 > .boxarrow {
+    width: 0.5%;
+}

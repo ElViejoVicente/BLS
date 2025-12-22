@@ -1,0 +1,142 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcMixPlanificacion.ascx.cs" Inherits=" GPS.Web.Controles.Usuario.UcMixPlanificacion" %>
+
+<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v22.2, Version=22.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
+<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v22.2, Version=22.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler.Controls" TagPrefix="dxwschsc" %>
+<%@ Register Assembly="DevExpress.Web.Bootstrap.v22.2, Version=22.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.Bootstrap" TagPrefix="dx" %>
+
+
+<%@ Register Src="~/Controles/Usuario/InfoMsgBox.ascx" TagPrefix="uc1" TagName="cuInfoMsgbox" %>
+
+
+
+<script>
+    columns: [  
+        {  
+        dataField: "s_Producto",  
+        cssClass: "custom"  
+        },
+        {  
+        dataField: "venta",  
+        cssClass: "custom"  
+        },
+        {  
+        dataField: "stock",  
+        cssClass: "custom"  
+        },
+        {  
+        dataField: "TNB",  
+        cssClass: "custom"  
+        },
+        {  
+        dataField: "TNN",  
+        cssClass: "custom"  
+        }
+]  
+
+</script>
+<style>
+    .custom[role="columnheader"]{  
+    font-size: 5px;  
+} 
+
+</style>
+
+
+<controls>
+    <uc1:cuInfoMsgbox runat="server" ID="cuInfoMsgbox1" />
+<dx:ASPxGridView ID="gvMixPlan" runat="server" AutoGenerateColumns="false" Width="100%"
+    Visible="false" OnDataBinding="gvMixPlan_DataBinding" >
+
+    <SettingsAdaptivity AdaptivityMode="HideDataCellsWindowLimit"
+        AllowOnlyOneAdaptiveDetailExpanded="true"
+        AllowHideDataCellsByColumnMinWidth="true">
+    </SettingsAdaptivity>
+
+    <SettingsBehavior AllowEllipsisInText="true" />
+
+    <EditFormLayoutProperties>
+        <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="300" />
+    </EditFormLayoutProperties>
+
+    <SettingsPager PageSize="50" NumericButtonCount="50"></SettingsPager>
+    <Settings ShowFooter="True" ShowFilterRow="false" ShowFilterBar="Hidden" ShowFilterRowMenu="false" ShowHeaderFilterButton="false" ShowGroupPanel="false" HorizontalScrollBarMode="Visible" />
+    <SettingsSearchPanel Visible="false" ShowClearButton="false"></SettingsSearchPanel>
+    <Columns>
+        <dx:GridViewDataTextColumn VisibleIndex="1" FieldName="s_Producto" Caption="Producto" ReadOnly="true" Width="100px" HeaderStyle-Font-Size="7" HeaderStyle-Font-Bold="true"> <HeaderStyle BackColor="#0099ff" />  </dx:GridViewDataTextColumn>
+        <dx:GridViewDataTextColumn VisibleIndex="2" FieldName="s_Tipo" Caption="Tipo" ReadOnly="true" Width="90px" HeaderStyle-Font-Size="7" HeaderStyle-Font-Bold="true"> <HeaderStyle BackColor="#0099ff" /> </dx:GridViewDataTextColumn>
+        <dx:GridViewDataTextColumn VisibleIndex="3" FieldName="s_Calidad" Caption="Calidad" ReadOnly="true" Width="90px" HeaderStyle-Font-Size="7" HeaderStyle-Font-Bold="true"> <HeaderStyle BackColor="#0099ff" /> </dx:GridViewDataTextColumn>
+        <dx:GridViewDataTextColumn VisibleIndex="5" FieldName="i_6_1" Caption="6.1" ReadOnly="true" Width="45px" HeaderStyle-Font-Size="7" HeaderStyle-Font-Bold="true"> <HeaderStyle BackColor="#0099ff" /> </dx:GridViewDataTextColumn>
+        <dx:GridViewDataTextColumn VisibleIndex="6" FieldName="i_10_1" Caption="10.1" ReadOnly="true" Width="45px" HeaderStyle-Font-Size="7" HeaderStyle-Font-Bold="true"> <HeaderStyle BackColor="#0099ff" /> </dx:GridViewDataTextColumn>
+        <dx:GridViewDataTextColumn VisibleIndex="7" FieldName="i_12_1" Caption="12.1" ReadOnly="true" Width="45px" HeaderStyle-Font-Size="7" HeaderStyle-Font-Bold="true"> <HeaderStyle BackColor="#0099ff" /> </dx:GridViewDataTextColumn>
+        <dx:GridViewDataTextColumn VisibleIndex="8" FieldName="i_13_1" Caption="13.1" ReadOnly="true" Width="45px" HeaderStyle-Font-Size="7" HeaderStyle-Font-Bold="true"> <HeaderStyle BackColor="#0099ff" /> </dx:GridViewDataTextColumn>
+        <dx:GridViewDataTextColumn VisibleIndex="9" FieldName="i_14_1" Caption="14.1" ReadOnly="true" Width="45px" HeaderStyle-Font-Size="7" HeaderStyle-Font-Bold="true"> <HeaderStyle BackColor="#0099ff" /> </dx:GridViewDataTextColumn>
+        <dx:GridViewDataTextColumn VisibleIndex="10" FieldName="i_15_1" Caption="15.1" ReadOnly="true" Width="45px" HeaderStyle-Font-Size="7" HeaderStyle-Font-Bold="true"> <HeaderStyle BackColor="#0099ff" /> </dx:GridViewDataTextColumn>
+        <dx:GridViewDataTextColumn VisibleIndex="11" FieldName="i_16_1" Caption="16.1" ReadOnly="true" Width="45px" HeaderStyle-Font-Size="7" HeaderStyle-Font-Bold="true"> <HeaderStyle BackColor="#0099ff" /> </dx:GridViewDataTextColumn>
+
+    </Columns>
+</dx:ASPxGridView>
+
+<dx:ASPxLoadingPanel ID="LoadingPanel" runat="server" ClientInstanceName="LoadingPanel" Modal="true" />
+<controls>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

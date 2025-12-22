@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WsGesag" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GESAP_GPB_Service" />
+      <xsd:import schemaLocation="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://wsgesag-p.clgrupoindustrial.com/WsGesag.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWsGesag_ProbarConexion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProbarConexion" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_ProbarConexion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProbarConexionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameExpedicionesPendientes_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameExpedicionesPendientes" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameExpedicionesPendientes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameExpedicionesPendientesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameExpedicionesRetrasadas_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameExpedicionesRetrasadas" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameExpedicionesRetrasadas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameExpedicionesRetrasadasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameDetalleExpediciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameDetalleExpediciones" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameDetalleExpediciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameDetalleExpedicionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameDetalleExpedicionesLETRA_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameDetalleExpedicionesLETRA" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameDetalleExpedicionesLETRA_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameDetalleExpedicionesLETRAResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DamePrevDemanda_InputMessage">
+    <wsdl:part name="parameters" element="tns:DamePrevDemanda" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DamePrevDemanda_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DamePrevDemandaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameEstadoExpediciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameEstadoExpediciones" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameEstadoExpediciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameEstadoExpedicionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameMaterialesGGB_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameMaterialesGGB" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameMaterialesGGB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameMaterialesGGBResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameMaterialDetalleGGB_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameMaterialDetalleGGB" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameMaterialDetalleGGB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameMaterialDetalleGGBResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameFamiliMaterialGGB_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameFamiliMaterialGGB" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameFamiliMaterialGGB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameFamiliMaterialGGBResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameMatriculas_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameMatriculas" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameMatriculas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameMatriculasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_GuardaMatricula_InputMessage">
+    <wsdl:part name="parameters" element="tns:GuardaMatricula" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_GuardaMatricula_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GuardaMatriculaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DetalleSituacionPrevDemanda_InputMessage">
+    <wsdl:part name="parameters" element="tns:DetalleSituacionPrevDemanda" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DetalleSituacionPrevDemanda_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DetalleSituacionPrevDemandaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameMaterialPendienteCargaGGB_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameMaterialPendienteCargaGGB" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameMaterialPendienteCargaGGB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameMaterialPendienteCargaGGBResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameTransportistas_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameTransportistas" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameTransportistas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameTransportistasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_GuardaTransportista_InputMessage">
+    <wsdl:part name="parameters" element="tns:GuardaTransportista" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_GuardaTransportista_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GuardaTransportistaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameConsultaGenericaGESAC_InputMessage">
+    <wsdl:part name="parameters" element="tns:DameConsultaGenericaGESAC" />
+  </wsdl:message>
+  <wsdl:message name="IWsGesag_DameConsultaGenericaGESAC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DameConsultaGenericaGESACResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWsGesag">
+    <wsdl:operation name="ProbarConexion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/ProbarConexion" message="tns:IWsGesag_ProbarConexion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/ProbarConexionResponse" message="tns:IWsGesag_ProbarConexion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameExpedicionesPendientes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameExpedicionesPendientes" message="tns:IWsGesag_DameExpedicionesPendientes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameExpedicionesPendientesResponse" message="tns:IWsGesag_DameExpedicionesPendientes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameExpedicionesRetrasadas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameExpedicionesRetrasadas" message="tns:IWsGesag_DameExpedicionesRetrasadas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameExpedicionesRetrasadasResponse" message="tns:IWsGesag_DameExpedicionesRetrasadas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameDetalleExpediciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameDetalleExpediciones" message="tns:IWsGesag_DameDetalleExpediciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameDetalleExpedicionesResponse" message="tns:IWsGesag_DameDetalleExpediciones_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameDetalleExpedicionesLETRA">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameDetalleExpedicionesLETRA" message="tns:IWsGesag_DameDetalleExpedicionesLETRA_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameDetalleExpedicionesLETRAResponse" message="tns:IWsGesag_DameDetalleExpedicionesLETRA_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DamePrevDemanda">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DamePrevDemanda" message="tns:IWsGesag_DamePrevDemanda_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DamePrevDemandaResponse" message="tns:IWsGesag_DamePrevDemanda_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameEstadoExpediciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameEstadoExpediciones" message="tns:IWsGesag_DameEstadoExpediciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameEstadoExpedicionesResponse" message="tns:IWsGesag_DameEstadoExpediciones_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameMaterialesGGB">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameMaterialesGGB" message="tns:IWsGesag_DameMaterialesGGB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameMaterialesGGBResponse" message="tns:IWsGesag_DameMaterialesGGB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameMaterialDetalleGGB">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameMaterialDetalleGGB" message="tns:IWsGesag_DameMaterialDetalleGGB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameMaterialDetalleGGBResponse" message="tns:IWsGesag_DameMaterialDetalleGGB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameFamiliMaterialGGB">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameFamiliMaterialGGB" message="tns:IWsGesag_DameFamiliMaterialGGB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameFamiliMaterialGGBResponse" message="tns:IWsGesag_DameFamiliMaterialGGB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameMatriculas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameMatriculas" message="tns:IWsGesag_DameMatriculas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameMatriculasResponse" message="tns:IWsGesag_DameMatriculas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GuardaMatricula">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/GuardaMatricula" message="tns:IWsGesag_GuardaMatricula_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/GuardaMatriculaResponse" message="tns:IWsGesag_GuardaMatricula_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DetalleSituacionPrevDemanda">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DetalleSituacionPrevDemanda" message="tns:IWsGesag_DetalleSituacionPrevDemanda_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DetalleSituacionPrevDemandaResponse" message="tns:IWsGesag_DetalleSituacionPrevDemanda_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameMaterialPendienteCargaGGB">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameMaterialPendienteCargaGGB" message="tns:IWsGesag_DameMaterialPendienteCargaGGB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameMaterialPendienteCargaGGBResponse" message="tns:IWsGesag_DameMaterialPendienteCargaGGB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameTransportistas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameTransportistas" message="tns:IWsGesag_DameTransportistas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameTransportistasResponse" message="tns:IWsGesag_DameTransportistas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GuardaTransportista">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/GuardaTransportista" message="tns:IWsGesag_GuardaTransportista_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/GuardaTransportistaResponse" message="tns:IWsGesag_GuardaTransportista_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DameConsultaGenericaGESAC">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsGesag/DameConsultaGenericaGESAC" message="tns:IWsGesag_DameConsultaGenericaGESAC_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsGesag/DameConsultaGenericaGESACResponse" message="tns:IWsGesag_DameConsultaGenericaGESAC_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="WsGesag" />
+</wsdl:definitions>
