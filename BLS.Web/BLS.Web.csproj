@@ -178,6 +178,7 @@
     <Content Include="imagenes\Iconos\text-x-generic.ico" />
     <Content Include="imagenes\Iconos\x-office-document.ico" />
     <Content Include="imagenes\Iconos\x-office-spreadsheet.ico" />
+    <Content Include="imagenes\login\FondoBLS.jpg" />
     <Content Include="imagenes\login\fondoSGN.jpg" />
     <Content Include="imagenes\login\LogoNotaria.svg" />
     <Content Include="imagenes\login\notaria-inicioOpa90.jpg" />
@@ -328,7 +329,6 @@
     <Content Include="imagenes\header\logo_gallardo_big.jpg" />
     <Content Include="imagenes\mensajes\close.png" />
     <Content Include="imagenes\mensajes\close20.png" />
-    <Content Include="imagenes\logo-cl.png" />
     <Content Include="imagenes\mensajes\errorsinFondo.png" />
     <Content Include="imagenes\mensajes\infoSinfondo.png" />
     <Content Include="imagenes\mensajes\successSinFondo.png" />

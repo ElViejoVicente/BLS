@@ -38,7 +38,9 @@ html, body {
     display: flex;
     flex-direction: column;
     /* Fondo con imagen + overlay más ligero para que se vea mejor */
-    background: linear-gradient(135deg, var(--brand-alpha-35), var(--brand-alpha-55)), url("../../imagenes/login/notaria-inicioOpa90.jpg") center/cover no-repeat fixed;
+    background: linear-gradient(135deg, var(--brand-alpha-35), var(--brand-alpha-55)), url("../../imagenes/login/FondoBLS.jpg") center/cover no-repeat fixed;
+    at fixed;
+    at fixed;
 }
 
 .main {
@@ -94,24 +96,26 @@ html, body {
 }
 
 .form-row {
-    margin-top: 14px;
+    margin-top: 18px; /* ligeramente más separación */
 }
 
 /* ===== DevExpress inputs ===== */
 .dxEditors_edt {
     width: 100% !important;
-    border-radius: 12px !important;
-    padding: 12px 10px !important;
-    font-size: 15px !important;
+    border-radius: 18px !important; /* bordes más suaves */
+    padding: 16px 14px !important; /* más espacio interior para mayor altura visual */
+    font-size: 18px !important; /* fuente más grande */
+    min-height: 56px !important; /* altura mínima aumentada para proporcionalidad */
     background-color: #fff !important;
-    transition: box-shadow .25s ease, transform .12s ease, border-color .25s ease;
+    transition: box-shadow .2s ease, transform .12s ease, border-color .2s ease;
+    border: 1px solid rgba(15,15,15,0.06) !important;
 }
 
-    .dxEditors_edt:hover,
-    .dxEditors_edt:focus {
-        box-shadow: 0 0 0 2px rgba(72,118,46,.18), 0 0 10px rgba(72,118,46,.35) !important;
-        transform: translateY(-1px);
-    }
+.dxEditors_edt:focus,
+.dxEditors_edt:hover {
+    box-shadow: 0 6px 18px rgba(5,79,119,0.12), 0 0 0 4px rgba(5,79,119,0.06) !important;
+    transform: translateY(-1px);
+}
 
 /* Autocomplete Chrome */
 input:-webkit-autofill,
@@ -124,30 +128,58 @@ input:-webkit-autofill:focus {
 /* ===== Botón primario ===== */
 .btn-primary {
     display: inline-block;
-    width: 100% !important;
+    width: 48% !important; /* ahora cada botón ocupa menos espacio que antes */
     border: 0;
-    border-radius: 12px !important;
-    padding: 14px !important;
+    border-radius: 14px !important; /* bordes suaves, pero ligeramente menos redondeados que inputs */
+    padding: 12px 18px !important;
+    font-size: 16px !important; /* mayor tamaño de fuente en botones */
+    min-height: 56px !important; /* igual altura que los inputs para mejor proporción */
     font-weight: 700;
     color: #fff !important;
     background: linear-gradient(135deg, var(--brand) 0%, var(--brand-600) 55%, var(--brand) 100%);
     box-shadow: 0 10px 24px rgba(72,118,46,.35);
-    transition: transform .15s ease, box-shadow .25s ease, filter .25s ease;
+    transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
 }
 
-    .btn-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 14px 30px rgba(72,118,46,.48);
-        filter: brightness(1.03);
-    }
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 20px rgba(72,118,46,.48);
+    filter: brightness(1.03);
+}
 
-    .btn-primary:active {
-        transform: translateY(0);
-    }
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    display: inline-block;
+    width: 48% !important;
+    border: 1px solid rgba(5,79,119,0.12);
+    background: transparent !important;
+    color: var(--brand-700) !important;
+    border-radius: 14px !important;
+    padding: 10px 16px !important;
+    font-size: 15px !important;
+    min-height: 56px !important;
+}
+
+.btn-secondary:hover {
+    background: rgba(5,79,119,0.04) !important;
+}
 
 /* Brillo sutil extra */
 .glow-on-hover:hover {
     box-shadow: 0 0 0 3px rgba(72,118,46,.22), 0 12px 28px rgba(72,118,46,.55);
+}
+
+/* Accion botones */
+.form-actions {
+    display: flex;
+    gap: 14px; /* más separación entre botones */
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 22px; /* espacio extra entre inputs y botones */
+    flex-wrap: nowrap;
 }
 
 /* ===== Footer full-width, fijo al pie ===== */
@@ -211,6 +243,14 @@ input:-webkit-autofill:focus {
     .logo-animated {
         width: 88px;
     }
+
+    .form-actions {
+        gap: 10px;
+    }
+
+    .btn-primary {
+        width: 48% !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -230,5 +270,17 @@ input:-webkit-autofill:focus {
     .footer {
         font-size: 12px;
         padding: 10px 8px;
+    }
+
+    /* En pantallas pequeñas, apilamos los botones y los hacemos ancho completo */
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100% !important;
     }
 }

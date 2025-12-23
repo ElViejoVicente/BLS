@@ -12,7 +12,7 @@
     <link rel="icon" href="imagenes/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="Content/NuevoMenu/login.css" />
     <script src="Scripts/sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="Scripts/sweetalert2.min.css"/>
+    <link rel="stylesheet" href="Scripts/sweetalert2.min.css" />
     <script src="../Scripts/mensajes.js"></script>
 
 </head>
@@ -23,9 +23,9 @@
             <main class="main">
                 <section class="card animate-slide-up">
                     <header class="card-header">
-                        <img src="imagenes/login/LogoNotaria.svg" alt="Logo Sistema" class="logo-animated" />
+                        <img src="imagenes/header/logoTi.png" alt="Logo Sistema" class="logo-animated" />
                         <h1 class="title">Bienvenido</h1>
-                        <h4 class="subtitle">Sistema de Gestión Notarial v1.9</h4>
+                        <h4 class="subtitle">BlackList Sentinel v1.0</h4>
                     </header>
 
                     <div class="card-body">
@@ -38,10 +38,8 @@
                                     <RegularExpression ErrorText="Usuario no válido" ValidationExpression=".+" />
                                     <RequiredField IsRequired="True" ErrorText="El campo 'Usuario' es obligatorio" />
                                 </ValidationSettings>
+
                             </dx:ASPxTextBox>
-
-                            
-
 
                         </div>
 
@@ -52,11 +50,16 @@
                                     <RequiredField IsRequired="True" ErrorText="El campo 'Contraseña' es obligatorio" />
                                 </ValidationSettings>
                             </dx:ASPxTextBox>
+
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-actions">
+
                             <dx:ASPxButton ID="BT_ok" runat="server" OnClick="BT_ok_Click" Text="Ingresar" CssClass="btn-primary glow-on-hover"></dx:ASPxButton>
+                            <dx:ASPxButton ID="btnRecuperarContreseña" runat="server" OnClick="BT_ok_Click" Text="Recuperar Contraseña" CssClass="btn-secondary glow-on-hover"></dx:ASPxButton>
+
                         </div>
+
                     </div>
                 </section>
             </main>
