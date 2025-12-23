@@ -8,7 +8,7 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <link rel="stylesheet" href="../SwitcherResources/Content/Cyborg/bootstrap.min.css" />
+    <link rel="stylesheet" href="../SwitcherResources/Content/Yeti/bootstrap.min.css" />
     <title></title>
 </head>
 <body>
@@ -24,7 +24,12 @@
 
         <asp:Panel ID="pnlResgistro" runat="server">
 
-            <dx:BootstrapFormLayout runat="server" ID="frmAltaCliente" AlignItemCaptionsInAllGroups="True">
+
+            <div style="width:70%; margin:0 auto;">
+                <div>
+                    
+
+            <dx:BootstrapFormLayout runat="server" ID="frmAltaCliente" AlignItemCaptionsInAllGroups="True" >
 
                 <Items>
                     <dx:BootstrapLayoutGroup Caption="Datos Personales">
@@ -173,6 +178,10 @@
 
                 </Items>
             </dx:BootstrapFormLayout>
+                </div>
+            </div>
+
+
         </asp:Panel>
 
 
@@ -260,7 +269,7 @@
                 <br />
                 <br />
 
-               <dx:BootstrapButton runat="server" Text="Regresar a paquetes" SettingsBootstrap-RenderOption="Link" AutoPostBack="true" OnClick="Unnamed_Click1" />
+                <dx:BootstrapButton runat="server" Text="Regresar a paquetes" SettingsBootstrap-RenderOption="Link" AutoPostBack="true" OnClick="Unnamed_Click1" />
 
             </div>
 
