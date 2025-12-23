@@ -24,6 +24,15 @@ namespace BLS.Web.RegistroClientes
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// Control imgLogo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgLogo;
+
+        /// <summary>
         /// Control pnlResgistro.
         /// </summary>
         /// <remarks>
@@ -40,15 +49,6 @@ namespace BLS.Web.RegistroClientes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.Bootstrap.BootstrapFormLayout frmAltaCliente;
-
-        /// <summary>
-        /// Control frmAltaCliente_E2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapDateEdit frmAltaCliente_E2;
 
         /// <summary>
         /// Control txtPassword.

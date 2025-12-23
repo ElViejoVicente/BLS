@@ -14,170 +14,260 @@
 <body>
     <form id="form1" runat="server">
 
+        <div class="position-absolute top-0 start-0 p-3">
+            <asp:Image
+                ID="imgLogo"
+                runat="server"
+                ImageUrl="~/imagenes/header/logoTi.png"
+                Height="90px"
+                AlternateText="Logo" />
+        </div>
+
+
         <div class="mb-4 text-center">
-            <h2 class="fw-bold text-danger">Crea tu cuenta</h2>
-            <p class="text-danger">
+            <h2 class="text-primary fw-bolder"
+                style="letter-spacing: 0.8px; font-size: 2rem;">Crea tu cuenta
+            </h2>
+
+            <p class="text-muted fw-semibold"
+                style="max-width: 520px; margin: 0 auto;">
                 Completa el siguiente formulario para registrar tus datos y tener acceso al sistema.
             </p>
         </div>
 
 
+
+
+
         <asp:Panel ID="pnlResgistro" runat="server">
 
 
-            <div style="width:70%; margin:0 auto;">
+            <div style="width: 70%; margin: 0 auto;">
                 <div>
-                    
 
-            <dx:BootstrapFormLayout runat="server" ID="frmAltaCliente" AlignItemCaptionsInAllGroups="True" >
 
-                <Items>
-                    <dx:BootstrapLayoutGroup Caption="Datos Personales">
+                    <dx:BootstrapFormLayout runat="server" ID="frmAltaCliente" AlignItemCaptionsInAllGroups="True">
+
                         <Items>
-                            <dx:BootstrapLayoutItem Caption="Nombre" HelpText="Introduce tu primer nombre" ColSpanLg="4" ColSpanMd="12">
+                            <dx:BootstrapLayoutGroup Caption="Datos Personales">
+                                <Items>
+                                    <dx:BootstrapLayoutItem Caption="Nombre" HelpText="Introduce tu nombre" ColSpanLg="4" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="El nombre es obligatorio" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Apellido Paterno" HelpText="Introduce tu apellido paterno" ColSpanLg="4" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="El apellido paterno es obligatorio" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Apellido Materno" HelpText="Introduce tu apellido materno" ColSpanLg="4" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="El apellido materno es obligatorio" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Fecha de nacimiento" HelpText="Selecciona tu fecha de nacimiento" ColSpanLg="6" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapDateEdit runat="server">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="La fecha de nacimiento es obligatoria" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapDateEdit>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="RFC" HelpText="Introduce tu RFC" ColSpanLg="6" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server" MaxLength="13">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="El RFC es obligatorio" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Nombre del despacho o consultoría" HelpText="Nombre comercial o razón social" ColSpanLg="8" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="Este campo es obligatorio" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Domicilio" HelpText="Dirección completa" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="El domicilio es obligatorio" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Calle" HelpText="Nombre de la calle" ColSpanLg="6" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="La calle es obligatoria" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Ciudad" HelpText="Ciudad" ColSpanLg="4" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="La ciudad es obligatoria" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Estado" HelpText="Estado" ColSpanLg="4" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="El estado es obligatorio" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Código Postal" HelpText="CP" ColSpanLg="4" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server" MaxLength="5">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="El código postal es obligatorio" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Teléfono de contacto" HelpText="Número telefónico" ColSpanLg="4" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server" MaxLength="15">
+                                                    <ValidationSettings>
+                                                        <RequiredField IsRequired="true" ErrorText="El teléfono es obligatorio" />
+                                                    </ValidationSettings>
+                                                </dx:BootstrapTextBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+
+                                </Items>
+                            </dx:BootstrapLayoutGroup>
+
+                            <dx:BootstrapLayoutGroup Caption="Datos de Acceso">
+                                <Items>
+                                    <dx:BootstrapLayoutItem Caption="email" ColSpanMd="12" HelpText="Ingresa tu correco electronico">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox runat="server" Text="correco electronico" />
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Contrase&#241;a" HelpText="Ingresa tu contrase&#241;a">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox ID="txtPassword" runat="server" Password="true" />
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Confirmar Contrase&#241;a (requerido)" HelpText="Por favor confirma tu contrase&#241;a">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox ID="txtConfirPassword" runat="server" Password="true" />
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Terminos y condiciones" HelpText="Declaro que le&#237; y consult&#233; los T&#233;rminos y condiciones, y acepto expresamente su contenido.">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapCheckBox runat="server" CheckState="Unchecked" ID="frmAltaCliente_E3"></dx:BootstrapCheckBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Politica de privacidad" HelpText="Autorizo a BLS a procesar mis datos personales para la prestaci&#243;n de sus servicios y otros prop&#243;sitos indicados en su Pol&#237;tica de privacidad.">
+                                        <ContentCollection>
+                                            <dx:ContentControl runat="server">
+                                                <dx:BootstrapCheckBox runat="server" CheckState="Unchecked" ID="frmAltaCliente_E4"></dx:BootstrapCheckBox>
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                </Items>
+                            </dx:BootstrapLayoutGroup>
+
+
+
+                            <dx:BootstrapLayoutItem HorizontalAlign="Right" ShowCaption="False" ColSpanMd="12">
                                 <ContentCollection>
                                     <dx:ContentControl>
-                                        <dx:BootstrapTextBox runat="server">
-                                            <ValidationSettings>
-                                                <RequiredField IsRequired="true" ErrorText="First Name is required" />
-                                            </ValidationSettings>
-                                        </dx:BootstrapTextBox>
+                                        <dx:BootstrapButton ID="btnConfirmar" runat="server" Text="Confirmar" SettingsBootstrap-RenderOption="Primary" AutoPostBack="true" OnClick="btnConfirmar_Click" />
+                                        <dx:BootstrapButton runat="server" Text="Cancelar" SettingsBootstrap-RenderOption="Link" AutoPostBack="true">
+                                            <ClientSideEvents Click="function(s, e) { document.location.reload();}" />
+                                        </dx:BootstrapButton>
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:BootstrapLayoutItem>
 
-                            <dx:BootstrapLayoutItem Caption="Segundo nombre: (opcional)" HelpText="Introduce tu segundo nombre en caso de tener" ColSpanLg="4" ColSpanMd="12">
+                            <dx:BootstrapLayoutItem ShowCaption="False" ColSpanMd="12">
                                 <ContentCollection>
                                     <dx:ContentControl>
-                                        <dx:BootstrapTextBox runat="server" />
-                                    </dx:ContentControl>
-                                </ContentCollection>
-                            </dx:BootstrapLayoutItem>
-
-                            <dx:BootstrapLayoutItem Caption="Apellidos" HelpText="Introduce tus apellidos" ColSpanLg="4" ColSpanMd="12">
-                                <ContentCollection>
-                                    <dx:ContentControl>
-                                        <dx:BootstrapTextBox runat="server">
-                                            <ValidationSettings>
-                                                <RequiredField IsRequired="true" ErrorText="Last Name is required" />
-                                            </ValidationSettings>
-                                        </dx:BootstrapTextBox>
-                                    </dx:ContentControl>
-                                </ContentCollection>
-                            </dx:BootstrapLayoutItem>
-
-                            <dx:BootstrapLayoutItem Caption="Fecha de Nacimiento" HelpText="Ingresa tu fecha de nacimiento">
-                                <ContentCollection>
-                                    <dx:ContentControl>
-                                        <dx:BootstrapDateEdit runat="server" ID="frmAltaCliente_E2"></dx:BootstrapDateEdit>
-                                    </dx:ContentControl>
-                                </ContentCollection>
-                            </dx:BootstrapLayoutItem>
-
-                            <dx:BootstrapLayoutItem Caption="Sexo" BeginRow="true">
-                                <ContentCollection>
-                                    <dx:ContentControl>
-                                        <div class="form-control-plaintext">
-                                            <dx:BootstrapRadioButton runat="server" Text="Hombre" GroupName="AddressTypeGroup">
-                                                <SettingsBootstrap InlineMode="true" />
-                                            </dx:BootstrapRadioButton>
-                                            <dx:BootstrapRadioButton runat="server" Text="Mujer" GroupName="AddressTypeGroup" Checked="true">
-                                                <SettingsBootstrap InlineMode="true" />
-                                            </dx:BootstrapRadioButton>
-                                        </div>
-                                    </dx:ContentControl>
-                                </ContentCollection>
-                            </dx:BootstrapLayoutItem>
-
-                            <dx:BootstrapLayoutItem BeginRow="True" Caption="Tengo mas de 18 a&#241;os">
-                                <ContentCollection>
-                                    <dx:ContentControl runat="server">
-                                        <div class="form-control-plaintext">
-                                            <dx:BootstrapRadioButton runat="server" GroupName="AddressTypeGroup" Text="Si">
-                                                <SettingsBootstrap InlineMode="True"></SettingsBootstrap>
-                                            </dx:BootstrapRadioButton>
-
-                                            <dx:BootstrapRadioButton runat="server" GroupName="AddressTypeGroup" Checked="True" Text="No">
-                                                <SettingsBootstrap InlineMode="True"></SettingsBootstrap>
-                                            </dx:BootstrapRadioButton>
-
-                                        </div>
+                                        <asp:Label ID="lblErrorTerminos" runat="server" CssClass="text-danger fw-bold" Visible="false">
+                                        </asp:Label>
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:BootstrapLayoutItem>
 
                         </Items>
-                    </dx:BootstrapLayoutGroup>
-
-                    <dx:BootstrapLayoutGroup Caption="Datos de Acceso">
-                        <Items>
-                            <dx:BootstrapLayoutItem Caption="email" ColSpanMd="12" HelpText="Ingresa tu correco electronico">
-                                <ContentCollection>
-                                    <dx:ContentControl>
-                                        <dx:BootstrapTextBox runat="server" Text="correco electronico" />
-                                    </dx:ContentControl>
-                                </ContentCollection>
-                            </dx:BootstrapLayoutItem>
-
-                            <dx:BootstrapLayoutItem Caption="Contrase&#241;a" HelpText="Ingresa tu contrase&#241;a">
-                                <ContentCollection>
-                                    <dx:ContentControl>
-                                        <dx:BootstrapTextBox ID="txtPassword" runat="server" Password="true" />
-                                    </dx:ContentControl>
-                                </ContentCollection>
-                            </dx:BootstrapLayoutItem>
-
-                            <dx:BootstrapLayoutItem Caption="Confirmar Contrase&#241;a (requerido)" HelpText="Por favor confirma tu contrase&#241;a">
-                                <ContentCollection>
-                                    <dx:ContentControl>
-                                        <dx:BootstrapTextBox ID="txtConfirPassword" runat="server" Password="true" />
-                                    </dx:ContentControl>
-                                </ContentCollection>
-                            </dx:BootstrapLayoutItem>
-
-                            <dx:BootstrapLayoutItem Caption="Terminos y condiciones" HelpText="Declaro que le&#237; y consult&#233; los T&#233;rminos y condiciones, y acepto expresamente su contenido.">
-                                <ContentCollection>
-                                    <dx:ContentControl>
-                                        <dx:BootstrapCheckBox runat="server" CheckState="Unchecked" ID="frmAltaCliente_E3"></dx:BootstrapCheckBox>
-                                    </dx:ContentControl>
-                                </ContentCollection>
-                            </dx:BootstrapLayoutItem>
-
-                            <dx:BootstrapLayoutItem Caption="Politica de privacidad" HelpText="Autorizo a BLS a procesar mis datos personales para la prestaci&#243;n de sus servicios y otros prop&#243;sitos indicados en su Pol&#237;tica de privacidad.">
-                                <ContentCollection>
-                                    <dx:ContentControl runat="server">
-                                        <dx:BootstrapCheckBox runat="server" CheckState="Unchecked" ID="frmAltaCliente_E4"></dx:BootstrapCheckBox>
-                                    </dx:ContentControl>
-                                </ContentCollection>
-                            </dx:BootstrapLayoutItem>
-
-                        </Items>
-                    </dx:BootstrapLayoutGroup>
-
-
-
-                    <dx:BootstrapLayoutItem HorizontalAlign="Right" ShowCaption="False" ColSpanMd="12">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapButton ID="btnConfirmar" runat="server" Text="Confirmar" SettingsBootstrap-RenderOption="Primary" AutoPostBack="true" OnClick="btnConfirmar_Click" />
-                                <dx:BootstrapButton runat="server" Text="Cancelar" SettingsBootstrap-RenderOption="Link" AutoPostBack="true">
-                                    <ClientSideEvents Click="function(s, e) { document.location.reload();}" />
-                                </dx:BootstrapButton>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-
-                    <dx:BootstrapLayoutItem ShowCaption="False" ColSpanMd="12">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <asp:Label ID="lblErrorTerminos" runat="server" CssClass="text-danger fw-bold" Visible="false">
-                                </asp:Label>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-
-                </Items>
-            </dx:BootstrapFormLayout>
+                    </dx:BootstrapFormLayout>
                 </div>
             </div>
 
