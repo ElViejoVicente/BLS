@@ -1,13 +1,14 @@
-﻿using System;
+﻿using BLS.Negocio.ORM;
+using BLS.Web.Configuracion;
+using DevExpress.CodeParser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Text.RegularExpressions;
-using DevExpress.CodeParser;
-using BLS.Negocio.ORM;
-using BLS.Web.Configuracion;
+using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
 
 
 namespace BLS.Web.RegistroClientes
@@ -16,6 +17,18 @@ namespace BLS.Web.RegistroClientes
     {
         #region Propiedades
         private Boolean ContraseñaValida = false;
+
+        // inicializar la clase para envio de tokens por email
+
+        EmailTokenService svc = new EmailTokenService(
+                                smtpHost: "mail.consultoria-it.com",
+                                smtpPort: 465,
+                                smtpUser: "no-responder@consultoria-it.com",
+                                smtpPass: "inteldx486mail",
+                                smtpEnableSsl: true,
+                                fromEmail: "no-responder@consultoria-it.com",
+                                fromName: "Verificacion Cuenta BLS"
+                            );
 
         #endregion
 
@@ -111,6 +124,21 @@ namespace BLS.Web.RegistroClientes
         {
             try
             {
+                if (e.Parameter.Contains("EnviarCodigoValidacionEmail"))
+                {
+
+                    int id = svc.GenerateStoreAndSendToken(txtCorreoCliente.Text, expiresMinutes: 10);
+
+
+
+                    frmAltaCliente.FindItemByFieldName("ValidarCodVerificiacionEmail").ClientVisible = true;
+                    frmAltaCliente.FindItemByFieldName("CodVerificacionEmail").ClientVisible = true;
+
+
+                    return;
+                }
+
+
                 if (e.Parameter.Contains("GuardarDatosIniciales"))
                 {
                     if (ContraseñaValida == false)
@@ -134,7 +162,7 @@ namespace BLS.Web.RegistroClientes
                     NuevoCliente.FechaNacimiento = DateTime.Now;
                     NuevoCliente.NombreNegocio = txtDespachoConsultoria.Text;
                     NuevoCliente.RFC = txtRFC.Text;
-                    NuevoCliente.DomCalle = txtDomicilio.Text;                  
+                    NuevoCliente.DomCalle = txtDomicilio.Text;
                     NuevoCliente.DomCiudad = txtDomCiudad.Text;
                     NuevoCliente.DomEstado = txtDomEstado.Text;
                     NuevoCliente.DomCP = int.MaxValue;

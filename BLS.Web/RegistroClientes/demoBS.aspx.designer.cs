@@ -177,13 +177,40 @@ namespace BLS.Web.RegistroClientes
         protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtTelefono;
 
         /// <summary>
-        /// Control txtCorreo.
+        /// Control txtCorreoCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtCorreo;
+        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtCorreoCliente;
+
+        /// <summary>
+        /// Control btnEnviarCodVerificiacionEmail.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.Bootstrap.BootstrapButton btnEnviarCodVerificiacionEmail;
+
+        /// <summary>
+        /// Control txtCodVerificacionEmail.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtCodVerificacionEmail;
+
+        /// <summary>
+        /// Control frmAltaCliente_E5.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.Bootstrap.BootstrapButton frmAltaCliente_E5;
 
         /// <summary>
         /// Control txtPassword.

@@ -264,48 +264,83 @@
 
                                                 <dx:BootstrapLayoutGroup Caption="Datos de Acceso">
                                                     <Items>
-                                                        <dx:BootstrapLayoutItem Caption="email" ColSpanMd="12">
+                                                        <dx:BootstrapLayoutItem Caption="email" ColSpanMd="9">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server" Text="correco electronico" ID="txtCorreo" />
+                                                                    <dx:BootstrapTextBox runat="server" Text="correco electronico" ID="txtCorreoCliente" />
+                                                                </dx:ContentControl>
+                                                            </ContentCollection>
+                                                        </dx:BootstrapLayoutItem>
+
+                                                        <dx:BootstrapLayoutItem Caption="Validar Correo" ShowCaption="False"  ColSpanMd="3"   FieldName ="EnviarCodVerificiacionEmail" >
+                                                            <ContentCollection>
+                                                                <dx:ContentControl>
+                                                                    <dx:BootstrapButton runat="server" AutoPostBack="false"  SettingsBootstrap-RenderOption="Secondary" Text="Enviar Correo:"  ID="btnEnviarCodVerificiacionEmail">
+                                                                        <ClientSideEvents Click=" function(s, e) { plnPrincipal.PerformCallback('EnviarCodigoValidacionEmail') }"  />
+                                                                    </dx:BootstrapButton>
+
+                                                                </dx:ContentControl>
+                                                            </ContentCollection>
+                                                        </dx:BootstrapLayoutItem>
+
+                                                        <dx:BootstrapLayoutItem Caption="Codigo de verificacion" ColSpanMd="9" FieldName="CodVerificacionEmail" ClientVisible ="false">
+                                                            <ContentCollection>
+                                                                <dx:ContentControl>
+                                                                    <dx:BootstrapTextBox ID="txtCodVerificacionEmail" runat="server">
+                                                                    </dx:BootstrapTextBox>
+                                                                </dx:ContentControl>
+                                                            </ContentCollection>
+                                                        </dx:BootstrapLayoutItem>
+
+                                                        <dx:BootstrapLayoutItem ColSpanMd="3" ShowCaption="False"  ClientVisible="false"   FieldName ="ValidarCodVerificiacionEmail" >
+                                                            <ContentCollection>
+                                                                <dx:ContentControl>
+                                                                    <dx:BootstrapButton runat="server"  AutoPostBack="false"  SettingsBootstrap-RenderOption="Secondary"  Text="Validar codigo:" ID="frmAltaCliente_E5"></dx:BootstrapButton>
                                                                 </dx:ContentControl>
                                                             </ContentCollection>
                                                         </dx:BootstrapLayoutItem>
 
                                                         <dx:BootstrapLayoutItem Caption="Contrase&#241;a">
                                                             <ContentCollection>
-                                                                <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox ID="txtPassword" runat="server" Password="true" />
+                                                                <dx:ContentControl runat="server">
+                                                                    <dx:BootstrapTextBox runat="server" Password="True" ID="txtPassword"></dx:BootstrapTextBox>
+
+
                                                                 </dx:ContentControl>
                                                             </ContentCollection>
                                                         </dx:BootstrapLayoutItem>
 
                                                         <dx:BootstrapLayoutItem Caption="Confirmar Contrase&#241;a (requerido)">
                                                             <ContentCollection>
-                                                                <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox ID="txtConfirPassword" runat="server" Password="true">
-                                                                        <ClientSideEvents TextChanged="function(s, e) { plnPrincipal.PerformCallback('ValidadContraseña') }" />
+                                                                <dx:ContentControl runat="server">
+                                                                    <dx:BootstrapTextBox runat="server" Password="True" ID="txtConfirPassword">
+                                                                        <ClientSideEvents TextChanged="function(s, e) { plnPrincipal.PerformCallback(&#39;ValidadContrase&#241;a&#39;) }"></ClientSideEvents>
                                                                     </dx:BootstrapTextBox>
+
+
+
+
+
                                                                 </dx:ContentControl>
                                                             </ContentCollection>
                                                         </dx:BootstrapLayoutItem>
-
                                                         <dx:BootstrapLayoutItem Caption="Terminos y condiciones">
                                                             <ContentCollection>
-                                                                <dx:ContentControl>
+                                                                <dx:ContentControl runat="server">
                                                                     <dx:BootstrapCheckBox runat="server" CheckState="Unchecked" ID="frmAltaCliente_E3"></dx:BootstrapCheckBox>
+
                                                                 </dx:ContentControl>
                                                             </ContentCollection>
                                                         </dx:BootstrapLayoutItem>
-
                                                         <dx:BootstrapLayoutItem Caption="Politica de privacidad">
                                                             <ContentCollection>
                                                                 <dx:ContentControl runat="server">
                                                                     <dx:BootstrapCheckBox runat="server" CheckState="Unchecked" ID="frmAltaCliente_E4"></dx:BootstrapCheckBox>
+
+
                                                                 </dx:ContentControl>
                                                             </ContentCollection>
                                                         </dx:BootstrapLayoutItem>
-
                                                     </Items>
                                                 </dx:BootstrapLayoutGroup>
 
@@ -315,9 +350,13 @@
                                                     <ContentCollection>
                                                         <dx:ContentControl>
                                                             <dx:BootstrapButton ID="btnConfirmar" runat="server" Text="Confirmar" SettingsBootstrap-RenderOption="Primary" AutoPostBack="false" />
+                                                            
+                                                            
                                                             <dx:BootstrapButton runat="server" Text="Cancelar" SettingsBootstrap-RenderOption="Link" AutoPostBack="true">
                                                                 <ClientSideEvents Click="function(s, e) { plnPrincipal.PerformCallback('GuardarDatosIniciales')   }" />
                                                             </dx:BootstrapButton>
+
+
                                                         </dx:ContentControl>
                                                     </ContentCollection>
                                                 </dx:BootstrapLayoutItem>
