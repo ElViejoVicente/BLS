@@ -61,9 +61,9 @@ namespace BLS.Web.RegistroClientes
 
 
 
-            pnlResgistro.ClientVisible = false;
+            pnlRegistro.ClientVisible = false;
 
-            pnlPaquetes.ClientVisible = true;
+            pnlPaquete.ClientVisible = true;
         }
 
         protected void btnGratis_Click(object sender, EventArgs e)
@@ -96,14 +96,14 @@ namespace BLS.Web.RegistroClientes
             lblPlan.Text = nombre;
             lblPrecio.Text = precio.ToString();
 
-            pnlPaquetes.Visible = false;
+            pnlPaquete.Visible = false;
             pnlResumen.Visible = true;
         }
 
         protected void Unnamed_Click1(object sender, EventArgs e)
         {
             pnlResumen.Visible = false;
-            pnlPaquetes.Visible = true;
+            pnlPaquete.Visible = true;
 
         }
 
@@ -128,6 +128,18 @@ namespace BLS.Web.RegistroClientes
                     NuevoCliente.Activo = false;
                     NuevoCliente.FechaRegistro = DateTime.Now;
                     NuevoCliente.PrimerNombre = txtPrimerNombre.Text;
+                    NuevoCliente.SegunoNombre = txtSegundoNombre.Text;
+                    NuevoCliente.AppPaterno = txtAppPaterno.Text;
+                    NuevoCliente.AppMaterno = txtAppMaterno.Text;
+                    NuevoCliente.FechaNacimiento = DateTime.Now;
+                    NuevoCliente.NombreNegocio = txtDespachoConsultoria.Text;
+                    NuevoCliente.RFC = txtRFC.Text;
+                    NuevoCliente.DomCalle = txtDomicilio.Text;                  
+                    NuevoCliente.DomCiudad = txtDomCiudad.Text;
+                    NuevoCliente.DomEstado = txtDomEstado.Text;
+                    NuevoCliente.DomCP = txtDomCP.Text;
+                    NuevoCliente.DomTelefono = txtTelefono.Text;
+
                     //..
 
 
@@ -149,9 +161,9 @@ namespace BLS.Web.RegistroClientes
 
 
 
-                    pnlResgistro.ClientVisible = false;
+                    pnlRegistro.ClientVisible = false;
 
-                    pnlPaquetes.ClientVisible = true;
+                    pnlPaquete.ClientVisible = true;
 
 
 

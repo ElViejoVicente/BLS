@@ -79,7 +79,7 @@
 
 
 
-                    <dx:ASPxPanel ID="pnlResgistro" runat="server">
+                    <dx:ASPxPanel ID="pnlRegistro" runat="server">
                         <PanelCollection>
                             <dx:PanelContent>
                                 <div style="width: 60%; margin: 0 auto;">
@@ -91,7 +91,7 @@
                                             <Items>
                                                 <dx:BootstrapLayoutGroup Caption="Datos Personales o del Responsable" ColSpanMd="12">
                                                     <Items>
-                                                        <dx:BootstrapLayoutItem Caption="Nombre" ColSpanMd="12">
+                                                        <dx:BootstrapLayoutItem Caption="PrimerNombreNombre" ColSpanMd="12">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
                                                                     <dx:BootstrapTextBox runat="server" Width="100%" ID="txtPrimerNombre">
@@ -103,10 +103,22 @@
                                                             </ContentCollection>
                                                         </dx:BootstrapLayoutItem>
 
+                                                        <dx:BootstrapLayoutItem Caption="SegundoNobre" ColSpanMd="12">
+                                                            <ContentCollection>
+                                                                <dx:ContentControl>
+                                                                    <dx:BootstrapTextBox runat="server" Width="100%" ID="txtSegundoNombre">
+                                                                        <ValidationSettings>
+                                                                            <RequiredField IsRequired="true" ErrorText="El nombre es obligatorio" />
+                                                                        </ValidationSettings>
+                                                                    </dx:BootstrapTextBox>
+                                                                </dx:ContentControl>
+                                                            </ContentCollection>
+                                                        </dx:BootstrapLayoutItem>
+
                                                         <dx:BootstrapLayoutItem Caption="Apellido Paterno" ColSpanMd="12">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server" Width="100%">
+                                                                    <dx:BootstrapTextBox runat="server" Width="100%" ID="txtAppPaterno">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="El apellido paterno es obligatorio" />
                                                                         </ValidationSettings>
@@ -118,7 +130,7 @@
                                                         <dx:BootstrapLayoutItem Caption="Apellido Materno" ColSpanMd="12">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server" Width="100%">
+                                                                    <dx:BootstrapTextBox runat="server" Width="100%" ID="txtAppMaterno">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="El apellido materno es obligatorio" />
                                                                         </ValidationSettings>
@@ -130,7 +142,7 @@
                                                         <dx:BootstrapLayoutItem Caption="Fecha de nacimiento" ColSpanMd="6">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapDateEdit runat="server">
+                                                                    <dx:BootstrapDateEdit runat="server" ID="txtFecha">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="La fecha de nacimiento es obligatoria" />
                                                                         </ValidationSettings>
@@ -142,7 +154,7 @@
                                                         <dx:BootstrapLayoutItem Caption="Despacho/consultor&#237;a" ColSpanMd="12">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server">
+                                                                    <dx:BootstrapTextBox runat="server" ID="txtDespachoConsultoria">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="Este campo es obligatorio" />
                                                                         </ValidationSettings>
@@ -154,7 +166,7 @@
                                                         <dx:BootstrapLayoutItem Caption="RFC" ColSpanMd="12">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server" MaxLength="13">
+                                                                    <dx:BootstrapTextBox runat="server" MaxLength="13" ID="txtRFC">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="El RFC es obligatorio" />
                                                                         </ValidationSettings>
@@ -166,7 +178,7 @@
                                                         <dx:BootstrapLayoutItem Caption="Domicilio" ColSpanMd="12">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server">
+                                                                    <dx:BootstrapTextBox runat="server" ID="txtDomicilio">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="El domicilio es obligatorio" />
                                                                         </ValidationSettings>
@@ -175,12 +187,12 @@
                                                             </ContentCollection>
                                                         </dx:BootstrapLayoutItem>
 
-                                                        <dx:BootstrapLayoutItem Caption="Calle" ColSpanMd="6">
+                                                        <dx:BootstrapLayoutItem Caption="N° Interior" ColSpanMd="6">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server">
+                                                                    <dx:BootstrapTextBox runat="server" ID="txtNumeroInterior">
                                                                         <ValidationSettings>
-                                                                            <RequiredField IsRequired="true" ErrorText="La calle es obligatoria" />
+                                                                            <RequiredField IsRequired="true" ErrorText="" />
                                                                         </ValidationSettings>
                                                                     </dx:BootstrapTextBox>
                                                                 </dx:ContentControl>
@@ -201,7 +213,7 @@
                                                         <dx:BootstrapLayoutItem Caption="Ciudad" ColSpanMd="6">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server">
+                                                                    <dx:BootstrapTextBox runat="server" ID="txtDomCiudad">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="La ciudad es obligatoria" />
                                                                         </ValidationSettings>
@@ -213,7 +225,7 @@
                                                         <dx:BootstrapLayoutItem Caption="Estado" ColSpanMd="6">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server">
+                                                                    <dx:BootstrapTextBox runat="server" ID="txtDomEstado">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="El estado es obligatorio" />
                                                                         </ValidationSettings>
@@ -225,7 +237,7 @@
                                                         <dx:BootstrapLayoutItem Caption="Código Postal" ColSpanMd="6">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server" MaxLength="5">
+                                                                    <dx:BootstrapTextBox runat="server" MaxLength="5" ID="txtDomCP">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="El código postal es obligatorio" />
                                                                         </ValidationSettings>
@@ -237,7 +249,7 @@
                                                         <dx:BootstrapLayoutItem Caption="Teléfono de contacto" ColSpanMd="6">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server" MaxLength="15">
+                                                                    <dx:BootstrapTextBox runat="server" MaxLength="15" ID="txtTelefono">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="El teléfono es obligatorio" />
                                                                         </ValidationSettings>
@@ -255,7 +267,7 @@
                                                         <dx:BootstrapLayoutItem Caption="email" ColSpanMd="12">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server" Text="correco electronico" />
+                                                                    <dx:BootstrapTextBox runat="server" Text="correco electronico" ID="txtCorreo" />
                                                                 </dx:ContentControl>
                                                             </ContentCollection>
                                                         </dx:BootstrapLayoutItem>
@@ -332,7 +344,7 @@
 
 
 
-                    <dx:ASPxPanel ID="pnlPaquetes" runat="server" ClientVisible="false">
+                    <dx:ASPxPanel ID="pnlPaquete" runat="server" ClientVisible="true">
                         <PanelCollection>
                             <dx:PanelContent>
                                 <div class="container mt-5">
