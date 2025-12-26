@@ -6,19 +6,42 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 using DevExpress.CodeParser;
+using BLS.Negocio.ORM;
+using BLS.Web.Configuracion;
+
 
 namespace BLS.Web.RegistroClientes
 {
     public partial class demoBS : System.Web.UI.Page
     {
-
+        #region Propiedades
         private Boolean ContraseñaValida = false;
 
+        #endregion
+
+
+        public Clientes NuevoCliente
+        {
+            get => Session["ssNuevoClienteSBL"] as Clientes ?? new Clientes();
+            set => Session["ssNuevoClienteSBL"] = value;
+        }
+
+        public Usuarios NuevoUsuario
+        {
+            get => Session["ssNuevoUsuarioSBL"] as Usuarios ?? new Usuarios();
+            set => Session["ssNuevoUsuarioSBL"] = value;
+        }
 
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                NuevoCliente = new Clientes();
+                NuevoUsuario = new Usuarios();
+
+            }
 
         }
 
@@ -36,9 +59,9 @@ namespace BLS.Web.RegistroClientes
                 return;
             }
 
-           
 
-            pnlResgistro.ClientVisible  = false;
+
+            pnlResgistro.ClientVisible = false;
 
             pnlPaquetes.ClientVisible = true;
         }
@@ -90,17 +113,41 @@ namespace BLS.Web.RegistroClientes
             {
                 if (e.Parameter.Contains("GuardarDatosIniciales"))
                 {
-                    if (ContraseñaValida==false)
+                    if (ContraseñaValida == false)
                     {
 
                         plnPrincipal.JSProperties["cp_swMsg"] = "No se ha establecido correctamente la contraseña";
-                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning ;
+                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
                         plnPrincipal.JSProperties["cp_swClose"] = "";
                         plnPrincipal.JSProperties["cp_Reload"] = "";
                     }
                     // Y MAS validaciones , entonces
 
                     // sin antes guardar el valos de los campos nuevos en la variable de session 
+
+                    NuevoCliente.Activo = false;
+                    NuevoCliente.FechaRegistro = DateTime.Now;
+                    NuevoCliente.PrimerNombre = txtPrimerNombre.Text;
+                    //..
+
+
+
+
+                    //NuevoUsuario.Id = 0;
+                    //NuevoUsuario.UserName = "esto seria el correo ya validado";
+                    //NuevoUsuario.Contraseña = "la contaseña encriptada";
+                    //NuevoUsuario.Nombre = NuevoCliente.PrimerNombre + " " + NuevoCliente.AppPaterno + " " + NuevoCliente.AppMaterno;
+                    //NuevoUsuario.FechaAlta = DateTime.Now;
+                    //NuevoUsuario.Mail = "esto seria el correo ya validado";
+                    //NuevoUsuario.EsProyectista = false;
+                    //NuevoUsuario.EsCreditos = false;
+
+
+
+
+
+
+
 
                     pnlResgistro.ClientVisible = false;
 

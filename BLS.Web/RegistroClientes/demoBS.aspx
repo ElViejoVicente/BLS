@@ -94,7 +94,7 @@
                                                         <dx:BootstrapLayoutItem Caption="Nombre" ColSpanMd="12">
                                                             <ContentCollection>
                                                                 <dx:ContentControl>
-                                                                    <dx:BootstrapTextBox runat="server" Width="100%">
+                                                                    <dx:BootstrapTextBox runat="server" Width="100%" ID="txtPrimerNombre">
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="El nombre es obligatorio" />
                                                                         </ValidationSettings>

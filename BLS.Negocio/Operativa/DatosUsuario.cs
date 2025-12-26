@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using BLS.Negocio.ORM;
 
 namespace BLS.Negocio.Operativa
 {
@@ -14,7 +15,7 @@ namespace BLS.Negocio.Operativa
     {
         protected GenericProvider BaseDatossql = new SqlProvider(ConfigurationManager.AppSettings["sqlConn.ConnectionString"]);
 
-        public Usuario DameDatosUsuario(string codUsuario)
+        public Usuarios DameDatosUsuario(string codUsuario)
         {
             try
             {
@@ -29,10 +30,10 @@ namespace BLS.Negocio.Operativa
 
                 if (dtresultado.Rows.Count == 0)
                 {
-                    return new Usuario();
+                    return new Usuarios();
                 }
 
-                return new Usuario()
+                return new Usuarios()
                 {
                     Id = Convert.ToInt32(dtresultado.Rows[0]["usCodigo"]),
                     UserName = dtresultado.Rows[0]["usId"].ToString().Trim(),

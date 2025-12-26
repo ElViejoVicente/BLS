@@ -1205,7 +1205,128 @@ namespace BLS.Negocio.CRUD
 
         #region Clientes
 
+        public Clientes ConsultaClientes(int idCliente)
+        {
+            try
+            {
+                Clientes resultado = new Clientes();
 
+                using (var db = new SqlConnection(cnn))
+                {
+                    resultado = db.Query<Clientes>
+                        (
+                        sql: "sp_CRUD_Clientes_Select", param: new
+                        {
+                            idCliente
+                        }, commandType: CommandType.StoredProcedure
+                        ).FirstOrDefault();
+                }
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al ejecutar sp_CRUD_Clientes_Select, detalle: \n" + ex.Message, ex);
+            }
+        }
+
+
+        public Boolean AltaClientes(Clientes values)
+        {
+            try
+            {
+                using (var db = new SqlConnection(cnn))
+                {
+                    db.Execute(sql: "sp_CRUD_Clientes_Insert", param: new
+                    {
+                        values.Activo,
+                        values.FechaRegistro,
+                        values.PrimerNombre,
+                        values.SegunoNombre,
+                        values.AppPaterno,
+                        values.AppMaterno,
+                        values.FechaNacimiento,
+                        values.NombreNegocio,
+                        values.RFC,
+                        values.DomCalle,
+                        values.DomNumeroInt,
+                        values.DomNumeroExt,
+                        values.DomCiudad,
+                        values.DomEstado,
+                        values.DomCP,
+                        values.DomTelefono
+
+                    }, commandType: CommandType.StoredProcedure);
+                }
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al ejecutar sp_CRUD_Clientes_Insert, detalle: \n" + ex.Message, ex);
+            }
+        }
+
+
+        public Boolean ActualizarClientes(Clientes values)
+        {
+            try
+            {
+                using (var db = new SqlConnection(cnn))
+                {
+                    db.Execute(sql: "sp_CRUD_Clientes_Update", param: new
+                    {
+                        values.idCliente,
+                        values.Activo,
+                        values.FechaRegistro,
+                        values.PrimerNombre,
+                        values.SegunoNombre,
+                        values.AppPaterno,
+                        values.AppMaterno,
+                        values.FechaNacimiento,
+                        values.NombreNegocio,
+                        values.RFC,
+                        values.DomCalle,
+                        values.DomNumeroInt,
+                        values.DomNumeroExt,
+                        values.DomCiudad,
+                        values.DomEstado,
+                        values.DomCP,
+                        values.DomTelefono
+
+                    }, commandType: CommandType.StoredProcedure);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_CRUD_Clientes_Update, detalle: \n" + ex.Message, ex);
+            }
+        }
+
+
+        public Boolean EliminarClientes(Clientes values)
+        {
+            try
+            {
+                using (var db = new SqlConnection(cnn))
+                {
+                    db.Execute(sql: "sp_CRUD_Clientes_Delete", param: new
+                    {
+                        values.idCliente
+
+                    }, commandType: CommandType.StoredProcedure);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_CRUD_Clientes_Delete, detalle: \n" + ex.Message, ex);
+            }
+        }
         #endregion
 
         #region Alertas
