@@ -1203,6 +1203,11 @@ namespace BLS.Negocio.CRUD
 
         #endregion
 
+        #region Clientes
+
+
+        #endregion
+
         #region Alertas
 
         public Alertas ConsultaAlertas(string IdAlerta)

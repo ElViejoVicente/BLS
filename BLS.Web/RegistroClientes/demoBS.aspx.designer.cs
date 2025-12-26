@@ -33,13 +33,22 @@ namespace BLS.Web.RegistroClientes
         protected global::System.Web.UI.WebControls.Image imgLogo;
 
         /// <summary>
+        /// Control plnPrincipal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxCallbackPanel plnPrincipal;
+
+        /// <summary>
         /// Control pnlResgistro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlResgistro;
+        protected global::DevExpress.Web.ASPxPanel pnlResgistro;
 
         /// <summary>
         /// Control frmAltaCliente.
@@ -49,6 +58,15 @@ namespace BLS.Web.RegistroClientes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.Bootstrap.BootstrapFormLayout frmAltaCliente;
+
+        /// <summary>
+        /// Control txtNumDomcilio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtNumDomcilio;
 
         /// <summary>
         /// Control txtPassword.
@@ -111,7 +129,7 @@ namespace BLS.Web.RegistroClientes
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPaquetes;
+        protected global::DevExpress.Web.ASPxPanel pnlPaquetes;
 
         /// <summary>
         /// Control btnGratis.
@@ -156,7 +174,7 @@ namespace BLS.Web.RegistroClientes
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlResumen;
+        protected global::DevExpress.Web.ASPxPanel pnlResumen;
 
         /// <summary>
         /// Control lblPlan.

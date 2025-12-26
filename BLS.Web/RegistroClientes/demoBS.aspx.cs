@@ -5,11 +5,18 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
+using DevExpress.CodeParser;
 
 namespace BLS.Web.RegistroClientes
 {
     public partial class demoBS : System.Web.UI.Page
     {
+
+        private Boolean ContraseñaValida = false;
+
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -29,57 +36,11 @@ namespace BLS.Web.RegistroClientes
                 return;
             }
 
-            string password = txtPassword.Text;
-            string confirmPassword = txtConfirPassword.Text;
+           
 
-            // 2️ Coincidencia
-            if (password != confirmPassword)
-            {
-                lblErrorTerminos.Text = "Las contraseñas no coinciden.";
-                lblErrorTerminos.Visible = true;
-                return;
-            }
+            pnlResgistro.ClientVisible  = false;
 
-            // 3️ Longitud mínima
-            if (password.Length < 8)
-            {
-                lblErrorTerminos.Text = "La contraseña debe tener al menos 8 caracteres.";
-                lblErrorTerminos.Visible = true;
-                return;
-            }
-
-            // 4️ Reglas de seguridad
-            if (!Regex.IsMatch(password, @"[A-Z]"))
-            {
-                lblErrorTerminos.Text = "La contraseña debe contener al menos una letra mayúscula.";
-                lblErrorTerminos.Visible = true;
-                return;
-            }
-
-            if (!Regex.IsMatch(password, @"[a-z]"))
-            {
-                lblErrorTerminos.Text = "La contraseña debe contener al menos una letra minúscula.";
-                lblErrorTerminos.Visible = true;
-                return;
-            }
-
-            if (!Regex.IsMatch(password, @"\d"))
-            {
-                lblErrorTerminos.Text = "La contraseña debe contener al menos un número.";
-                lblErrorTerminos.Visible = true;
-                return;
-            }
-
-            if (!Regex.IsMatch(password, @"[\W_]"))
-            {
-                lblErrorTerminos.Text = "La contraseña debe contener al menos un símbolo.";
-                lblErrorTerminos.Visible = true;
-                return;
-            }
-
-            pnlResgistro.Visible = false;
-
-            pnlPaquetes.Visible = true;
+            pnlPaquetes.ClientVisible = true;
         }
 
         protected void btnGratis_Click(object sender, EventArgs e)
@@ -120,6 +81,103 @@ namespace BLS.Web.RegistroClientes
         {
             pnlResumen.Visible = false;
             pnlPaquetes.Visible = true;
+
+        }
+
+        protected void plnPrincipal_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        {
+            try
+            {
+                if (e.Parameter.Contains("GuardarDatosIniciales"))
+                {
+                    if (ContraseñaValida==false)
+                    {
+
+                        plnPrincipal.JSProperties["cp_swMsg"] = "No se ha establecido correctamente la contraseña";
+                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning ;
+                        plnPrincipal.JSProperties["cp_swClose"] = "";
+                        plnPrincipal.JSProperties["cp_Reload"] = "";
+                    }
+                    // Y MAS validaciones , entonces
+
+                    // sin antes guardar el valos de los campos nuevos en la variable de session 
+
+                    pnlResgistro.ClientVisible = false;
+
+                    pnlPaquetes.ClientVisible = true;
+
+
+
+
+                    return;
+                }
+
+                if (e.Parameter.Contains("ValidadContraseña"))
+                {
+                    string password = txtPassword.Text;
+                    string confirmPassword = txtConfirPassword.Text;
+
+                    // 2️ Coincidencia
+                    if (password != confirmPassword)
+                    {
+                        lblErrorTerminos.Text = "Las contraseñas no coinciden.";
+                        lblErrorTerminos.Visible = true;
+                        return;
+                    }
+
+                    // 3️ Longitud mínima
+                    if (password.Length < 8)
+                    {
+                        plnPrincipal.JSProperties["cp_swMsg"] = "La contraseña debe tener al menos 8 caracteres.";
+                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
+                        plnPrincipal.JSProperties["cp_swClose"] = "";
+                        plnPrincipal.JSProperties["cp_Reload"] = "";
+
+                        //lblErrorTerminos.Text = "";
+                        //lblErrorTerminos.Visible = true;
+                        return;
+                    }
+
+                    // 4️ Reglas de seguridad
+                    if (!Regex.IsMatch(password, @"[A-Z]"))
+                    {
+                        lblErrorTerminos.Text = "La contraseña debe contener al menos una letra mayúscula.";
+                        lblErrorTerminos.Visible = true;
+                        return;
+                    }
+
+                    if (!Regex.IsMatch(password, @"[a-z]"))
+                    {
+                        lblErrorTerminos.Text = "La contraseña debe contener al menos una letra minúscula.";
+                        lblErrorTerminos.Visible = true;
+                        return;
+                    }
+
+                    if (!Regex.IsMatch(password, @"\d"))
+                    {
+                        lblErrorTerminos.Text = "La contraseña debe contener al menos un número.";
+                        lblErrorTerminos.Visible = true;
+                        return;
+                    }
+
+                    if (!Regex.IsMatch(password, @"[\W_]"))
+                    {
+                        lblErrorTerminos.Text = "La contraseña debe contener al menos un símbolo.";
+                        lblErrorTerminos.Visible = true;
+                        return;
+                    }
+
+                    ContraseñaValida = true;
+
+                    return;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
         }
     }

@@ -110,6 +110,7 @@
     <Compile Include="ORM\Cat_RolParticipantes.cs" />
     <Compile Include="ORM\Cat_TipoInventario.cs" />
     <Compile Include="ORM\Cat_VariantesPorActo.cs" />
+    <Compile Include="ORM\Clientes.cs" />
     <Compile Include="ORM\DatosAvisoNotarial.cs" />
     <Compile Include="ORM\DatosDocumentos.cs" />
     <Compile Include="ORM\DatosParticipantes.cs" />
