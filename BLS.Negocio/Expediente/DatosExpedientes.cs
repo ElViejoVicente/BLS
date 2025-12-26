@@ -382,7 +382,7 @@ namespace BLS.Negocio.Expediente
             }
         }
 
-        public List<ListaExpedientes> DameListaExpediente(DateTime fechaInicial, DateTime fechaFinal,  int idUsuario, Boolean todasLasFechas)
+        public List<ListaExpedientes> DameListaExpediente(DateTime fechaInicial, DateTime fechaFinal,  long idUsuario, Boolean todasLasFechas)
         {
             try
             {

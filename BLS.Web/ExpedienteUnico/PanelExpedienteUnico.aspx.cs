@@ -111,7 +111,7 @@ namespace BLS.Web.ExpedienteUnico
         {
             if (!Page.IsPostBack)
             {
-                Session["UsuarioConsultaLN"] = UsuarioPagina.Nombre;
+                Session["UsuarioConsultaLN"] = UsuarioPagina.usNombre;
                 dtFechaInicio.Date = DateTime.Now.Date.AddDays(-15);
                 dtFechaFin.Date = DateTime.Now.Date;
                 DameCatalogos();
@@ -316,7 +316,7 @@ namespace BLS.Web.ExpedienteUnico
                 HojaDatos hojaDatos = datosCrud.ConsultaHojaDatos(miRegistro.IdHojaDatos);
 
                 BitacoraExpediente logCambios = new BitacoraExpediente();
-                logCambios.UsuarioImplicado = UsuarioPagina.Nombre;
+                logCambios.UsuarioImplicado = UsuarioPagina.usNombre;
                 logCambios.IdExpediente = hojaDatos.numExpediente;
                 logCambios.NombreModulo = "Expediente Unico";
 

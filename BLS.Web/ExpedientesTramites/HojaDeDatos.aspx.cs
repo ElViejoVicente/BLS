@@ -387,7 +387,7 @@ namespace BLS.Web.ExpedientesTramites
                 dtFechaFin.Date = DateTime.Now.Date;
 
                 dtFechaIngreso.Date = DateTime.Now;
-                txtNombreAsesor.Text = UsuarioPagina.Nombre;
+                txtNombreAsesor.Text = UsuarioPagina.usNombre;
                 DameCatalogos();
 
             }
@@ -946,7 +946,7 @@ namespace BLS.Web.ExpedientesTramites
             nuevaHoja.NumTelCelular1 = txtNumCelular.Text;
             nuevaHoja.CorreoElectronico = txtCorreoElectronico.Text;
 
-            if (datosCrud.AltaHojaDatos(ref nuevaHoja,UsuarioPagina.Id))
+            if (datosCrud.AltaHojaDatos(ref nuevaHoja,UsuarioPagina.usCodigo))
             {
                 nuevaHojaComplemento.IdHojaDatos = nuevaHoja.IdHojaDatos;
                 nuevaHojaComplemento.IdActo = cbActosNuevo.Value == null ? 0 : Convert.ToInt32(cbActosNuevo.Value);

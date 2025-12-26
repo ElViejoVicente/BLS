@@ -36,7 +36,7 @@ namespace BLS.Web
                 if (Session["usuario"] != null)
                 {
                     string strHora = DateTime.Now.ToString("HH:mm:ss");
-                    HidUsuario.Value = UsuarioPagina.Id.ToString();
+                    HidUsuario.Value = UsuarioPagina.usCodigo.ToString();
                     //lblHora.Text = System.DateTime.Today.ToLongDateString();
                     //lblNomUsuario.Text = ((Usuario)Session["usuario"]).Nombre;
                     try

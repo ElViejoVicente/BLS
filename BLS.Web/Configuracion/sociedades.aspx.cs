@@ -10,6 +10,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BLS.Negocio.ORM;
+using BLS.Negocio.CRUD;
 
 namespace BLS.Web.Configuracion
 {
@@ -33,14 +35,14 @@ namespace BLS.Web.Configuracion
             }
         }
 
-        public List<Usuario> ListaUsuarios
+        public List<Usuarios> ListaUsuarios
         {
             get
             {
-                List<Usuario> dtUsuarios = new List<Usuario>();
+                List<Usuarios> dtUsuarios = new List<Usuarios>();
                 if (this.ViewState["dtUsuarios"] != null)
                 {
-                    dtUsuarios = (List<Usuario>)this.ViewState["dtUsuarios"];
+                    dtUsuarios = (List<Usuarios>)this.ViewState["dtUsuarios"];
                 }
 
                 return dtUsuarios;
@@ -51,6 +53,8 @@ namespace BLS.Web.Configuracion
             }
 
         }
+
+        DatosCrud datosCrud = new DatosCrud();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -391,7 +395,7 @@ namespace BLS.Web.Configuracion
         {
             try
             {
-                ListaUsuarios = datosUsuario.DameDatosUsuario(-1);
+                ListaUsuarios = datosCrud.ConsultaUsuario();
                 Cb_Usuarios.DataBind();
             }
             catch (Exception ex)

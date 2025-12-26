@@ -1,5 +1,8 @@
-﻿using SGN.Datos;
-using BLS.Negocio.Operativa;
+﻿using BLS.Negocio.Operativa;
+using BLS.Negocio.ORM;
+using Dapper;
+using Newtonsoft.Json.Linq;
+using SGN.Datos;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,7 +10,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using BLS.Negocio.ORM;
 
 namespace BLS.Negocio.Operativa
 {
@@ -15,243 +17,32 @@ namespace BLS.Negocio.Operativa
     {
         protected GenericProvider BaseDatossql = new SqlProvider(ConfigurationManager.AppSettings["sqlConn.ConnectionString"]);
 
-        public Usuarios DameDatosUsuario(string codUsuario)
+        protected String cnn = ConfigurationManager.AppSettings["sqlConn.ConnectionString"];
+
+        public UsuariosEXT DameDatosUsuario(string usMail)
         {
             try
             {
-                DataTable dtresultado;
-
-                List<SqlParamTranfer> parametros = new List<SqlParamTranfer>
+                UsuariosEXT resultado = new UsuariosEXT();
+                using (var db = new SqlConnection(cnn))
                 {
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@usuario", SqlDbType.VarChar), _SqlValue: codUsuario)
-                };
-
-                dtresultado = BaseDatossql.LoadDataSet("sp_dameusuario", parametros).Tables[0];
-
-                if (dtresultado.Rows.Count == 0)
-                {
-                    return new Usuarios();
+                    resultado = db.Query<UsuariosEXT>(
+                        sql: "sp_DameDatosUsuarioPorCorreo",
+                        param: new { usMail },
+                        commandType: CommandType.StoredProcedure
+                    ).FirstOrDefault();
                 }
-
-                return new Usuarios()
-                {
-                    Id = Convert.ToInt32(dtresultado.Rows[0]["usCodigo"]),
-                    UserName = dtresultado.Rows[0]["usId"].ToString().Trim(),
-                    Contraseña = dtresultado.Rows[0]["usPWD"].ToString().Trim(),
-                    Nombre = dtresultado.Rows[0]["usNombre"].ToString().Trim(),
-                    FechaAlta = Convert.ToDateTime(dtresultado.Rows[0]["usFecAlta"]),
-                    Activo = Convert.ToBoolean(dtresultado.Rows[0]["usActivo"]),
-                    Mail = dtresultado.Rows[0]["usMail"].ToString().Trim(),
-                    FechaBaja = Convert.ToDateTime(dtresultado.Rows[0]["usFecBaja"] != DBNull.Value ? dtresultado.Rows[0]["usFecBaja"] : "1900-01-01"),
-                    Avisoemail = Convert.ToBoolean(dtresultado.Rows[0]["usAvisosEmail"]),
-                    AreaTrabajo = dtresultado.Rows[0]["usArea"].ToString().Trim(),
-                    EsProyectista = Convert.ToBoolean(dtresultado.Rows[0]["usEsproyectista"]),
-                    EsCreditos = Convert.ToBoolean(dtresultado.Rows[0]["usEsCreditos"]),
-                    Perfil = Convert.ToInt32((dtresultado.Rows[0]["puPerfil"]) != DBNull.Value ? dtresultado.Rows[0]["puPerfil"] : ""),
-                    NombrePerfil = dtresultado.Rows[0]["usNombrePerfil"].ToString().Trim(),
-                    Creado = true
-                };
-
+                return resultado;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al ejecutar sp_dameusuario detalle: \n" + ex.Message, ex);
-            }
-
-        }
-
-        public Boolean AltaUsuario(Usuario miUsuario)
-        {
-            try
-            {
-
-                DataTable dtresultado;
-
-                List<SqlParamTranfer> parametros = new List<SqlParamTranfer>
-                {
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@UserName", SqlDbType.VarChar), _SqlValue: miUsuario.UserName),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@Contraseña", SqlDbType.VarChar), _SqlValue: miUsuario.Contraseña),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@Nombre", SqlDbType.VarChar), _SqlValue: miUsuario.Nombre),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@FechaAlta", SqlDbType.DateTime), _SqlValue: miUsuario.FechaAlta),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@Activo", SqlDbType.Bit), _SqlValue: miUsuario.Activo),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@Mail", SqlDbType.VarChar), _SqlValue: miUsuario.Mail),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@FechaBaja", SqlDbType.DateTime), _SqlValue: miUsuario.FechaBaja),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@avisoemail", SqlDbType.Bit), _SqlValue: miUsuario.Avisoemail),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@AreaTrabajo", SqlDbType.VarChar), _SqlValue: miUsuario.AreaTrabajo),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@esProyectista", SqlDbType.Bit), _SqlValue: miUsuario.EsProyectista),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@esCreditos", SqlDbType.Bit), _SqlValue: miUsuario.EsCreditos )
-                };
-
-                dtresultado = BaseDatossql.LoadDataSet("sp_AltaNuevoUsuario", parametros).Tables[0];
-
-
-                if (int.Parse(dtresultado.Rows[0]["RES"].ToString()) > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    throw new Exception("Error en sp_AltaNuevoUsuario detalle: la operacion de actulizacion retorno @@rowcount =0");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al ejecutar sp_AltaNuevoUsuario detalle: \n" + ex.Message, ex);
+                throw new Exception("Error al ejecutar sp_DameDatosUsuarioPorCorreo, detalle: \n" + ex.Message, ex);
             }
         }
 
-        public Boolean ActulizarDatosUsuario(Usuario miUsuario)
-        {
-            try
-            {
-                DataTable dtresultado;
-
-                List<SqlParamTranfer> parametros = new List<SqlParamTranfer>
-                {
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@CodigoUsuario", SqlDbType.Int), _SqlValue: miUsuario.Id),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@UserName", SqlDbType.VarChar), _SqlValue: miUsuario.UserName),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@Nombre", SqlDbType.VarChar), _SqlValue: miUsuario.Nombre),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@FechaAlta", SqlDbType.DateTime), _SqlValue: miUsuario.FechaAlta),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@Activo", SqlDbType.Bit), _SqlValue: miUsuario.Activo),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@Mail", SqlDbType.VarChar), _SqlValue: miUsuario.Mail),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@FechaBaja", SqlDbType.DateTime), _SqlValue: miUsuario.FechaBaja),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@avisoemail", SqlDbType.Bit), _SqlValue: miUsuario.Avisoemail),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@contrasena", SqlDbType.Bit), _SqlValue: miUsuario.Contraseña),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@AreaTrabajo", SqlDbType.VarChar), _SqlValue: miUsuario.AreaTrabajo),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@esProyectista", SqlDbType.Bit), _SqlValue: miUsuario.EsProyectista),
-                 new SqlParamTranfer( _SqlParameter: new SqlParameter("@esCreditos", SqlDbType.Bit), _SqlValue: miUsuario.EsCreditos),
-                };
 
 
-                dtresultado = BaseDatossql.LoadDataSet("sp_actualizaDatosUsuario", parametros).Tables[0];
-
-
-                // Saul: para las pruebas y provocar un error estamos llamandoa un columana que no existe RExS
-                // cuando logremos el objetivo hay que renombrar a RES
-
-                if (int.Parse(dtresultado.Rows[0]["RES"].ToString()) == 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    throw new Exception("Error en sp_actualizaDatosUsuario detalle: la operacion de actulizacion retorno @@rowcount =0");
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error al ejecutar sp_actualizaDatosUsuario detalle: \n" + ex.Message, ex);
-            }
-        }
-
-        public Boolean ActualizarPWD(Usuario miUsuario)
-        {
-            try
-            {
-                DataTable dtresultado;
-
-                List<SqlParamTranfer> parametros = new List<SqlParamTranfer>
-                {
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@idusuario", SqlDbType.Int), _SqlValue: miUsuario.Id),
-                 new SqlParamTranfer( _SqlParameter: new SqlParameter("@nombre", SqlDbType.VarChar), _SqlValue: miUsuario.Nombre),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@mail", SqlDbType.DateTime), _SqlValue: miUsuario.Mail),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@pwd", SqlDbType.VarChar), _SqlValue: miUsuario.Contraseña),
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@avisomail", SqlDbType.DateTime), _SqlValue: miUsuario.Avisoemail)
-
-                };
-
-
-                dtresultado = BaseDatossql.LoadDataSet("sp_cambiapwd", parametros).Tables[0];
-
-
-                // Saul: para las pruebas y provocar un error estamos llamandoa un columana que no existe RExS
-                // cuando logremos el objetivo hay que renombrar a RES
-
-                if (int.Parse(dtresultado.Rows[0]["RES"].ToString()) == 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    throw new Exception("Error en sp_actualizaDatosUsuario detalle: la operacion de actulizacion retorno @@rowcount =0");
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error al ejecutar sp_actualizaDatosUsuario detalle: \n" + ex.Message, ex);
-            }
-        }
-        public List<Usuario> DameDatosUsuario(int codusuario)
-        {
-            try
-            {
-                DataTable dtresultado;
-                List<Usuario> miListaUsuarios = new List<Usuario>();
-                dtresultado = BaseDatossql.LoadDataSet("sp_dameTodosUsuarios").Tables[0];
-
-                if (dtresultado.Rows.Count == 0)
-                {
-                    return miListaUsuarios;
-                }
-                if (codusuario != -1)
-                {
-                    DataRow[] dtusuario = dtresultado.Select("usCodigo=" + codusuario);
-                    miListaUsuarios = (from elemento in dtusuario.AsEnumerable()
-                                       select new Usuario
-                                       {
-                                           Id = Convert.ToInt32(elemento["usCodigo"]),
-                                           UserName = elemento["usId"].ToString().Trim(),
-                                           Contraseña = elemento["usPWD"].ToString().Trim(),
-                                           Nombre = elemento["usNombre"].ToString().Trim(),
-                                           FechaAlta = Convert.ToDateTime(elemento["usFecAlta"]),
-                                           Activo = Convert.ToBoolean(elemento["usActivo"]),
-                                           Mail = elemento["usMail"].ToString().Trim(),
-                                           FechaBaja = Convert.ToDateTime(elemento["usFecBaja"]),                                          
-                                           Avisoemail = Convert.ToBoolean(elemento["usAvisosEmail"]),
-                                           AreaTrabajo = elemento["usArea"].ToString().Trim(),
-                                           EsProyectista = Convert.ToBoolean(elemento["usEsproyectista"]),
-                                           EsCreditos =  Convert.ToBoolean(elemento["usEsCreditos"]),
-                                           Creado = true
-                                       }).ToList();
-                    return miListaUsuarios;
-                }
-                else
-                {
-                    miListaUsuarios = (from elemento in dtresultado.AsEnumerable()
-                                       select new Usuario
-                                       {
-                                           Id = Convert.ToInt32(elemento["usCodigo"]),
-                                           UserName = elemento["usId"].ToString().Trim(),
-                                           Contraseña = elemento["usPWD"].ToString().Trim(),
-                                           Nombre = elemento["usNombre"].ToString().Trim(),
-                                           FechaAlta = Convert.ToDateTime(elemento["usFecAlta"]),
-                                           Activo = Convert.ToBoolean(elemento["usActivo"]),
-                                           Mail = elemento["usMail"].ToString().Trim(),
-                                           FechaBaja = Convert.ToDateTime(elemento["usFecBaja"]),                                          
-                                           Avisoemail = Convert.ToBoolean(elemento["usAvisosEmail"]),
-                                           AreaTrabajo = elemento["usArea"].ToString().Trim(),
-                                           EsProyectista = Convert.ToBoolean(elemento["usEsproyectista"]),
-                                           EsCreditos = Convert.ToBoolean(elemento["usEsCreditos"]),
-                                           Creado = true
-                                       }).ToList();
-                    return miListaUsuarios;
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error al ejecutar sp_dameTodosUsuarios detalle: \n" + ex.Message, ex);
-            }
-
-
-        }
-
-        public List<PerfilXOperaciones> DameAccionesPermitidas(int Idusuario)
+        public List<PerfilXOperaciones> DameAccionesPermitidas(long Idusuario)
         {
             try
             {
@@ -259,7 +50,7 @@ namespace BLS.Negocio.Operativa
                 List<PerfilXOperaciones> miListaOperacionesXPefil = new List<PerfilXOperaciones>();
                 List<SqlParamTranfer> parametros = new List<SqlParamTranfer>
                 {
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@idUsuario", SqlDbType.Int), _SqlValue: Idusuario)
+                new SqlParamTranfer( _SqlParameter: new SqlParameter("@idUsuario", SqlDbType.BigInt), _SqlValue: Idusuario)
                 };
 
                 dtresultado = BaseDatossql.LoadDataSet("sp_dameOperacionXPerfil", parametros).Tables[0];
@@ -291,7 +82,7 @@ namespace BLS.Negocio.Operativa
                 throw new Exception("Error al ejecutar sp_dameModulosXPerfil detalle: \n" + ex.Message, ex);
             }
         }
-        public DataTable ObtenNodosMenu(int parent, int codUsuario, bool vertodo = false)
+        public DataTable ObtenNodosMenu(int parent, long codUsuario, bool vertodo = false)
         {
             try
             {
@@ -300,7 +91,7 @@ namespace BLS.Negocio.Operativa
                 List<SqlParamTranfer> parametros = new List<SqlParamTranfer>
                 {
                 new SqlParamTranfer( _SqlParameter: new SqlParameter("@piParent", SqlDbType.Int), _SqlValue: parent),
-                 new SqlParamTranfer( _SqlParameter: new SqlParameter("@piUser", SqlDbType.Int), _SqlValue: codUsuario),
+                 new SqlParamTranfer( _SqlParameter: new SqlParameter("@piUser", SqlDbType.BigInt), _SqlValue: codUsuario),
                  new SqlParamTranfer( _SqlParameter: new SqlParameter("@piTodo", SqlDbType.Bit), _SqlValue: vertodo),
 
 
@@ -741,7 +532,7 @@ namespace BLS.Negocio.Operativa
         }
 
 
-        public List<SociedadXUsuario> DameSociedadesUsuario(int idUsuario)
+        public List<SociedadXUsuario> DameSociedadesUsuario(long idUsuario)
         {
             try
             {
@@ -751,7 +542,7 @@ namespace BLS.Negocio.Operativa
 
                 List<SqlParamTranfer> parametros = new List<SqlParamTranfer>
                 {
-                new SqlParamTranfer( _SqlParameter: new SqlParameter("@idUsuario", SqlDbType.Int), _SqlValue: idUsuario)
+                new SqlParamTranfer( _SqlParameter: new SqlParameter("@idUsuario", SqlDbType.BigInt), _SqlValue: idUsuario)
                 };
 
                 dtresultado = BaseDatossql.LoadDataSet("sp_dameSociedadesUsuario", parametros).Tables[0];
@@ -765,7 +556,7 @@ namespace BLS.Negocio.Operativa
                 miListaSociedadUsuario = (from elemento in dtresultado.AsEnumerable()
                                           select new SociedadXUsuario
                                           {
-                                              suUsuario = Convert.ToInt32(elemento["suUsuario"]),
+                                              suUsuario = Convert.ToInt64(elemento["suUsuario"]),
                                               suSociedad = Convert.ToInt32(elemento["suSociedad"]),
                                               suPorDefecto = Convert.ToBoolean(elemento["suPorDefecto"]),
                                               Creado = true

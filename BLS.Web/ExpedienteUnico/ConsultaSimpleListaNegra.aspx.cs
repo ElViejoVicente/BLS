@@ -62,7 +62,7 @@ namespace BLS.Web.ExpedienteUnico
                 DetalleBusqueda.Rfc = txtRFC.Text.Trim().ToUpper();
                 DetalleBusqueda.TipoRegimen=chkTipoPersona.SelectedItem.Value.ToString().ToUpper();
                 DetalleBusqueda.RazonSocial=txtNombreSociedad.Text.Trim();
-                DetalleBusqueda.NombreUsuarioConsulta = UsuarioPagina.Nombre;
+                DetalleBusqueda.NombreUsuarioConsulta = UsuarioPagina.usNombre;
 
               //  Response.Write("<script> window.open('" + "www.google.com" + "','_blank'); </script>");
 

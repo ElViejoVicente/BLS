@@ -8,7 +8,7 @@ namespace BLS.Negocio.ORM
 {
     public class Usuarios
     {
-        public string usCodigo { get; set; }
+        public Int64 usCodigo { get; set; }
         public string usMail { get; set; }
         public string usPWD { get; set; }
         public string usNombre { get; set; }

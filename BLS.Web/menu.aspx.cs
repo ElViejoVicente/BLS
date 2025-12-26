@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BLS.Negocio.ORM;
 
 namespace BLS.Web
 {
@@ -35,7 +36,7 @@ namespace BLS.Web
             {
                 // datosUsuario = new DatosUsuario();
 
-                var AccionesPermitidad = datosUsuario.DameAccionesPermitidas(Idusuario: ((Usuario)Session["usuario"]).Id);
+                var AccionesPermitidad = datosUsuario.DameAccionesPermitidas(Idusuario: ((Usuarios)Session["usuario"]).usCodigo);
                 if (AccionesPermitidad.Count > 0)
                 {
                     Session["AccionesControXPerfil"] = AccionesPermitidad;
@@ -55,7 +56,7 @@ namespace BLS.Web
             DataSet ds = new DataSet();
             if (Session["usuario"] != null)
             {
-                DataTable nodos = datosUsuario.ObtenNodosMenu(parent: 0, codUsuario: ((Usuario)Session["usuario"]).Id, vertodo: false).Copy();
+                DataTable nodos = datosUsuario.ObtenNodosMenu(parent: 0, codUsuario: ((Usuarios)Session["usuario"]).usCodigo, vertodo: false).Copy();
                 ds.Tables.Add(nodos);
                 ds.Relations.Add("NodeRelation", ds.Tables[0].Columns["fiIdModulo"], ds.Tables[0].Columns["fiParentId"]);
                 foreach (DataRow row in ds.Tables[0].Rows)
@@ -132,10 +133,10 @@ namespace BLS.Web
             {
                 if (Session["usuario"] != null)
                 {
-                    Usuario user = (Usuario)Session["usuario"];
+                    UsuariosEXT user = (UsuariosEXT)Session["usuario"];
                     lblPerfil.Text = user.NombrePerfil.Trim();
-                    lblNomUsuario.Text = user.Nombre;
-                    lblMail.Text = user.Mail;
+                    lblNomUsuario.Text = user.usNombre.Trim();
+                    lblMail.Text = user.usMail;
                    // imagenUser.ImageUrl = "imagenes/menu/avatar-face-head.png";
                 }
 

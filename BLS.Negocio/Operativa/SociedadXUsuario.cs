@@ -10,7 +10,7 @@ namespace BLS.Negocio.Operativa
     public class SociedadXUsuario
     {
         #region Propiedades
-        public int suUsuario { get; set; } = 0;
+        public long suUsuario { get; set; } = 0;
         public int suSociedad { get; set; } = 0;
         public Boolean suPorDefecto { get; set; } = false;
         public Boolean Creado { get; set; } = false;

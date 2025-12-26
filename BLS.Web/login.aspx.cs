@@ -1,4 +1,5 @@
 ﻿using BLS.Negocio.Operativa;
+using BLS.Negocio.ORM;
 using BLS.Web.Controles.Servidor;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace BLS.Web
 {
     public partial class Login : PageBase
     {
-        private Usuario user = null;
+        private UsuariosEXT user = null;
         private List<Sociedad> ListaSociedades = null;
         private List<SociedadXUsuario> ListaSociedadesAutorizadas = null;
         protected void Page_Load(object sender, EventArgs e)
@@ -52,14 +53,14 @@ namespace BLS.Web
                 }
 
                 user = datosUsuario.DameDatosUsuario(txtUsername.Text.Trim());
-                if (user == null && user.Creado == false)
+                if (user == null)
                 {
                     //ventana de error por que no existe el usuario
                     cuInfoMsgbox1.mostrarMensaje("Usuario no existe, porfavor verifique.", Controles.Usuario.InfoMsgBox.tipoMsg.error);
                     return;
                 }
 
-                if (user.Activo == false)
+                if (user.usActivo == false)
                 {
                     //ventana de error por que el usuario esta dado de baja
                     cuInfoMsgbox1.mostrarMensaje("Usuario dado de baja.", Controles.Usuario.InfoMsgBox.tipoMsg.warning);
@@ -67,32 +68,14 @@ namespace BLS.Web
 
                 }
 
-                if (txtPassword.Text.Trim() == user.Contraseña.Trim())
+
+                if (PasswordHasher.VerifyPassword(txtPassword.Text.Trim(), user.usPWD))
                 {
+
                     // despues de la validacion de contraseña consultamos las socieades permitidas para este usuario.
                     Session["usuario"] = user;
-
-                    ListaSociedades = datosUsuario.DameDatosSociedades();
-                    ListaSociedadesAutorizadas = datosUsuario.DameSociedadesUsuario(user.Id);
-
-                    if (ListaSociedades != null && ListaSociedadesAutorizadas != null && ListaSociedadesAutorizadas.Count > 0)
-                    {
-                        Session["listaSociedades"] = ListaSociedades;
-                        Session["sociedadesXusuario"] = ListaSociedadesAutorizadas;
-
-                    }
-                    else
-                    {
-                        cuInfoMsgbox1.mostrarMensaje("El usuario: " + txtUsername.Text + " no cuenta con sociedades asignadas, solicite ayuda al administrador.", Controles.Usuario.InfoMsgBox.tipoMsg.warning);
-
-                        Session["listaSociedades"] = null;
-                        Session["sociedadesXusuario"] = null;
-                        return;
-                    }
-
-
+                      
                     Response.Redirect("index.aspx");
-
 
 
                 }

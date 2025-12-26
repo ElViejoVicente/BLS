@@ -14,7 +14,7 @@ namespace BLS.Negocio.ORM
         public string NombreAsesor { get; set; } = "";
         public DateTime FechaIngreso { get; set; } = Constantes.FechaGlobal;
         public DateTime FechaCompleto { get; set; } =Constantes.FechaGlobal;
-        public int IdUsuarioResponsable { get; set; } = 0;
+        public long IdUsuarioResponsable { get; set; } = 0;
         public int IdEquipoResponsable { get; set; } = 0;
         public string NumbreUsuarioTramita { get; set; } = "";
         public string NumTelCelular1 { get; set; } = "";
