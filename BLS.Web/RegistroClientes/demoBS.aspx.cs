@@ -137,7 +137,7 @@ namespace BLS.Web.RegistroClientes
                     NuevoCliente.DomCalle = txtDomicilio.Text;                  
                     NuevoCliente.DomCiudad = txtDomCiudad.Text;
                     NuevoCliente.DomEstado = txtDomEstado.Text;
-                    NuevoCliente.DomCP = txtDomCP.Text;
+                    NuevoCliente.DomCP = int.MaxValue;
                     NuevoCliente.DomTelefono = txtTelefono.Text;
 
                     //..

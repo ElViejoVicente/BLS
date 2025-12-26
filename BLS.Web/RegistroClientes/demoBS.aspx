@@ -141,8 +141,8 @@
 
                                                         <dx:BootstrapLayoutItem Caption="Fecha de nacimiento" ColSpanMd="6">
                                                             <ContentCollection>
-                                                                <dx:ContentControl>
-                                                                    <dx:BootstrapDateEdit runat="server" ID="txtFecha">
+                                                                <dx:ContentControl> 
+                                                                    <dx:BootstrapDateEdit runat="server" >
                                                                         <ValidationSettings>
                                                                             <RequiredField IsRequired="true" ErrorText="La fecha de nacimiento es obligatoria" />
                                                                         </ValidationSettings>

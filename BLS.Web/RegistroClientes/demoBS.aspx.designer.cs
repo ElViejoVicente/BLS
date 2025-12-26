@@ -96,15 +96,6 @@ namespace BLS.Web.RegistroClientes
         protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtAppMaterno;
 
         /// <summary>
-        /// Control txtFecha.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapDateEdit txtFecha;
-
-        /// <summary>
         /// Control txtDespachoConsultoria.
         /// </summary>
         /// <remarks>
