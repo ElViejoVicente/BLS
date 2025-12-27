@@ -88,6 +88,14 @@
                         <Items>
                             <dx:BootstrapLayoutGroup Caption="Recuperar / Cambiar Contraseña">
                                 <Items>
+                                    <dx:BootstrapLayoutItem ShowCaption="False" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <asp:Label ID="lblRecovMsg" runat="server" CssClass="text-muted" />
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
                                     <dx:BootstrapLayoutItem Caption="Correo electrónico" ColSpanMd="12">
                                         <ContentCollection>
                                             <dx:ContentControl>

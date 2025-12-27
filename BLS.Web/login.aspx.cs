@@ -133,7 +133,10 @@ namespace BLS.Web
                 string email = txtRecovEmail.Text?.Trim();
                 if (string.IsNullOrWhiteSpace(email))
                 {
-                    cuInfoMsgbox1.mostrarMensaje("Ingrese el correo electrónico.", Controles.Usuario.InfoMsgBox.tipoMsg.warning);
+                    // show message inside popup label instead of cuInfoMsgbox1
+                    lblRecovMsg.CssClass = "text-danger";
+                    lblRecovMsg.Text = "Ingrese el correo electrónico.";
+                    ppcRecuperar.ShowOnPageLoad = true;
                     return;
                 }
 
@@ -143,7 +146,9 @@ namespace BLS.Web
                 var usuarioExt = datosUsuario.DameDatosUsuario(email);
                 if (usuarioExt == null)
                 {
-                    cuInfoMsgbox1.mostrarMensaje("No existe un usuario con ese correo.", Controles.Usuario.InfoMsgBox.tipoMsg.error);
+                    lblRecovMsg.CssClass = "text-danger";
+                    lblRecovMsg.Text = "No existe un usuario con ese correo.";
+                    ppcRecuperar.ShowOnPageLoad = true;
                     return;
                 }
 
@@ -158,12 +163,15 @@ namespace BLS.Web
 
                 ppcRecuperar.ShowOnPageLoad = true;
 
-                cuInfoMsgbox1.mostrarMensaje("Se envió un código al correo. Revise su bandeja.", Controles.Usuario.InfoMsgBox.tipoMsg.info);
+                lblRecovMsg.CssClass = "text-success";
+                lblRecovMsg.Text = "Se envió un código al correo. Revise su bandeja (incluida la carpeta de spam o " +
+                                      "correo no deseado). Si no lo recibe en unos minutos, intente nuevamente.";
 
             }
             catch (Exception ex)
             {
-                cuInfoMsgbox1.mostrarMensaje("Error enviando el correo: " + ex.Message, Controles.Usuario.InfoMsgBox.tipoMsg.error);
+                lblRecovMsg.CssClass = "text-danger";
+                lblRecovMsg.Text = "Error enviando el correo: " + ex.Message;
                 ppcRecuperar.ShowOnPageLoad = true;
             }
         }

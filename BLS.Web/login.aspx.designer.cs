@@ -87,6 +87,15 @@ namespace BLS.Web
         protected global::DevExpress.Web.Bootstrap.BootstrapFormLayout frmRecuperar;
 
         /// <summary>
+        /// Control lblRecovMsg.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRecovMsg;
+
+        /// <summary>
         /// Control txtRecovEmail.
         /// </summary>
         /// <remarks>
