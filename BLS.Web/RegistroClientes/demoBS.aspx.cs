@@ -65,7 +65,7 @@ namespace BLS.Web.RegistroClientes
             lblErrorTerminos.Visible = false;
 
             // Validar Términos y Política
-            if (!frmAltaCliente_E3.Checked || !frmAltaCliente_E4.Checked)
+            if (!frmAltaCliente_E3.Checked || !frmAltaCliente_E3.Checked)
             {
                 lblErrorTerminos.Text = "Debes aceptar los Términos y Condiciones y la Política de Privacidad.";
                 lblErrorTerminos.Visible = true;

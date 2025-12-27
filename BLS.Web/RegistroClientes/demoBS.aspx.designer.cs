@@ -177,6 +177,15 @@ namespace BLS.Web.RegistroClientes
         protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtTelefono;
 
         /// <summary>
+        /// Control frmAltaCliente_E3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.Bootstrap.BootstrapCheckBox frmAltaCliente_E3;
+
+        /// <summary>
         /// Control txtCorreoCliente.
         /// </summary>
         /// <remarks>
@@ -229,24 +238,6 @@ namespace BLS.Web.RegistroClientes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtConfirPassword;
-
-        /// <summary>
-        /// Control frmAltaCliente_E3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapCheckBox frmAltaCliente_E3;
-
-        /// <summary>
-        /// Control frmAltaCliente_E4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapCheckBox frmAltaCliente_E4;
 
         /// <summary>
         /// Control btnConfirmar.
