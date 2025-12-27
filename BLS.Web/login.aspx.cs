@@ -11,6 +11,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using BLS.Negocio.CRUD;
+using System.Text.RegularExpressions;
 
 namespace BLS.Web
 {
@@ -196,30 +197,42 @@ namespace BLS.Web
 
                 if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(token))
                 {
-                    cuInfoMsgbox1.mostrarMensaje("Correo y código son requeridos.", Controles.Usuario.InfoMsgBox.tipoMsg.warning);
+                    lblRecovMsg.CssClass = "text-danger";
+                    lblRecovMsg.Text = "Correo y código son requeridos.";
                     ppcRecuperar.ShowOnPageLoad = true;
                     return;
                 }
 
-                if (newPwd.Length < 8 || newPwd == "12345678" || newPwd == "87654321")
+                // Evaluate password and show feedback using lblRecovMsg
+                var eval = EvaluatePassword(newPwd);
+
+                if (!eval.MeetsMinimum)
                 {
-                    cuInfoMsgbox1.mostrarMensaje("La contraseña no cumple los niveles de seguridad. Introduzca una contraseña con al menos 8 carácteres", Controles.Usuario.InfoMsgBox.tipoMsg.error);
+                    lblRecovMsg.CssClass = "text-danger";
+                    lblRecovMsg.Text = "La contraseña no cumple los requisitos: " + string.Join(", ", eval.MissingRequirements);
                     ppcRecuperar.ShowOnPageLoad = true;
                     return;
                 }
 
                 if (newPwd != confirm)
                 {
-                    cuInfoMsgbox1.mostrarMensaje("Las contraseñas no coinciden.", Controles.Usuario.InfoMsgBox.tipoMsg.warning);
+                    lblRecovMsg.CssClass = "text-warning";
+                    lblRecovMsg.Text = "Las contraseñas no coinciden.";
                     ppcRecuperar.ShowOnPageLoad = true;
                     return;
                 }
+
+                // Show strength and which requirements are met
+                lblRecovMsg.CssClass = eval.IsStrong ? "text-success" : (eval.IsMedium ? "text-warning" : "text-danger");
+                lblRecovMsg.Text = $"Contraseña válida. Fuerza: {eval.StrengthLabel}. Requisitos cumplidos: {string.Join(", ", eval.MetRequirements)}";
+                ppcRecuperar.ShowOnPageLoad = true;
 
                 // validate token
                 bool valid = _tokenService.ValidateToken(email, token);
                 if (!valid)
                 {
-                    cuInfoMsgbox1.mostrarMensaje("Código inválido o excedió el número de intentos.", Controles.Usuario.InfoMsgBox.tipoMsg.error);
+                    lblRecovMsg.CssClass = "text-danger";
+                    lblRecovMsg.Text = "Código inválido o excedió el número de intentos.";
                     ppcRecuperar.ShowOnPageLoad = true;
                     return;
                 }
@@ -229,7 +242,8 @@ namespace BLS.Web
                 var usuario = crud.ConsultaUsuario().FirstOrDefault(u => string.Equals(u.usMail, email, StringComparison.OrdinalIgnoreCase));
                 if (usuario == null)
                 {
-                    cuInfoMsgbox1.mostrarMensaje("Usuario no encontrado.", Controles.Usuario.InfoMsgBox.tipoMsg.error);
+                    lblRecovMsg.CssClass = "text-danger";
+                    lblRecovMsg.Text = "Usuario no encontrado.";
                     ppcRecuperar.ShowOnPageLoad = true;
                     return;
                 }
@@ -238,22 +252,62 @@ namespace BLS.Web
                 bool ok = crud.ActualizarUsuarios(usuario);
                 if (ok)
                 {
-                    cuInfoMsgbox1.mostrarMensaje("Contraseña actualizada correctamente.", Controles.Usuario.InfoMsgBox.tipoMsg.info);
+
+                    cuInfoMsgbox1.mostrarMensaje("Contraseña actualizada correctamente.", Controles.Usuario.InfoMsgBox.tipoMsg.success);
+                    //lblRecovMsg.CssClass = "text-success";
+                    //lblRecovMsg.Text = "Contraseña actualizada correctamente.";
                     // close popup
                     ppcRecuperar.ShowOnPageLoad = false;
                 }
                 else
                 {
-                    cuInfoMsgbox1.mostrarMensaje("Error actualizando la contraseña.", Controles.Usuario.InfoMsgBox.tipoMsg.error);
+                    lblRecovMsg.CssClass = "text-danger";
+                    lblRecovMsg.Text = "Error actualizando la contraseña.";
                     ppcRecuperar.ShowOnPageLoad = true;
                 }
 
             }
             catch (Exception ex)
             {
-                cuInfoMsgbox1.mostrarMensaje("Error: " + ex.Message, Controles.Usuario.InfoMsgBox.tipoMsg.error);
+                lblRecovMsg.CssClass = "text-danger";
+                lblRecovMsg.Text = "Error: " + ex.Message;
                 ppcRecuperar.ShowOnPageLoad = true;
             }
+        }
+
+        // Helper to evaluate password requirements and strength
+        private (bool MeetsMinimum, bool IsStrong, bool IsMedium, string StrengthLabel, string[] MetRequirements, string[] MissingRequirements) EvaluatePassword(string pwd)
+        {
+            if (string.IsNullOrEmpty(pwd))
+            {
+                return (false, false, false, "Débil", new string[0], new[] { "8+ caracteres", "minusculas", "mayusculas", "digitos", "caracteres especiales" });
+            }
+
+            var met = new List<string>();
+            var missing = new List<string>();
+
+            if (pwd.Length >= 8) met.Add("8+ caracteres"); else missing.Add("8+ caracteres");
+            if (Regex.IsMatch(pwd, "[a-z]")) met.Add("minusculas"); else missing.Add("minusculas");
+            if (Regex.IsMatch(pwd, "[A-Z]")) met.Add("mayusculas"); else missing.Add("mayusculas");
+            if (Regex.IsMatch(pwd, "\\d")) met.Add("digitos"); else missing.Add("digitos");
+            if (Regex.IsMatch(pwd, "[^a-zA-Z0-9]")) met.Add("caracteres especiales"); else missing.Add("caracteres especiales");
+
+            var lowered = pwd.ToLowerInvariant();
+            if (lowered == "12345678" || lowered == "87654321")
+            {
+                return (false, false, false, "Débil", met.ToArray(), new[] { "contraseña demasiado simple" });
+            }
+
+            int metCount = met.Count;
+            bool meetsMinimum = pwd.Length >= 8 && metCount >= 2;
+
+            string strength = "Débil";
+            bool isStrong = false;
+            bool isMedium = false;
+            if (metCount >= 5) { strength = "Fuerte"; isStrong = true; }
+            else if (metCount >= 3) { strength = "Media"; isMedium = true; }
+
+            return (meetsMinimum, isStrong, isMedium, strength, met.ToArray(), missing.ToArray());
         }
 
     }
