@@ -1976,8 +1976,8 @@ namespace BLS.Web.ExpedientesTramites
         {
             ASPxComboBox control = (ASPxComboBox)sender;
 
-            control.ValueField = "Nombre";
-            control.TextField = "Nombre";
+            control.ValueField = "usNombre";
+            control.TextField = "usNombre";
             control.DataSource = catProyectistas;
 
         }
