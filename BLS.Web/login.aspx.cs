@@ -165,7 +165,7 @@ namespace BLS.Web
 
                 lblRecovMsg.CssClass = "text-success";
                 lblRecovMsg.Text = "Se envió un código al correo. Revise su bandeja (incluida la carpeta de spam o " +
-                                      "correo no deseado). Si no lo recibe en unos minutos, intente nuevamente.";
+                                      "correo no deseado).";
 
             }
             catch (Exception ex)

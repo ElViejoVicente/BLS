@@ -111,7 +111,7 @@ namespace BLS.Web
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxButton btnEnviarToken;
+        protected global::DevExpress.Web.Bootstrap.BootstrapButton btnEnviarToken;
 
         /// <summary>
         /// Control txtRecovToken.
@@ -147,6 +147,6 @@ namespace BLS.Web
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxButton btnApplyNewPassword;
+        protected global::DevExpress.Web.Bootstrap.BootstrapButton btnApplyNewPassword;
     }
 }

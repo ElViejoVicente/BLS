@@ -81,12 +81,14 @@
         </div>
 
         <!-- Popup for password recovery -->
-        <dx:BootstrapPopupControl ID="ppcRecuperar" runat="server" Width="520px" Height="360px" PopupHorizontalAlign="WindowCenter"  ShowHeader="false" PopupVerticalAlign="WindowCenter" CloseOnEscape="true"  ShowCloseButton="true" Modal="true" EnableClientSideAPI="true">
+        <dx:BootstrapPopupControl ID="ppcRecuperar" runat="server" Width="520px" Height="360px"  PopupHorizontalAlign="WindowCenter"  ShowHeader="true" PopupVerticalAlign="WindowCenter" CloseOnEscape="false"  
+            CloseAction="CloseButton" HeaderText="Cambiar Contraseña"
+            ShowCloseButton="true" Modal="true" EnableClientSideAPI="true">
             <ContentCollection>
                 <dx:ContentControl>
-                    <dx:BootstrapFormLayout runat="server" ID="frmRecuperar" LayoutType="Vertical">
+                    <dx:BootstrapFormLayout runat="server" ID="frmRecuperar" LayoutType="Vertical" AlignItemCaptionsInAllGroups="True">
                         <Items>
-                            <dx:BootstrapLayoutGroup Caption="Recuperar / Cambiar Contraseña">
+                            <dx:BootstrapLayoutGroup Caption="" ShowCaption="False" >
                                 <Items>
                                     <dx:BootstrapLayoutItem ShowCaption="False" ColSpanMd="12">
                                         <ContentCollection>
@@ -100,14 +102,7 @@
                                         <ContentCollection>
                                             <dx:ContentControl>
                                                 <dx:BootstrapTextBox ID="txtRecovEmail" runat="server" Width="100%" />
-                                            </dx:ContentControl>
-                                        </ContentCollection>
-                                    </dx:BootstrapLayoutItem>
-
-                                    <dx:BootstrapLayoutItem ShowCaption="False" ColSpanMd="12">
-                                        <ContentCollection>
-                                            <dx:ContentControl>
-                                                <dx:ASPxButton ID="btnEnviarToken" runat="server" Text="Enviar código" OnClick="btnEnviarToken_Click" CssClass="btn-secondary" />
+                                                 <dx:BootstrapButton runat="server" OnClick="btnEnviarToken_Click" ID="btnEnviarToken" Text="Enviar código" SettingsBootstrap-RenderOption="Secondary" ></dx:BootstrapButton> 
                                             </dx:ContentControl>
                                         </ContentCollection>
                                     </dx:BootstrapLayoutItem>
@@ -120,7 +115,7 @@
                                         </ContentCollection>
                                     </dx:BootstrapLayoutItem>
 
-                                    <dx:BootstrapLayoutItem Caption="Nueva contraseña" ColSpanMd="12">
+                                    <dx:BootstrapLayoutItem Caption="Nueva contraseña" ColSpanMd="6">
                                         <ContentCollection>
                                             <dx:ContentControl>
                                                 <dx:BootstrapTextBox ID="txtRecovNewPassword" runat="server" Width="100%" Password="true" Enabled="false" />
@@ -128,7 +123,7 @@
                                         </ContentCollection>
                                     </dx:BootstrapLayoutItem>
 
-                                    <dx:BootstrapLayoutItem Caption="Confirmar contraseña" ColSpanMd="12">
+                                    <dx:BootstrapLayoutItem Caption="Confirmar contraseña" ColSpanMd="6">
                                         <ContentCollection>
                                             <dx:ContentControl>
                                                 <dx:BootstrapTextBox ID="txtRecovConfirmPassword" runat="server" Width="100%" Password="true" Enabled="false" />
@@ -139,7 +134,8 @@
                                     <dx:BootstrapLayoutItem ShowCaption="False" ColSpanMd="12">
                                         <ContentCollection>
                                             <dx:ContentControl>
-                                                <dx:ASPxButton ID="btnApplyNewPassword" runat="server" Text="Cambiar contraseña" OnClick="btnApplyNewPassword_Click" CssClass="btn-primary" Enabled="false" />
+                                                <dx:BootstrapButton ID="btnApplyNewPassword" runat="server" Text="Cambiar contraseña" SettingsBootstrap-RenderOption="Primary" Enabled="false" OnClick="btnApplyNewPassword_Click"  ></dx:BootstrapButton>
+                                               
                                             </dx:ContentControl>
                                         </ContentCollection>
                                     </dx:BootstrapLayoutItem>
