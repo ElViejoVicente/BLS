@@ -10,6 +10,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BLS.Negocio.ORM;
+using BLS.Negocio.CRUD;
 
 namespace BLS.Web.Configuracion
 {
@@ -22,14 +24,14 @@ namespace BLS.Web.Configuracion
         #endregion
 
         #region propiedades
-        public List<Usuario> ListaUsuarios
+        public List<Usuarios> ListaUsuarios
         {
             get
             {
-                List<Usuario> dtUsuarios = new List<Usuario>();
+                List<Usuarios> dtUsuarios = new List<Usuarios>();
                 if (this.ViewState["dtUsuarios"] != null)
                 {
-                    dtUsuarios = (List<Usuario>)this.ViewState["dtUsuarios"];
+                    dtUsuarios = (List<Usuarios>)this.ViewState["dtUsuarios"];
                 }
 
                 return dtUsuarios;
@@ -58,6 +60,10 @@ namespace BLS.Web.Configuracion
             }
 
         }
+
+
+        DatosCrud datosCrud = new DatosCrud();
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -101,11 +107,11 @@ namespace BLS.Web.Configuracion
             {
                 if (MiUsuario)
                 {
-                    ListaUsuarios = datosUsuario.DameDatosUsuario(UsuarioPagina.Id);
+                    ListaUsuarios.Add( datosCrud.ConsultaUsuario(UsuarioPagina.usCodigo));
                 }
                 else
                 {
-                    ListaUsuarios = datosUsuario.DameDatosUsuario(-1);
+                    ListaUsuarios = datosCrud.ConsultaUsuario();
                 }
                 gvUsuarios.DataBind();
             }
@@ -162,7 +168,7 @@ namespace BLS.Web.Configuracion
 
 
 
-                var miUsuario = ListaUsuarios.Where(x => x.Id == int.Parse(e.Keys[0].ToString())).First();
+                var miUsuario = ListaUsuarios.Where(x => x.usCodigo == int.Parse(e.Keys[0].ToString())).First();
 
 
                 if (miUsuario != null)
@@ -170,16 +176,12 @@ namespace BLS.Web.Configuracion
 
                     if (!MiUsuario)
                     {
-                        //miUsuario.UserName = e.OldValues["UserName"].ToString();
-                        miUsuario.Nombre = e.NewValues["Nombre"].ToString();
-                        //miUsuario.FechaAlta = DateTime.Parse(e.NewValues["FechaAlta"].ToString());
-                        miUsuario.Activo = Boolean.Parse(e.NewValues["Activo"].ToString());
-                        miUsuario.Mail = e.NewValues["Mail"].ToString();
-                        miUsuario.FechaBaja = DateTime.Parse(e.NewValues["FechaBaja"].ToString());
-                        miUsuario.EsProyectista = Boolean.Parse(e.NewValues["EsProyectista"].ToString());
-                        miUsuario.EsCreditos = Boolean.Parse(e.NewValues["EsCreditos"].ToString());
 
-                        miUsuario.Avisoemail = Boolean.Parse(e.NewValues["Avisoemail"].ToString());
+                        miUsuario.usNombre  = e.NewValues["Nombre"].ToString();        
+                        miUsuario.usActivo  = Boolean.Parse(e.NewValues["Activo"].ToString());
+                        miUsuario.usMail  = e.NewValues["Mail"].ToString();
+                        miUsuario.usFecBaja  = DateTime.Parse(e.NewValues["FechaBaja"].ToString());
+
                         if (e.OldValues["Contraseña"].ToString() != e.NewValues["Contraseña"].ToString())
                         {
                             if (e.NewValues["Contraseña"].ToString().Length < 8 || e.NewValues["Contraseña"].ToString() == "12345678" || e.NewValues["Contraseña"].ToString() == "87654321")
@@ -192,18 +194,18 @@ namespace BLS.Web.Configuracion
                             }
                             else
                             {
-                                miUsuario.Contraseña = e.NewValues["Contraseña"].ToString();
+                                miUsuario.usPWD =  PasswordHasher.HashPassword(e.NewValues["Contraseña"].ToString().Trim());
 
                             }
                         }
 
                         
-                        datosUsuario.ActulizarDatosUsuario(miUsuario);
+                        datosCrud.ActualizarUsuarios(miUsuario);
                     }
                     else
                     {
-                        miUsuario.Nombre = e.NewValues["Nombre"].ToString();
-                        miUsuario.Mail = e.NewValues["Mail"].ToString();
+                        miUsuario.usNombre = e.NewValues["Nombre"].ToString();
+                        miUsuario.usMail = e.NewValues["Mail"].ToString();
                        // miUsuario.Avisoemail = Boolean.Parse(e.NewValues["Avisoemail"].ToString());
                         if (e.OldValues["Contraseña"].ToString() != e.NewValues["Contraseña"].ToString())
                         {
@@ -217,10 +219,10 @@ namespace BLS.Web.Configuracion
                             }
                             else
                             {
-                                miUsuario.Contraseña = e.NewValues["Contraseña"].ToString();
+                                miUsuario.usPWD = PasswordHasher.HashPassword(e.NewValues["Contraseña"].ToString().Trim());
                             }
                         }
-                        datosUsuario.ActualizarPWD(miUsuario);
+                        datosCrud.ActualizarUsuarios(miUsuario);
 
                     }
 
@@ -248,24 +250,19 @@ namespace BLS.Web.Configuracion
             {
 
 
-                Usuario nuevoUsuario = new Usuario()
+                Usuarios nuevoUsuario = new Usuarios()
                 {
-                    Id = 0,
-                    UserName = e.NewValues["UserName"].ToString(),
-                    Contraseña = e.NewValues["Contraseña"].ToString(),
-                    Nombre = e.NewValues["Nombre"].ToString(),
-                    FechaAlta = DateTime.Now,
-                    Activo = Boolean.Parse(e.NewValues["Activo"].ToString()),
-                    Mail = e.NewValues["Mail"].ToString(),
-                    FechaBaja = DateTime.Parse(e.NewValues["FechaBaja"].ToString()),
-                    EsProyectista = Boolean.Parse(e.NewValues["EsProyectista"].ToString()),
-                    EsCreditos = Boolean.Parse(e.NewValues["EsCreditos"].ToString()),
-                    Avisoemail = Boolean.Parse(e.NewValues["Avisoemail"].ToString()),
-                    Creado = false
+                    usCodigo = 0,
+                    usMail = e.NewValues["Mail"].ToString(),
+                    usPWD = PasswordHasher.HashPassword(e.NewValues["Contraseña"].ToString()),
+                    usNombre = e.NewValues["Nombre"].ToString(),
+                    usFecAlta = DateTime.Now,
+                    usActivo = Boolean.Parse(e.NewValues["Activo"].ToString()),
+                    usFecBaja = DateTime.Parse(e.NewValues["FechaBaja"].ToString())      
                 };
 
 
-                datosUsuario.AltaUsuario(nuevoUsuario);
+                datosCrud.AltaUsuarios(nuevoUsuario);
 
 
                 gvUsuarios.CancelEdit();
@@ -370,12 +367,12 @@ namespace BLS.Web.Configuracion
 
                 //Validar que el usuario a crear no exista la en la lista de usuarios
 
-                var usuarioExistente = ListaUsuarios.Find(x => x.UserName == e.NewValues["UserName"].ToString().Trim());
+                var usuarioExistente = ListaUsuarios.Find(x => x.usMail  == e.NewValues["Mail"].ToString().Trim());
 
                 if (usuarioExistente != null)
                 {
 
-                    e.RowError += "El nombre de usuario: " + e.NewValues["UserName"].ToString() + " Ya existe utilice otro. \n ";
+                    e.RowError += "El nombre de usuario (correo electronico): " + e.NewValues["Mail"].ToString() + " Ya existe utilice otro. \n ";
            
                 }
                 if (e.NewValues["Contraseña"].ToString().Length < 8 || e.NewValues["Contraseña"].ToString() == "12345678" || e.NewValues["Contraseña"].ToString() == "87654321")

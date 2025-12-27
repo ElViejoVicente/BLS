@@ -7,7 +7,7 @@ const SWEETALERT_ZINDEX = 300000; // Superior a los z-index de DevExpress
 const swalTop = Swal.mixin({ zIndex: SWEETALERT_ZINDEX });
 
 //llamar esta funcion cuando la ejecuciòn sea desde un evento callback de devExpress en lugar del control de usuario
-function mostrarMensajeSweet2(type, message) {
+function mostrarMensajeSweet(type, message) {
     if (type != null && message != null) {
         console.log("llamando a la funcion del mensaje Sweet...." + "[" + type + "]");
         switch (type) {

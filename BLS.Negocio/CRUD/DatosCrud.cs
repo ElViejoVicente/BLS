@@ -350,7 +350,7 @@ namespace BLS.Negocio.CRUD
         #endregion
 
         #region HojaDatos
-        public Boolean AltaHojaDatos(ref HojaDatos values, int idUsuarioSistema)
+        public Boolean AltaHojaDatos(ref HojaDatos values, long idUsuarioSistema)
         {
             try
             {
@@ -1203,6 +1203,132 @@ namespace BLS.Negocio.CRUD
 
         #endregion
 
+        #region Clientes
+
+        public Clientes ConsultaClientes(int idCliente)
+        {
+            try
+            {
+                Clientes resultado = new Clientes();
+
+                using (var db = new SqlConnection(cnn))
+                {
+                    resultado = db.Query<Clientes>
+                        (
+                        sql: "sp_CRUD_Clientes_Select", param: new
+                        {
+                            idCliente
+                        }, commandType: CommandType.StoredProcedure
+                        ).FirstOrDefault();
+                }
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al ejecutar sp_CRUD_Clientes_Select, detalle: \n" + ex.Message, ex);
+            }
+        }
+
+
+        public Boolean AltaClientes(Clientes values)
+        {
+            try
+            {
+                using (var db = new SqlConnection(cnn))
+                {
+                    db.Execute(sql: "sp_CRUD_Clientes_Insert", param: new
+                    {
+                        values.Activo,
+                        values.FechaRegistro,
+                        values.PrimerNombre,
+                        values.SegunoNombre,
+                        values.AppPaterno,
+                        values.AppMaterno,
+                        values.FechaNacimiento,
+                        values.NombreNegocio,
+                        values.RFC,
+                        values.DomCalle,
+                        values.DomNumeroInt,
+                        values.DomNumeroExt,
+                        values.DomCiudad,
+                        values.DomEstado,
+                        values.DomCP,
+                        values.DomTelefono
+
+                    }, commandType: CommandType.StoredProcedure);
+                }
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al ejecutar sp_CRUD_Clientes_Insert, detalle: \n" + ex.Message, ex);
+            }
+        }
+
+
+        public Boolean ActualizarClientes(Clientes values)
+        {
+            try
+            {
+                using (var db = new SqlConnection(cnn))
+                {
+                    db.Execute(sql: "sp_CRUD_Clientes_Update", param: new
+                    {
+                        values.idCliente,
+                        values.Activo,
+                        values.FechaRegistro,
+                        values.PrimerNombre,
+                        values.SegunoNombre,
+                        values.AppPaterno,
+                        values.AppMaterno,
+                        values.FechaNacimiento,
+                        values.NombreNegocio,
+                        values.RFC,
+                        values.DomCalle,
+                        values.DomNumeroInt,
+                        values.DomNumeroExt,
+                        values.DomCiudad,
+                        values.DomEstado,
+                        values.DomCP,
+                        values.DomTelefono
+
+                    }, commandType: CommandType.StoredProcedure);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_CRUD_Clientes_Update, detalle: \n" + ex.Message, ex);
+            }
+        }
+
+
+        public Boolean EliminarClientes(Clientes values)
+        {
+            try
+            {
+                using (var db = new SqlConnection(cnn))
+                {
+                    db.Execute(sql: "sp_CRUD_Clientes_Delete", param: new
+                    {
+                        values.idCliente
+
+                    }, commandType: CommandType.StoredProcedure);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_CRUD_Clientes_Delete, detalle: \n" + ex.Message, ex);
+            }
+        }
+        #endregion
+
         #region Alertas
 
         public Alertas ConsultaAlertas(string IdAlerta)
@@ -2026,6 +2152,136 @@ namespace BLS.Negocio.CRUD
 
 
 
+        #endregion
+
+        #region Usuarios
+
+        public Usuarios ConsultaUsuario(long usCodigo)
+        {
+            try
+            {
+                Usuarios resultado = new Usuarios();
+                using (var db = new SqlConnection(cnn))
+                {
+                    resultado = db.Query<Usuarios>(
+                        sql: "sp_CRUD_Usuarios_Select",
+                        param: new { usCodigo },
+                        commandType: CommandType.StoredProcedure
+                    ).FirstOrDefault();
+                }
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_CRUD_Usuarios_Select, detalle: \n" + ex.Message, ex);
+            }
+        }
+
+        public List<Usuarios> ConsultaUsuario()
+        {
+            try
+            {
+                List<Usuarios> resultado = new List<Usuarios>();
+                using (var db = new SqlConnection(cnn))
+                {
+                    resultado = db.Query<Usuarios>(
+                        sql: "sp_CRUD_Usuarios_Select",
+                        param: new { usCodigo = (long?)null },
+                        commandType: CommandType.StoredProcedure
+                    ).ToList();
+                }
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_CRUD_Usuarios_Select, detalle: \n" + ex.Message, ex);
+            }
+        }
+
+        public bool AltaUsuarios(Usuarios values)
+        {
+            try
+            {
+
+                Usuarios resultado = new Usuarios();    
+
+                using (var db = new SqlConnection(cnn))
+                {
+                    resultado = db.QuerySingle<Usuarios>(
+                        sql: "sp_CRUD_Usuarios_Insert",
+                        param: new
+                        {
+                            
+                            values.usCodigo,
+                            values.usMail,
+                            values.usPWD,
+                            values.usNombre,
+                            values.usFecAlta ,
+                            values.usActivo,
+                            values.usFecBaja
+                          
+                        },
+                        commandType: CommandType.StoredProcedure
+                    );
+                }
+
+                values= resultado;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_CRUD_Usuarios_Insert, detalle: \n" + ex.Message, ex);
+            }
+        }
+
+        public bool ActualizarUsuarios(Usuarios values)
+        {
+            try
+            {
+                using (var db = new SqlConnection(cnn))
+                {
+                    db.Execute(
+                        sql: "sp_CRUD_Usuarios_Update",
+                        param: new
+                        {
+                            values.usCodigo,
+                            values.usMail,
+                            values.usPWD,
+                            values.usNombre,
+                            values.usFecAlta,
+                            values.usActivo,
+                            values.usFecBaja
+                        },
+                        commandType: CommandType.StoredProcedure
+                    );
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_CRUD_Usuarios_Update, detalle: \n" + ex.Message, ex);
+            }
+        }
+
+        public bool EliminarUsuario(Usuarios values)
+        {
+            try
+            {
+                using (var db = new SqlConnection(cnn))
+                {
+                    db.Execute(
+                        sql: "sp_CRUD_Usuarios_Delete",
+                        param: new { values.usCodigo },
+                        commandType: CommandType.StoredProcedure
+                    );
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_CRUD_Usuarios_Delete, detalle: \n" + ex.Message, ex);
+            }
+        }
         #endregion
 
     }

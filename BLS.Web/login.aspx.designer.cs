@@ -39,7 +39,7 @@ namespace BLS.Web
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox txtUsername;
+        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtUsername;
 
         /// <summary>
         /// Control txtPassword.
@@ -48,7 +48,7 @@ namespace BLS.Web
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox txtPassword;
+        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtPassword;
 
         /// <summary>
         /// Control BT_ok.

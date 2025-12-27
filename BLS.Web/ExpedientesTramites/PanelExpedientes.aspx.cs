@@ -111,15 +111,15 @@ namespace BLS.Web.ExpedientesTramites
         }
 
 
-        public List<Usuario> catProyectistas
+        public List<Usuarios> catProyectistas
         {
             get
 
             {
-                List<Usuario> sseCatProyectistas = new List<Usuario>();
+                List<Usuarios> sseCatProyectistas = new List<Usuarios>();
                 if (this.Session["sseCatProyectistas"] != null)
                 {
-                    sseCatProyectistas = (List<Usuario>)this.Session["sseCatProyectistas"];
+                    sseCatProyectistas = (List<Usuarios>)this.Session["sseCatProyectistas"];
                 }
 
                 return sseCatProyectistas;
@@ -292,7 +292,7 @@ namespace BLS.Web.ExpedientesTramites
                 catEstatusFull = datosCrud.ConsultaCatEstatus();
 
                 catActos = datosCrud.ConsultaCatActos();
-                catProyectistas = datosUsuario.DameDatosUsuario(-1).Where(x => x.EsProyectista == true).ToList();
+                catProyectistas = datosCrud.ConsultaUsuario();
                 lsPerfilesXestatus = datosCrud.ConsultaPerfilesXestatus();
 
                 if (lsPerfilesXestatus.Count > 0)
@@ -928,7 +928,7 @@ namespace BLS.Web.ExpedientesTramites
             {
                 if (UsuarioPagina.NombrePerfil == "Mesas") //2024-03-17 si el perfil es de mesas entonces solo mostramos lo registros del usuario 
                 {
-                    lsExpediente = datosExpediente.DameListaExpediente(fechaInicial: dtFechaInicio.Date, fechaFinal: dtFechaFin.Date, idUsuario: UsuarioPagina.Id, todasLasFechas: chkBusquedaCompleta.Checked).OrderByDescending(x => x.FechaIngreso).ToList();// cargamos registros
+                    lsExpediente = datosExpediente.DameListaExpediente(fechaInicial: dtFechaInicio.Date, fechaFinal: dtFechaFin.Date, idUsuario: UsuarioPagina.usCodigo, todasLasFechas: chkBusquedaCompleta.Checked).OrderByDescending(x => x.FechaIngreso).ToList();// cargamos registros
                 }
                 else
                 {
@@ -1399,7 +1399,7 @@ namespace BLS.Web.ExpedientesTramites
 
                     //Proyecto
                     cbPRfnProyectista.Value = RegistroExistente.NombreProyectista;
-                    cbPRfnProyectista.SelectedIndex = catProyectistas.FindIndex(w => w.Nombre == RegistroExistente.NombreProyectista);
+                    cbPRfnProyectista.SelectedIndex = catProyectistas.FindIndex(w => w.usNombre  == RegistroExistente.NombreProyectista);
 
                     dtPRfnFechaAsignacionProyectista.Date = RegistroExistente.FechaAsignacionProyectista;
                     dtPRfnFechaPrevistaTermino.Date = RegistroExistente.FechaPrevistaTerminoProyectista;
@@ -1504,7 +1504,7 @@ namespace BLS.Web.ExpedientesTramites
 
                     BitacoraExpediente logCambios = new BitacoraExpediente();
 
-                    logCambios.UsuarioImplicado = UsuarioPagina.Nombre;
+                    logCambios.UsuarioImplicado = UsuarioPagina.usNombre ;
                     logCambios.IdExpediente = RegistroExistente.IdExpediente;
                     logCambios.NombreModulo = "Expediente";
 
@@ -1976,8 +1976,8 @@ namespace BLS.Web.ExpedientesTramites
         {
             ASPxComboBox control = (ASPxComboBox)sender;
 
-            control.ValueField = "Nombre";
-            control.TextField = "Nombre";
+            control.ValueField = "usNombre";
+            control.TextField = "usNombre";
             control.DataSource = catProyectistas;
 
         }
@@ -2076,7 +2076,7 @@ namespace BLS.Web.ExpedientesTramites
             nuevaAlerta.NumExpediente = NumExpSelccionadoAlerta;
             nuevaAlerta.FechaAlta = DateTime.Now;
             nuevaAlerta.AlertaActiva = true;
-            nuevaAlerta.NomUsuarioInformante = UsuarioPagina.Nombre;
+            nuevaAlerta.NomUsuarioInformante = UsuarioPagina.usNombre ;
             nuevaAlerta.MensajeAlerta = e.NewValues["MensajeAlerta"].ToString();
             nuevaAlerta.Prioridad = "";
 
@@ -2130,7 +2130,7 @@ namespace BLS.Web.ExpedientesTramites
 
                 if (miAlerta.AlertaActiva == false)
                 {
-                    miAlerta.NomUsuarioCierra = UsuarioPagina.Nombre;
+                    miAlerta.NomUsuarioCierra = UsuarioPagina.usNombre;
                 }
 
             }

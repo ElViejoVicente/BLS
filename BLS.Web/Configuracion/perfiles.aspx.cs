@@ -10,6 +10,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DevExpress.CodeParser;
 using BLS.Web.Controles.Servidor;
+using BLS.Negocio.ORM;
+using BLS.Negocio.CRUD;
 
 namespace BLS.Web.Configuracion
 {
@@ -56,14 +58,14 @@ namespace BLS.Web.Configuracion
 
         }
 
-        public List<Usuario> ListaUsuarios
+        public List<Usuarios> ListaUsuarios
         {
             get
             {
-                List<Usuario> dtUsuarios = new List<Usuario>();
+                List<Usuarios> dtUsuarios = new List<Usuarios>();
                 if (this.ViewState["dtUsuarios"] != null)
                 {
-                    dtUsuarios = (List<Usuario>)this.ViewState["dtUsuarios"];
+                    dtUsuarios = (List<Usuarios>)this.ViewState["dtUsuarios"];
                 }
 
                 return dtUsuarios;
@@ -75,11 +77,13 @@ namespace BLS.Web.Configuracion
 
         }
 
- 
- 
+
+
 
         #endregion
 
+
+        DatosCrud  datosCrud = new DatosCrud();
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -195,7 +199,7 @@ namespace BLS.Web.Configuracion
         protected void GeneraArbol()
         {
             DataSet ds = new DataSet();
-            DataTable nodos = datosUsuario.ObtenNodosMenu(parent: 0, codUsuario: ((Usuario)Session["usuario"]).Id, vertodo:true ).Copy();
+            DataTable nodos = datosUsuario.ObtenNodosMenu(parent: 0, codUsuario: ((Usuarios)Session["usuario"]).usCodigo, vertodo:true ).Copy();
             ds.Tables.Add(nodos);
             ds.Relations.Add("NodeRelation", ds.Tables[0].Columns["fiIdModulo"], ds.Tables[0].Columns["fiParentId"]);
             foreach (DataRow row in ds.Tables[0].Rows)
@@ -540,7 +544,7 @@ namespace BLS.Web.Configuracion
         {
             try
             {
-                ListaUsuarios = datosUsuario.DameDatosUsuario(-1);
+                ListaUsuarios = datosCrud.ConsultaUsuario(); 
                 Cb_Usuarios.DataBind();
             }
             catch (Exception ex)
@@ -552,8 +556,8 @@ namespace BLS.Web.Configuracion
         protected void Cb_Usuarios_DataBinding(object sender, EventArgs e)
         {
             Cb_Usuarios.DataSource = ListaUsuarios;
-            Cb_Usuarios.TextField = "UserName";
-            Cb_Usuarios.ValueField = "Id";
+            Cb_Usuarios.TextField = "usNombre";
+            Cb_Usuarios.ValueField = "usCodigo";
 
         }
 

@@ -127,7 +127,7 @@ namespace BLS.Web.PLD
             {
 
                 miRegistro.AvActiva = Convert.ToBoolean(e.NewValues["AvActiva"].ToString());
-                miRegistro.UsuarioGestionaAviso = UsuarioPagina.Nombre;
+                miRegistro.UsuarioGestionaAviso = UsuarioPagina.usNombre ;
                 miRegistro.FolioDeAviso = e.NewValues["FolioDeAviso"].ToString();                
                 miRegistro.Observaciones = e.NewValues["Observaciones"].ToString();
 

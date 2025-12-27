@@ -7,6 +7,7 @@ using BLS.Web.Controles.Servidor;
 using BLS.Negocio.Operativa;
 using System.Data;
 using System.Web.UI;
+using BLS.Negocio.ORM;
 
 
 namespace BLS.Web.Controles.Servidor
@@ -16,14 +17,14 @@ namespace BLS.Web.Controles.Servidor
         #region Variables privadas
         public DatosUsuario datosUsuario = new DatosUsuario();
         
-        public BLS.Negocio.Operativa.Usuario UsuarioPagina
+        public UsuariosEXT UsuarioPagina
         {
             get
             {
-                BLS.Negocio.Operativa.Usuario user = null;
+                UsuariosEXT user = null;
                 if (Session["usuario"] != null)
                 {
-                    return (BLS.Negocio.Operativa.Usuario)Session["usuario"];
+                    return (UsuariosEXT)Session["usuario"];
                 }
                 else
                 {
@@ -32,7 +33,7 @@ namespace BLS.Web.Controles.Servidor
             }
             set
             {
-                Session["Usuario"] = value;
+                Session["usuario"] = value;
             }
         }
         public List<PerfilXOperaciones> AccionesPermitidasUsuario

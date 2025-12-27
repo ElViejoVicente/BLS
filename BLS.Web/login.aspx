@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="BLS.Web.Login" %>
 
 <%@ Register Assembly="DevExpress.Web.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.Bootstrap.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.Bootstrap" TagPrefix="dx" %>
 <%@ Register Src="~/Controles/Usuario/InfoMsgBox.ascx" TagPrefix="uc1" TagName="cuInfoMsgbox" %>
 
 <!DOCTYPE html>
@@ -11,6 +12,7 @@
     <title>SGN</title>
     <link rel="icon" href="imagenes/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="Content/NuevoMenu/login.css" />
+    <link rel="stylesheet" href="../SwitcherResources/Content/Yeti/bootstrap.min.css" />
     <script src="Scripts/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="Scripts/sweetalert2.min.css" />
     <script src="../Scripts/mensajes.js"></script>
@@ -32,24 +34,29 @@
                         <uc1:cuInfoMsgbox runat="server" ID="cuInfoMsgbox1" OnRespuestaClick="cuInfoMsgbox1_RespuestaClicked" />
 
                         <div class="form-row">
-                            <dx:ASPxTextBox runat="server" ID="txtUsername" Width="100%" NullText="Usuario">
-                                <ValidationSettings ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom"
-                                    SetFocusOnError="true" ValidateOnLeave="false">
-                                    <RegularExpression ErrorText="Usuario no válido" ValidationExpression=".+" />
-                                    <RequiredField IsRequired="True" ErrorText="El campo 'Usuario' es obligatorio" />
-                                </ValidationSettings>
 
-                            </dx:ASPxTextBox>
+                            <dx:BootstrapTextBox runat="server"  ID="txtUsername" Width="100%" NullText="Correo electronico">
+                                <ValidationSettings
+                                    SetFocusOnError="true" ValidateOnLeave="false">
+                                   <RegularExpression ErrorText="Correo no válido" ValidationExpression="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" />
+                                    <RequiredField IsRequired="True" ErrorText="El campo Correo es obligatorio" />
+                                </ValidationSettings>
+                            </dx:BootstrapTextBox>
+
 
                         </div>
 
                         <div class="form-row">
-                            <dx:ASPxTextBox ID="txtPassword" runat="server" Password="true" Width="100%" NullText="Contraseña">
-                                <ValidationSettings ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom"
-                                    SetFocusOnError="true" ValidateOnLeave="false">
-                                    <RequiredField IsRequired="True" ErrorText="El campo 'Contraseña' es obligatorio" />
+
+                            
+                            <dx:BootstrapTextBox runat="server"  ID="txtPassword" Width="100%" NullText="Contraseña" Password="true" >
+                                <ValidationSettings
+                                    SetFocusOnError="true" ValidateOnLeave="false">                                   
+                                    <RequiredField IsRequired="True" ErrorText="El campo contraseña es obligatorio" />
                                 </ValidationSettings>
-                            </dx:ASPxTextBox>
+                            </dx:BootstrapTextBox>
+
+                                           
 
                         </div>
 
