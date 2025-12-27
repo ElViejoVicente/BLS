@@ -20,15 +20,8 @@ namespace BLS.Web.RegistroClientes
 
         // inicializar la clase para envio de tokens por email
 
-        EmailTokenService svc = new EmailTokenService(
-                                smtpHost: "mail.consultoria-it.com",
-                                smtpPort: 465,
-                                smtpUser: "no-responder@consultoria-it.com",
-                                smtpPass: "inteldx486mail",
-                                smtpEnableSsl: true,
-                                fromEmail: "mail.consultoria-it.com",
-                                fromName: "Verificacion Cuenta BLS"
-                            );
+        private EmailTokenService _tokenService;
+
 
         #endregion
 
@@ -53,6 +46,18 @@ namespace BLS.Web.RegistroClientes
             {
                 NuevoCliente = new Clientes();
                 NuevoUsuario = new Usuarios();
+
+
+                var smtpHost = System.Configuration.ConfigurationManager.AppSettings["smtp.host"] ?? "mail.consultoria-it.com";
+                var smtpPort = int.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.port"], out var p) ? p : 465;
+                var smtpUser = System.Configuration.ConfigurationManager.AppSettings["smtp.user"] ?? "no-responder@consultoria-it.com";
+                var smtpPass = System.Configuration.ConfigurationManager.AppSettings["smtp.pass"] ?? "inteldx486mail";
+                var smtpSsl = bool.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.ssl"], out var s) ? s : true;
+                var fromEmail = System.Configuration.ConfigurationManager.AppSettings["smtp.from"] ?? smtpUser;
+                var fromName = System.Configuration.ConfigurationManager.AppSettings["smtp.fromname"] ?? "Soporte";
+                _tokenService = new EmailTokenService(smtpHost, smtpPort, smtpUser, smtpPass, smtpSsl, fromEmail, fromName);
+
+
 
             }
 
@@ -127,7 +132,7 @@ namespace BLS.Web.RegistroClientes
                 if (e.Parameter.Contains("EnviarCodigoValidacionEmail"))
                 {
 
-                    int id = svc.GenerateStoreAndSendToken(txtCorreoCliente.Text, expiresMinutes: 10);
+                    int id = _tokenService.GenerateStoreAndSendToken(txtCorreoCliente.Text, expiresMinutes: 10);
 
 
 

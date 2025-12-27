@@ -16,6 +16,7 @@
     <script src="Scripts/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="Scripts/sweetalert2.min.css" />
     <script src="../Scripts/mensajes.js"></script>
+        <link rel="stylesheet" href="../Content/generic/pageMinimalStyle.css" />
 
 </head>
 <body>
@@ -36,7 +37,7 @@
                         <div class="form-row">
 
                             <dx:BootstrapTextBox runat="server"  ID="txtUsername" Width="100%" NullText="Correo electronico">
-                                <ValidationSettings
+                                <ValidationSettings ValidationGroup="Pass"
                                     SetFocusOnError="true" ValidateOnLeave="false">
                                    <RegularExpression ErrorText="Correo no válido" ValidationExpression="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" />
                                     <RequiredField IsRequired="True" ErrorText="El campo Correo es obligatorio" />
@@ -50,7 +51,7 @@
 
                             
                             <dx:BootstrapTextBox runat="server"  ID="txtPassword" Width="100%" NullText="Contraseña" Password="true" >
-                                <ValidationSettings
+                                <ValidationSettings ValidationGroup="Pass"
                                     SetFocusOnError="true" ValidateOnLeave="false">                                   
                                     <RequiredField IsRequired="True" ErrorText="El campo contraseña es obligatorio" />
                                 </ValidationSettings>
@@ -62,8 +63,9 @@
 
                         <div class="form-actions">
 
-                            <dx:ASPxButton ID="BT_ok" runat="server" OnClick="BT_ok_Click" Text="Ingresar" CssClass="btn-primary glow-on-hover"></dx:ASPxButton>
-                            <dx:ASPxButton ID="btnRecuperarContreseña" runat="server" OnClick="BT_ok_Click" Text="Recuperar Contraseña" CssClass="btn-secondary glow-on-hover"></dx:ASPxButton>
+                            <dx:ASPxButton ID="BT_ok" runat="server" OnClick="BT_ok_Click" Text="Ingresar" ValidationGroup="Pass" CssClass="btn-primary glow-on-hover"></dx:ASPxButton>
+
+                            <dx:ASPxButton ID="btnRecuperarContreseña" runat="server" OnClick="btnRecuperarContreseña_Click" Text="Recuperar Contraseña" CssClass="btn-secondary glow-on-hover"></dx:ASPxButton>
 
                         </div>
 
@@ -77,6 +79,71 @@
             </a>
             </footer>
         </div>
+
+        <!-- Popup for password recovery -->
+        <dx:BootstrapPopupControl ID="ppcRecuperar" runat="server" Width="520px" Height="360px" PopupHorizontalAlign="WindowCenter"  ShowHeader="false" PopupVerticalAlign="WindowCenter" CloseOnEscape="true"  ShowCloseButton="true" Modal="true" EnableClientSideAPI="true">
+            <ContentCollection>
+                <dx:ContentControl>
+                    <dx:BootstrapFormLayout runat="server" ID="frmRecuperar" LayoutType="Vertical">
+                        <Items>
+                            <dx:BootstrapLayoutGroup Caption="Recuperar / Cambiar Contraseña">
+                                <Items>
+                                    <dx:BootstrapLayoutItem Caption="Correo electrónico" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox ID="txtRecovEmail" runat="server" Width="100%" />
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem ShowCaption="False" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:ASPxButton ID="btnEnviarToken" runat="server" Text="Enviar código" OnClick="btnEnviarToken_Click" CssClass="btn-secondary" />
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Código" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox ID="txtRecovToken" runat="server" Width="100%" Enabled="false" />
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Nueva contraseña" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox ID="txtRecovNewPassword" runat="server" Width="100%" Password="true" Enabled="false" />
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem Caption="Confirmar contraseña" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:BootstrapTextBox ID="txtRecovConfirmPassword" runat="server" Width="100%" Password="true" Enabled="false" />
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                    <dx:BootstrapLayoutItem ShowCaption="False" ColSpanMd="12">
+                                        <ContentCollection>
+                                            <dx:ContentControl>
+                                                <dx:ASPxButton ID="btnApplyNewPassword" runat="server" Text="Cambiar contraseña" OnClick="btnApplyNewPassword_Click" CssClass="btn-primary" Enabled="false" />
+                                            </dx:ContentControl>
+                                        </ContentCollection>
+                                    </dx:BootstrapLayoutItem>
+
+                                </Items>
+                            </dx:BootstrapLayoutGroup>
+                        </Items>
+                    </dx:BootstrapFormLayout>
+                </dx:ContentControl>
+            </ContentCollection>
+        </dx:BootstrapPopupControl>
+
     </form>
 </body>
 </html>
