@@ -1,10 +1,15 @@
-﻿using System;
+﻿using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net;
-using System.Net.Mail;
+using System.Net.Security;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.MsmqIntegration;
 using System.Text;
 
 public sealed class EmailTokenService
@@ -175,31 +180,75 @@ public sealed class EmailTokenService
     }
 
     // ---------------------------
-    // Email (SMTP)
+    // Email (MailKit, SSL/TLS 465)
     // ---------------------------
 
     private void SendEmail(string toEmail, string token, int expiresMinutes)
     {
-        string subject = "Tu código de verificación BLS";
-        string body =
-            "Tu código de verificación es: " + token + Environment.NewLine +
-            "Vence en " + expiresMinutes + " minuto(s)." + Environment.NewLine +
-            "Si no solicitaste esto, ignora este correo.";
+        if (string.IsNullOrWhiteSpace(toEmail))
+            throw new ArgumentException("Email destino requerido.", nameof(toEmail));
 
-        using (var msg = new MailMessage())
+        var message = new MimeMessage();
+        message.From.Add(new MailboxAddress(_fromName, _fromEmail));
+        message.To.Add(MailboxAddress.Parse(toEmail.Trim()));
+        message.Subject = "Tu código de verificación";
+
+        message.Body = new TextPart("plain")
         {
-            msg.From = new MailAddress(_fromEmail, _fromName);
-            msg.To.Add(new MailAddress(toEmail));
-            msg.Subject = subject;
-            msg.Body = body;
-            msg.IsBodyHtml = false;
+            Text =
+                "Tu código de verificación es: " + token + Environment.NewLine +
+                "Vence en " + expiresMinutes + " minuto(s)." + Environment.NewLine +
+                "Si no solicitaste esto, ignora este correo."
+        };
 
-            using (var smtp = new SmtpClient(_smtpHost, _smtpPort))
+        // MailKit es más robusto que System.Net.Mail.SmtpClient, especialmente con 465 (SSL implícito)
+        using (var client = new SmtpClient())
+        {
+            client.Timeout = 15000;
+
+            client.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
             {
-                smtp.EnableSsl = _smtpEnableSsl;   
-                smtp.Credentials = new NetworkCredential(_smtpUser, _smtpPass);
-                smtp.Send(msg);
-            }
+                // Si no hay errores, OK
+                if (sslPolicyErrors == SslPolicyErrors.None)
+                    return true;
+
+                // Permitimos SOLO el error de revocación (offline/unknown)
+                // y rechazamos cualquier otro (CN mismatch, cadena inválida, etc.)
+                if (sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors && chain != null)
+                {
+                    bool onlyRevocationIssues = true;
+
+                    foreach (var status in chain.ChainStatus)
+                    {
+                        var s = status.Status;
+
+                        bool isRevocationProblem =
+                            s == X509ChainStatusFlags.RevocationStatusUnknown ||
+                            s == X509ChainStatusFlags.OfflineRevocation ||
+                            s == X509ChainStatusFlags.Revoked; // <- normalmente NO deberías permitir "Revoked"
+
+                        // Recomendación: NO permitir Revoked.
+                        if (s == X509ChainStatusFlags.Revoked)
+                            return false;
+
+                        if (!isRevocationProblem && s != X509ChainStatusFlags.NoError)
+                        {
+                            onlyRevocationIssues = false;
+                            break;
+                        }
+                    }
+
+                    if (onlyRevocationIssues)
+                        return true;
+                }
+
+                return false;
+            };
+
+            client.Connect(_smtpHost, _smtpPort, SecureSocketOptions.SslOnConnect);
+            client.Authenticate(_smtpUser, _smtpPass);
+            client.Send(message);
+            client.Disconnect(true);
         }
     }
 
