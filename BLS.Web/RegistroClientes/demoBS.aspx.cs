@@ -26,7 +26,7 @@ namespace BLS.Web.RegistroClientes
                                 smtpUser: "no-responder@consultoria-it.com",
                                 smtpPass: "inteldx486mail",
                                 smtpEnableSsl: true,
-                                fromEmail: "manueldesion22@gmail.com",
+                                fromEmail: "mail.consultoria-it.com",
                                 fromName: "Verificacion Cuenta BLS"
                             );
 
