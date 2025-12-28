@@ -152,7 +152,6 @@
     <Compile Include="ORM\RecibosDePago.cs" />
     <Compile Include="ORM\Usuarios.cs" />
     <Compile Include="PLD\DatosPld.cs" />
-    <Compile Include="Properties\ApiGoogle\ApiGoogle.cs" />
     <Compile Include="Operativa\Constantes.cs" />
     <Compile Include="Operativa\DatosUsuario.cs" />
     <Compile Include="Operativa\Funcioneslog.cs" />
@@ -205,7 +204,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <Content Include="Reportes\dsHojaDatos.xsc">
       <DependentUpon>dsHojaDatos.xsd</DependentUpon>
     </Content>

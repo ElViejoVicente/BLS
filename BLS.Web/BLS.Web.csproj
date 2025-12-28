@@ -470,9 +470,9 @@
     <Content Include="SwitcherResources\Scripts\popper.min.js" />
     <Content Include="SwitcherResources\Themes.xml" />
     <Content Include="Themes.xml" />
-    <Content Include="Web.config">
+    <None Include="Web.config.template">
       <SubType>Designer</SubType>
-    </Content>
+    </None>
     <Content Include="Bundle.config" />
     <Content Include="webfonts\fa-solid-900.woff" />
     <Content Include="webfonts\fa-solid-900.woff2" />
@@ -855,11 +855,11 @@
     <Content Include="Scripts\umd\popper-utils.js.map" />
     <Content Include="Scripts\README.md" />
     <Content Include="SwitcherResources\Content\LICENSE" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="Web.config.Debug.template">
+      <DependentUpon>Web.config.template</DependentUpon>
     </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="Web.config.Release.template">
+      <DependentUpon>Web.config.template</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
