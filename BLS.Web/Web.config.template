@@ -152,18 +152,15 @@
 	<appSettings>
 		<add key="vs:EnableBrowserLink" value="false" />
 
-		<!--<add key="sqlConn.ConnectionString" value="Data Source=CAMAXTLI;Initial Catalog=Notaria01;User ID=sa; password=inteldx486; Connection Lifetime=3" />-->
-		<!--<add key="sqlConn.ConnectionString" value="Data Source=MANUEL\SQLEXPRESS;Initial Catalog=BLS_PRO;User ID=sa; password=inteldx486; Connection Lifetime=3" />-->
+		<add key="sqlConn.ConnectionString" value="SECRET_CONNECTIONSTRING" />
 
-		<add key="sqlConn.ConnectionString" value="Data Source=CAMAXTLI;Initial Catalog=BLS_PRO;User ID=sa; password=inteldx486; Connection Lifetime=3" />
-
-		<add key="smtpHost" value="mail.consultoria-it.com" />
-		<add key="smtpPort" value="465" />
-		<add key="smtpUser" value="no-responder@consultoria-it.com" />
-		<add key="smtpPass" value="inteldx486mail" />
-		<add key="smtpEnableSsl" value="true" />
-		<add key="fromEmail" value="mail.consultoria-it.com" />
-		<add key="fromName" value="Verificacion Cuenta BLS" />
+		<add key="smtpHost" value="SECRET_SMTPHOST" />
+		<add key="smtpPort" value="SECRET_SMTPPORT" />
+		<add key="smtpUser" value="SECRET_SMTPUSER" />
+		<add key="smtpPass" value="SECRET_SMTPPASS" />
+		<add key="smtpEnableSsl" value="SECRET_SMTPENABLESSL" />
+		<add key="fromEmail" value="SECRET_FROMEMAIL" />
+		<add key="fromName" value="SECRET_FROMNAME" />
 		
 		
 	</appSettings>
