@@ -1,0 +1,11 @@
+<Project>
+    <Target Name="GenerateWebConfig" BeforeTargets="Build">
+      <PropertyGroup>
+        <_Template>$(ProjectDir)web.config.template</_Template>
+        <_Out>$(ProjectDir)web.config</_Out>
+        <_Script>$(ProjectDir)build\Generate-WebConfig.ps1</_Script>
+      </PropertyGroup>
+
+      <Exec Command='powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(_Script)&quot; -TemplatePath &quot;$(_Template)&quot; -OutputPath &quot;$(_Out)&quot;' />
+    </Target>
+</Project>

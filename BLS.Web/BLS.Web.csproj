@@ -293,6 +293,7 @@
     <Content Include="imagenes\pages\excel-icon.jpg" />
     <Content Include="Controles\Usuario\InfoMsgBox.ascx" />
     <Content Include="Global.asax" />
+    <Content Include="build\Generate-WebConfig.ps1" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <Content Include="PLD\ActiviadesVulnerables.aspx" />
@@ -845,6 +846,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="fonts\" />
     <Folder Include="NewFolder1\" />
+    <Folder Include="NewFolder2\" />
     <Folder Include="Produccion\" />
   </ItemGroup>
   <ItemGroup>
