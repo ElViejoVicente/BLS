@@ -294,7 +294,8 @@
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <Content Include="PLD\ActiviadesVulnerables.aspx" />
-    <Content Include="RegistroClientes\demoBS.aspx" />
+    <Content Include="RegistroClientes\AltaNuevoCliente.aspx" />
+    <Content Include="RegistroClientes\ComprarCreditos.aspx" />
     <Content Include="Reportes\reporteAcuseConsultaListaNegra.aspx" />
     <Content Include="Reportes\reporteAcuseConsultaListaNegraSimple.aspx" />
     <Content Include="Reportes\reporteAvisoNotarial.aspx" />
@@ -673,12 +674,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RegistroClientes\demoBS.aspx.cs">
-      <DependentUpon>demoBS.aspx</DependentUpon>
+    <Compile Include="RegistroClientes\AltaNuevoCliente.aspx.cs">
+      <DependentUpon>AltaNuevoCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RegistroClientes\demoBS.aspx.designer.cs">
-      <DependentUpon>demoBS.aspx</DependentUpon>
+    <Compile Include="RegistroClientes\AltaNuevoCliente.aspx.designer.cs">
+      <DependentUpon>AltaNuevoCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroClientes\ComprarCreditos.aspx.cs">
+      <DependentUpon>ComprarCreditos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroClientes\ComprarCreditos.aspx.designer.cs">
+      <DependentUpon>ComprarCreditos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reportes\reporteAcuseConsultaListaNegra.aspx.cs">
       <DependentUpon>reporteAcuseConsultaListaNegra.aspx</DependentUpon>

@@ -11,7 +11,7 @@ namespace BLS.Web.RegistroClientes
 {
 
 
-    public partial class demoBS
+    public partial class AltaNuevoCliente
     {
 
         /// <summary>
@@ -256,51 +256,6 @@ namespace BLS.Web.RegistroClientes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrorTerminos;
-
-        /// <summary>
-        /// Control pnlPaquete.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxPanel pnlPaquete;
-
-        /// <summary>
-        /// Control btnGratis.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapButton btnGratis;
-
-        /// <summary>
-        /// Control btn20.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapButton btn20;
-
-        /// <summary>
-        /// Control btn50.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapButton btn50;
-
-        /// <summary>
-        /// Control btn100.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapButton btn100;
 
         /// <summary>
         /// Control pnlResumen.

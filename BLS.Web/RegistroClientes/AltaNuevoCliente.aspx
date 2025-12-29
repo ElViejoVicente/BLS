@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="demoBS.aspx.cs" Inherits="BLS.Web.RegistroClientes.demoBS" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AltaNuevoCliente.aspx.cs" Inherits="BLS.Web.RegistroClientes.AltaNuevoCliente" %>
 
 <%@ Register Assembly="DevExpress.Web.Bootstrap.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.Bootstrap" TagPrefix="dx" %>
 <%@ Register Assembly="DevExpress.Web.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
@@ -400,7 +400,7 @@
                                                             <dx:BootstrapLayoutItem Caption="Codigo de verificacion" ColSpanMd="9" FieldName="CodVerificacionEmail" ClientVisible="true">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapTextBox ID="txtCodVerificacionEmail" runat="server">
+                                                                        <dx:BootstrapTextBox ID="txtCodVerificacionEmail" AutoPostBack="false"   runat="server">
                                                                         </dx:BootstrapTextBox>
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
@@ -489,77 +489,7 @@
 
 
 
-                        <dx:ASPxPanel ID="pnlPaquete" runat="server" ClientVisible="false">
-                            <PanelCollection>
-                                <dx:PanelContent>
-                                    <div class="container mt-5">
-                                        <h2 class="text-center text-danger fw-bold">Elige tu paquete</h2>
-                                        <p class="text-center text-muted">Selecciona el plan que mejor se adapte a ti</p>
 
-                                        <div class="row mt-4">
-
-                                            <!-- Paquete Gratis -->
-                                            <div class="col-md-3">
-                                                <div class="card shadow" id="cardGratis">
-                                                    <div class="card-body text-center">
-                                                        <h5 class="card-title">Pruebas Gratis</h5>
-                                                        <p class="card-text">$0</p>
-                                                        <p>4 pruebas incluidas</p>
-                                                        <dx:BootstrapButton ID="btnGratis" runat="server" Text="Seleccionar" SettingsBootstrap-RenderOption="Secondary" AutoPostBack="true" OnClick="btnGratis_Click">
-                                                            <ClientSideEvents Click="function(s,e){ seleccionarPaqueteVisual('cardGratis'); }" />
-                                                        </dx:BootstrapButton>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Paquete 20 Créditos -->
-                                            <div class="col-md-3">
-                                                <div class="card shadow" id="card20">
-                                                    <div class="card-body text-center">
-                                                        <h5 class="card-title">20 Créditos</h5>
-                                                        <p class="card-text">$100</p>
-                                                        <p>Ideal para comenzar</p>
-                                                        <dx:BootstrapButton ID="btn20" runat="server" Text="Seleccionar" SettingsBootstrap-RenderOption="Secondary" AutoPostBack="true" OnClick="btn20_Click">
-                                                            <ClientSideEvents Click="function(s,e){ seleccionarPaqueteVisual('card20'); }" />
-                                                        </dx:BootstrapButton>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Paquete 50 Créditos -->
-                                            <div class="col-md-3">
-                                                <div class="card shadow border-danger" id="card50">
-                                                    <div class="card-body text-center">
-                                                        <h5 class="card-title text-danger">50 Créditos</h5>
-                                                        <p class="card-text">$200</p>
-                                                        <p>Mejor relación costo</p>
-                                                        <dx:BootstrapButton ID="btn50" runat="server" Text="Seleccionar" SettingsBootstrap-RenderOption="Primary" AutoPostBack="true" OnClick="btn50_Click">
-                                                            <ClientSideEvents Click="function(s,e){ seleccionarPaqueteVisual('card50'); }" />
-                                                        </dx:BootstrapButton>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Paquete 100 Créditos -->
-                                            <div class="col-md-3">
-                                                <div class="card shadow" id="card100">
-                                                    <div class="card-body text-center">
-                                                        <h5 class="card-title">100 Créditos</h5>
-                                                        <p class="card-text">$400</p>
-                                                        <p>Para uso intensivo</p>
-                                                        <dx:BootstrapButton ID="btn100" runat="server" Text="Seleccionar" SettingsBootstrap-RenderOption="Secondary" AutoPostBack="true" OnClick="btn100_Click">
-                                                            <ClientSideEvents Click="function(s,e){ seleccionarPaqueteVisual('card100'); }" />
-                                                        </dx:BootstrapButton>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </dx:PanelContent>
-                            </PanelCollection>
-
-                        </dx:ASPxPanel>
 
 
                         <dx:ASPxPanel ID="pnlResumen" runat="server" ClientVisible="false">

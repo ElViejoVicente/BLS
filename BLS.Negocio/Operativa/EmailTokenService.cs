@@ -25,6 +25,9 @@ public sealed class EmailTokenService
     private readonly string _fromEmail;
     private readonly string _fromName;
 
+
+
+
     public EmailTokenService(
         string smtpHost,
         int smtpPort,
@@ -44,6 +47,13 @@ public sealed class EmailTokenService
         _fromEmail = fromEmail ?? throw new ArgumentNullException(nameof(fromEmail));
         _fromName = string.IsNullOrWhiteSpace(fromName) ? "Soporte" : fromName;
     }
+
+
+    public EmailTokenService()
+    { 
+    }
+
+
 
     /// <summary>
     /// Genera token de 6 dígitos, guarda (hash+salt) y envía email.

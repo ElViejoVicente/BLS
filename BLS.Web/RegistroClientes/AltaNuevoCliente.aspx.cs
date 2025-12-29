@@ -9,23 +9,31 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 
 namespace BLS.Web.RegistroClientes
 {
-    public partial class demoBS : System.Web.UI.Page
+    public partial class AltaNuevoCliente : System.Web.UI.Page
     {
         #region Propiedades
         private Boolean ContraseñaValida = false;
 
         // inicializar la clase para envio de tokens por email
 
-        private EmailTokenService _tokenService;
+        public bool TokenValidado
+        {
+            get => (Session["ssTokenValidado"] as bool?) ?? false;
+            set => Session["ssTokenValidado"] = value;
+        }
 
 
 
-
-        #endregion
+        public EmailTokenService _tokenService
+        {
+            get => Session["ss_tokenService"] as EmailTokenService ?? new EmailTokenService();
+            set => Session["ss_tokenService"] = value;
+        }
 
 
         public Clientes NuevoCliente
@@ -41,6 +49,11 @@ namespace BLS.Web.RegistroClientes
         }
 
 
+        #endregion
+
+
+
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -49,6 +62,17 @@ namespace BLS.Web.RegistroClientes
                 NuevoCliente = new Clientes();
                 NuevoUsuario = new Usuarios();
 
+
+
+                var smtpHost = System.Configuration.ConfigurationManager.AppSettings["smtp.host"] ?? "mail.consultoria-it.com";
+                var smtpPort = int.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.port"], out var p) ? p : 465;
+                var smtpUser = System.Configuration.ConfigurationManager.AppSettings["smtp.user"] ?? "no-responder@consultoria-it.com";
+                var smtpPass = System.Configuration.ConfigurationManager.AppSettings["smtp.pass"] ?? "inteldx486mail";
+                var smtpSsl = bool.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.ssl"], out var s) ? s : true;
+                var fromEmail = System.Configuration.ConfigurationManager.AppSettings["smtp.from"] ?? smtpUser;
+                var fromName = System.Configuration.ConfigurationManager.AppSettings["smtp.fromname"] ?? "Soporte";
+
+                _tokenService = new EmailTokenService(smtpHost, smtpPort, smtpUser, smtpPass, smtpSsl, fromEmail, fromName);
 
 
             }
@@ -71,9 +95,9 @@ namespace BLS.Web.RegistroClientes
 
 
 
-            pnlRegistro.ClientVisible = false;
+            //pnlRegistro.ClientVisible = false;
 
-            pnlPaquete.ClientVisible = true;
+          
         }
 
         protected void btnGratis_Click(object sender, EventArgs e)
@@ -106,14 +130,23 @@ namespace BLS.Web.RegistroClientes
             lblPlan.Text = nombre;
             lblPrecio.Text = precio.ToString();
 
-            pnlPaquete.Visible = false;
             pnlResumen.Visible = true;
         }
 
         protected void Unnamed_Click1(object sender, EventArgs e)
         {
             pnlResumen.Visible = false;
-            pnlPaquete.Visible = true;
+   
+
+        }
+
+
+        private void OcultarControlesValidacion()
+        {
+            btnEnviarCodVerificiacionEmail.ClientVisible = !TokenValidado;
+            txtCodVerificacionEmail.ClientEnabled = !TokenValidado;
+            txtCorreoCliente.ClientEnabled = !TokenValidado;
+            btnValidarCodigoNewCliente.ClientVisible = !TokenValidado;
 
         }
 
@@ -121,21 +154,60 @@ namespace BLS.Web.RegistroClientes
         {
             try
             {
+                OcultarControlesValidacion();
+
+
+
+                if (e.Parameter.Contains("ValidarCodigoNewCliente"))
+
+                { 
+                    string tokenRecivido = txtCodVerificacionEmail.Text.Trim();
+
+
+                    bool valid = _tokenService.ValidateToken(NuevoUsuario.usMail, tokenRecivido);
+
+                    if (valid)
+                    {
+                        plnPrincipal.JSProperties["cp_swMsg"] = "Código validado correctamente..";
+                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.success ;
+                        plnPrincipal.JSProperties["cp_swClose"] = "";
+                        plnPrincipal.JSProperties["cp_Reload"] = "";
+                        TokenValidado = true;
+                   
+                    }
+                    else
+                    {
+
+                        plnPrincipal.JSProperties["cp_swMsg"] = "Código inválido o excedió el número de intentos.";
+                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
+                        plnPrincipal.JSProperties["cp_swClose"] = "";
+                        plnPrincipal.JSProperties["cp_Reload"] = "";
+                        TokenValidado = false;
+
+                        return;
+
+                    }
+
+
+
+
+                    OcultarControlesValidacion();
+
+                        return;
+                }
+
                 if (e.Parameter.Contains("EnviarCodigoValidacionEmail"))
                 {
 
-                    var smtpHost = System.Configuration.ConfigurationManager.AppSettings["smtp.host"] ?? "mail.consultoria-it.com";
-                    var smtpPort = int.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.port"], out var p) ? p : 465;
-                    var smtpUser = System.Configuration.ConfigurationManager.AppSettings["smtp.user"] ?? "no-responder@consultoria-it.com";
-                    var smtpPass = System.Configuration.ConfigurationManager.AppSettings["smtp.pass"] ?? "inteldx486mail";
-                    var smtpSsl = bool.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.ssl"], out var s) ? s : true;
-                    var fromEmail = System.Configuration.ConfigurationManager.AppSettings["smtp.from"] ?? smtpUser;
-                    var fromName = System.Configuration.ConfigurationManager.AppSettings["smtp.fromname"] ?? "Soporte";
-
-                    _tokenService = new EmailTokenService(smtpHost, smtpPort, smtpUser, smtpPass, smtpSsl, fromEmail, fromName);
 
 
-                    int id = _tokenService.GenerateStoreAndSendToken(txtCorreoCliente.Text, expiresMinutes: 10);
+
+                    //  en datos sencibles hacer una copia del mismo en una propiedad;
+
+                    NuevoUsuario.usMail  = txtCorreoCliente.Text;
+
+
+                    int id = _tokenService.GenerateStoreAndSendToken(NuevoUsuario.usMail, expiresMinutes: 10);
 
 
 
@@ -200,7 +272,7 @@ namespace BLS.Web.RegistroClientes
 
                     pnlRegistro.ClientVisible = false;
 
-                    pnlPaquete.ClientVisible = true;
+
 
 
 
