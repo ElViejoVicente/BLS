@@ -95,7 +95,7 @@
        <div class="embed-container2">
             
            <iframe name="menu" id="menu" src="Menu.aspx" frameborder="0"  scrolling="no" allowfullscreen ></iframe>
-           <iframe name="basefrm" id="basefrm" src="RegistroClientes/ComprarCreditos.aspx" frameborder="0" allowfullscreen></iframe>
+           <iframe name="basefrm" id="basefrm" src="RegistroClientes/ResumenCreditos.aspx" frameborder="0" allowfullscreen></iframe>
       </div>
   </div>
 

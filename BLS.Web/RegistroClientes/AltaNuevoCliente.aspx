@@ -129,11 +129,6 @@
             opacity: 0.6;
             transition: opacity 0.3s ease;
         }
-
-
-
-
-
     </style>
 
 
@@ -400,7 +395,7 @@
                                                             <dx:BootstrapLayoutItem Caption="Codigo de verificacion" ColSpanMd="9" FieldName="CodVerificacionEmail" ClientVisible="true">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapTextBox ID="txtCodVerificacionEmail" AutoPostBack="false"   runat="server">
+                                                                        <dx:BootstrapTextBox ID="txtCodVerificacionEmail" AutoPostBack="false" runat="server">
                                                                         </dx:BootstrapTextBox>
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
@@ -420,7 +415,7 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl runat="server">
                                                                         <div class="password-container">
-                                                                            <dx:BootstrapTextBox runat="server" Password="True" ID="txtPassword" AutoPostBack="false" >
+                                                                            <dx:BootstrapTextBox runat="server" Password="True" ID="txtPassword" AutoPostBack="false">
                                                                                 <ClientSideEvents KeyUp="validarPasswordVisual" />
                                                                             </dx:BootstrapTextBox>
                                                                             <div id="passwordRules" class="mt-2">
@@ -429,6 +424,12 @@
                                                                                 <small id="rule-lower" class="text-danger d-block">❌ Al menos una minúscula</small>
                                                                                 <small id="rule-number" class="text-danger d-block">❌ Al menos un número</small>
                                                                                 <small id="rule-symbol" class="text-danger d-block">❌ Al menos un símbolo</small>
+                                                                                <asp:Label
+                                                                                    ID="lblErrorPassword"
+                                                                                    runat="server"
+                                                                                    CssClass="text-danger fw-semibold d-block mt-2"
+                                                                                    Visible="false">
+                                                                                </asp:Label>
                                                                             </div>
                                                                         </div>
                                                                     </dx:ContentControl>
@@ -460,7 +461,7 @@
                                                                 <dx:BootstrapButton ID="btnConfirmar" runat="server" Text="Confirmar" SettingsBootstrap-RenderOption="Primary" AutoPostBack="false">
                                                                     <ClientSideEvents Click="function(s, e) { plnPrincipal.PerformCallback('GuardarDatosIniciales')   }" />
                                                                 </dx:BootstrapButton>
-                                                           
+
 
 
                                                             </dx:ContentControl>

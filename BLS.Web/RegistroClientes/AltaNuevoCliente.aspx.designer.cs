@@ -231,6 +231,15 @@ namespace BLS.Web.RegistroClientes
         protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtPassword;
 
         /// <summary>
+        /// Control lblErrorPassword.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorPassword;
+
+        /// <summary>
         /// Control txtConfirPassword.
         /// </summary>
         /// <remarks>
