@@ -457,12 +457,10 @@
                                                     <dx:BootstrapLayoutItem HorizontalAlign="Right" ShowCaption="False" ColSpanMd="12">
                                                         <ContentCollection>
                                                             <dx:ContentControl>
-                                                                <dx:BootstrapButton ID="btnConfirmar" runat="server" Text="Confirmar" SettingsBootstrap-RenderOption="Primary" AutoPostBack="false" />
-
-
-                                                                <dx:BootstrapButton runat="server" Text="Cancelar" SettingsBootstrap-RenderOption="Link" AutoPostBack="true">
+                                                                <dx:BootstrapButton ID="btnConfirmar" runat="server" Text="Confirmar" SettingsBootstrap-RenderOption="Primary" AutoPostBack="false">
                                                                     <ClientSideEvents Click="function(s, e) { plnPrincipal.PerformCallback('GuardarDatosIniciales')   }" />
                                                                 </dx:BootstrapButton>
+                                                           
 
 
                                                             </dx:ContentControl>
@@ -491,7 +489,7 @@
 
 
 
-                        <dx:ASPxPanel ID="pnlPaquete" runat="server" ClientVisible="true">
+                        <dx:ASPxPanel ID="pnlPaquete" runat="server" ClientVisible="false">
                             <PanelCollection>
                                 <dx:PanelContent>
                                     <div class="container mt-5">

@@ -140,7 +140,7 @@ namespace BLS.Web.RegistroClientes
 
 
                     plnPrincipal.JSProperties["cp_swMsg"] = "Se envió un código al correo. Revise su bandeja (incluida la carpeta de spam o correo no deseado).";
-                    plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.info ;
+                    plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.info;
                     plnPrincipal.JSProperties["cp_swClose"] = "";
                     plnPrincipal.JSProperties["cp_Reload"] = "";
 
@@ -268,6 +268,8 @@ namespace BLS.Web.RegistroClientes
                     return;
                 }
 
+
+
             }
             catch (Exception)
             {
@@ -276,5 +278,9 @@ namespace BLS.Web.RegistroClientes
             }
 
         }
+
+
+
+  
     }
 }
