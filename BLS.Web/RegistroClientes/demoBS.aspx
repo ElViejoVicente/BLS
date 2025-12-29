@@ -397,7 +397,7 @@
                                                                 </ContentCollection>
                                                             </dx:BootstrapLayoutItem>
 
-                                                            <dx:BootstrapLayoutItem Caption="Codigo de verificacion" ColSpanMd="9" FieldName="CodVerificacionEmail" ClientVisible="false">
+                                                            <dx:BootstrapLayoutItem Caption="Codigo de verificacion" ColSpanMd="9" FieldName="CodVerificacionEmail" ClientVisible="true">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox ID="txtCodVerificacionEmail" runat="server">
@@ -406,10 +406,12 @@
                                                                 </ContentCollection>
                                                             </dx:BootstrapLayoutItem>
 
-                                                            <dx:BootstrapLayoutItem ColSpanMd="3" ShowCaption="False" ClientVisible="false" FieldName="ValidarCodVerificiacionEmail">
+                                                            <dx:BootstrapLayoutItem ColSpanMd="3" ShowCaption="False" ClientVisible="true" FieldName="ValidarCodVerificiacionEmail">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapButton runat="server" AutoPostBack="false" SettingsBootstrap-RenderOption="Secondary" Text="Validar codigo:" ID="frmAltaCliente_E5"></dx:BootstrapButton>
+                                                                        <dx:BootstrapButton runat="server" AutoPostBack="false" SettingsBootstrap-RenderOption="Secondary" Text="Validar codigo:" ID="btnValidarCodigoNewCliente">
+                                                                            <ClientSideEvents Click=" function(s, e) { plnPrincipal.PerformCallback('ValidarCodigoNewCliente') }" />
+                                                                        </dx:BootstrapButton>
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
                                                             </dx:BootstrapLayoutItem>
@@ -418,7 +420,7 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl runat="server">
                                                                         <div class="password-container">
-                                                                            <dx:BootstrapTextBox runat="server" Password="True" ID="txtPassword">
+                                                                            <dx:BootstrapTextBox runat="server" Password="True" ID="txtPassword" AutoPostBack="false" >
                                                                                 <ClientSideEvents KeyUp="validarPasswordVisual" />
                                                                             </dx:BootstrapTextBox>
                                                                             <div id="passwordRules" class="mt-2">
@@ -436,7 +438,7 @@
                                                             <dx:BootstrapLayoutItem Caption="Confirmar Contrase&#241;a (requerido)">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl runat="server">
-                                                                        <dx:BootstrapTextBox runat="server" Password="True" ID="txtConfirPassword">
+                                                                        <dx:BootstrapTextBox runat="server" AutoPostBack="false" Password="True" ID="txtConfirPassword">
                                                                             <ClientSideEvents TextChanged="function(s, e) { plnPrincipal.PerformCallback(&#39;ValidadContrase&#241;a&#39;) }"></ClientSideEvents>
                                                                         </dx:BootstrapTextBox>
 

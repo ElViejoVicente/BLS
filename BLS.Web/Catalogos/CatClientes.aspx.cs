@@ -10,7 +10,7 @@ using DevExpress.Utils;
 using DevExpress.Web;
 using DevExpress.XtraPrinting;
 using BLS.Negocio.CRUD;
-using BLS.Negocio.Inventarios;
+
 using BLS.Negocio.Operativa;
 using BLS.Negocio.ORM;
 using BLS.Web.Controles.Servidor;

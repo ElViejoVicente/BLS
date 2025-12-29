@@ -23,6 +23,8 @@ namespace BLS.Web.RegistroClientes
         private EmailTokenService _tokenService;
 
 
+
+
         #endregion
 
 
@@ -46,16 +48,6 @@ namespace BLS.Web.RegistroClientes
             {
                 NuevoCliente = new Clientes();
                 NuevoUsuario = new Usuarios();
-
-
-                var smtpHost = System.Configuration.ConfigurationManager.AppSettings["smtp.host"] ?? "mail.consultoria-it.com";
-                var smtpPort = int.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.port"], out var p) ? p : 465;
-                var smtpUser = System.Configuration.ConfigurationManager.AppSettings["smtp.user"] ?? "no-responder@consultoria-it.com";
-                var smtpPass = System.Configuration.ConfigurationManager.AppSettings["smtp.pass"] ?? "inteldx486mail";
-                var smtpSsl = bool.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.ssl"], out var s) ? s : true;
-                var fromEmail = System.Configuration.ConfigurationManager.AppSettings["smtp.from"] ?? smtpUser;
-                var fromName = System.Configuration.ConfigurationManager.AppSettings["smtp.fromname"] ?? "Soporte";
-                _tokenService = new EmailTokenService(smtpHost, smtpPort, smtpUser, smtpPass, smtpSsl, fromEmail, fromName);
 
 
 
@@ -132,13 +124,25 @@ namespace BLS.Web.RegistroClientes
                 if (e.Parameter.Contains("EnviarCodigoValidacionEmail"))
                 {
 
+                    var smtpHost = System.Configuration.ConfigurationManager.AppSettings["smtp.host"] ?? "mail.consultoria-it.com";
+                    var smtpPort = int.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.port"], out var p) ? p : 465;
+                    var smtpUser = System.Configuration.ConfigurationManager.AppSettings["smtp.user"] ?? "no-responder@consultoria-it.com";
+                    var smtpPass = System.Configuration.ConfigurationManager.AppSettings["smtp.pass"] ?? "inteldx486mail";
+                    var smtpSsl = bool.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.ssl"], out var s) ? s : true;
+                    var fromEmail = System.Configuration.ConfigurationManager.AppSettings["smtp.from"] ?? smtpUser;
+                    var fromName = System.Configuration.ConfigurationManager.AppSettings["smtp.fromname"] ?? "Soporte";
+
+                    _tokenService = new EmailTokenService(smtpHost, smtpPort, smtpUser, smtpPass, smtpSsl, fromEmail, fromName);
+
+
                     int id = _tokenService.GenerateStoreAndSendToken(txtCorreoCliente.Text, expiresMinutes: 10);
 
 
 
-                    frmAltaCliente.FindItemByFieldName("ValidarCodVerificiacionEmail").ClientVisible = true;
-                    frmAltaCliente.FindItemByFieldName("CodVerificacionEmail").ClientVisible = true;
-
+                    plnPrincipal.JSProperties["cp_swMsg"] = "Se envió un código al correo. Revise su bandeja (incluida la carpeta de spam o correo no deseado).";
+                    plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.info ;
+                    plnPrincipal.JSProperties["cp_swClose"] = "";
+                    plnPrincipal.JSProperties["cp_Reload"] = "";
 
                     return;
                 }

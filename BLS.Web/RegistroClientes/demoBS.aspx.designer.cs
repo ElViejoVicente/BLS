@@ -213,13 +213,13 @@ namespace BLS.Web.RegistroClientes
         protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtCodVerificacionEmail;
 
         /// <summary>
-        /// Control frmAltaCliente_E5.
+        /// Control btnValidarCodigoNewCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapButton frmAltaCliente_E5;
+        protected global::DevExpress.Web.Bootstrap.BootstrapButton btnValidarCodigoNewCliente;
 
         /// <summary>
         /// Control txtPassword.
