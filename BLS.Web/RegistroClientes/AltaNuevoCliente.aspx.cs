@@ -112,46 +112,6 @@ namespace BLS.Web.RegistroClientes
           
         }
 
-        protected void btnGratis_Click(object sender, EventArgs e)
-        {
-            SeleccionarPaquete("4 Pruebas Gratis", 0);
-        }
-
-        protected void btn20_Click(object sender, EventArgs e)
-        {
-            SeleccionarPaquete("20 Créditos", 100);
-        }
-
-        protected void btn50_Click(object sender, EventArgs e)
-        {
-            SeleccionarPaquete("50 Créditos", 200);
-        }
-
-        protected void btn100_Click(object sender, EventArgs e)
-        {
-            SeleccionarPaquete("100 Créditos", 400);
-        }
-
-        private void SeleccionarPaquete(string nombre, int precio)
-        {
-            // Guardar temporalmente
-            Session["PaqueteNombre"] = nombre;
-            Session["PaquetePrecio"] = precio;
-
-            // Mostrar resumen
-            lblPlan.Text = nombre;
-            lblPrecio.Text = precio.ToString();
-
-            pnlResumen.Visible = true;
-        }
-
-        protected void Unnamed_Click1(object sender, EventArgs e)
-        {
-            pnlResumen.Visible = false;
-   
-
-        }
-
 
         private void OcultarControlesValidacion()
         {
