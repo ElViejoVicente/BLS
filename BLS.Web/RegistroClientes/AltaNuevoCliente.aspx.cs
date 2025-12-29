@@ -303,10 +303,15 @@ namespace BLS.Web.RegistroClientes
                     // 2️ Coincidencia
                     if (password != confirmPassword)
                     {
-                        lblErrorTerminos.Text = "Las contraseñas no coinciden.";
-                        lblErrorTerminos.Visible = true;
+                        lblErrorPassword.Text = "Las contraseñas no coinciden.";
+                        lblErrorPassword.Visible = true;
                         return;
                     }
+                    else
+                    {
+                        lblErrorPassword.Visible = false;
+                    }
+
 
                     // 3️ Longitud mínima
                     if (password.Length < 8)

@@ -129,11 +129,6 @@
             opacity: 0.6;
             transition: opacity 0.3s ease;
         }
-
-
-
-
-
     </style>
 
 
@@ -438,6 +433,12 @@
                                                                                 <small id="rule-lower" class="text-danger d-block">❌ Al menos una minúscula</small>
                                                                                 <small id="rule-number" class="text-danger d-block">❌ Al menos un número</small>
                                                                                 <small id="rule-symbol" class="text-danger d-block">❌ Al menos un símbolo</small>
+                                                                                <asp:Label
+                                                                                    ID="lblErrorPassword"
+                                                                                    runat="server"
+                                                                                    CssClass="text-danger fw-semibold d-block mt-2"
+                                                                                    Visible="false">
+                                                                                </asp:Label>
                                                                             </div>
                                                                         </div>
                                                                     </dx:ContentControl>
@@ -477,7 +478,7 @@
                                                                             }                                                                         
                                                                                                             }" />
                                                                 </dx:BootstrapButton>
-                                                           
+
 
 
                                                             </dx:ContentControl>
