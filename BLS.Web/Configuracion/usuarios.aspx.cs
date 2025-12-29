@@ -262,7 +262,7 @@ namespace BLS.Web.Configuracion
                 };
 
 
-                datosCrud.AltaUsuarios(nuevoUsuario);
+                datosCrud.AltaUsuarios( ref nuevoUsuario);
 
 
                 gvUsuarios.CancelEdit();

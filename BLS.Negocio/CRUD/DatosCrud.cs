@@ -2198,7 +2198,7 @@ namespace BLS.Negocio.CRUD
             }
         }
 
-        public bool AltaUsuarios(Usuarios values)
+        public bool AltaUsuarios(ref Usuarios values)
         {
             try
             {

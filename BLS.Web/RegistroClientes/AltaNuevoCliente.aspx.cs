@@ -5,6 +5,7 @@ using BLS.Web.Configuracion;
 using DevExpress.CodeParser;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -73,8 +74,8 @@ namespace BLS.Web.RegistroClientes
             {
                 NuevoCliente = new Clientes();
                 NuevoUsuario = new Usuarios();
-
-
+                ContraseñaValida = false;
+                TokenValidado = false;
 
                 var smtpHost = System.Configuration.ConfigurationManager.AppSettings["smtp.host"] ?? "mail.consultoria-it.com";
                 var smtpPort = int.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.port"], out var p) ? p : 465;
@@ -91,26 +92,7 @@ namespace BLS.Web.RegistroClientes
 
         }
 
-        protected void btnConfirmar_Click(object sender, EventArgs e)
-        {
 
-
-            lblErrorTerminos.Visible = false;
-
-            // Validar Términos y Política
-            if (!frmAltaCliente_E3.Checked || !frmAltaCliente_E3.Checked)
-            {
-                lblErrorTerminos.Text = "Debes aceptar los Términos y Condiciones y la Política de Privacidad.";
-                lblErrorTerminos.Visible = true;
-                return;
-            }
-
-
-
-            //pnlRegistro.ClientVisible = false;
-
-          
-        }
 
 
         private void OcultarControlesValidacion()
@@ -132,7 +114,7 @@ namespace BLS.Web.RegistroClientes
 
                 if (e.Parameter.Contains("ValidarCodigoNewCliente"))
 
-                { 
+                {
                     string tokenRecivido = txtCodVerificacionEmail.Text.Trim();
 
 
@@ -141,11 +123,11 @@ namespace BLS.Web.RegistroClientes
                     if (valid)
                     {
                         plnPrincipal.JSProperties["cp_swMsg"] = "Código validado correctamente..";
-                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.success ;
+                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.success;
                         plnPrincipal.JSProperties["cp_swClose"] = "";
                         plnPrincipal.JSProperties["cp_Reload"] = "";
                         TokenValidado = true;
-                   
+
                     }
                     else
                     {
@@ -165,7 +147,7 @@ namespace BLS.Web.RegistroClientes
 
                     OcultarControlesValidacion();
 
-                        return;
+                    return;
                 }
 
                 if (e.Parameter.Contains("EnviarCodigoValidacionEmail"))
@@ -176,7 +158,7 @@ namespace BLS.Web.RegistroClientes
 
                     //  en datos sencibles hacer una copia del mismo en una propiedad;
 
-                    NuevoUsuario.usMail  = txtCorreoCliente.Text;
+                    NuevoUsuario.usMail = txtCorreoCliente.Text;
 
 
                     int id = _tokenService.GenerateStoreAndSendToken(NuevoUsuario.usMail, expiresMinutes: 10);
@@ -204,7 +186,7 @@ namespace BLS.Web.RegistroClientes
                         return;
                     }
 
-                    if (TokenValidado ==false)
+                    if (TokenValidado == false)
                     {
                         plnPrincipal.JSProperties["cp_swMsg"] = "Código inválido o excedió el número de intentos.";
                         plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
@@ -219,38 +201,6 @@ namespace BLS.Web.RegistroClientes
                     // sin antes guardar el valos de los campos nuevos en la variable de session 
 
 
-                    var hastPwd  = 
-
-
-                    NuevoUsuario.usCodigo = 0;
-                    //NuevoUsuario.usMail 
-                    NuevoUsuario.usActivo = true;
-                    NuevoUsuario.usPWD = PasswordHasher.HashPassword(txtPassword.Text.Trim());
-                    NuevoUsuario.usNombre = NuevoCliente.PrimerNombre + " " + NuevoCliente.AppPaterno + " " + NuevoCliente.AppMaterno;
-                    NuevoUsuario.usFecAlta = DateTime.Now;
-                    NuevoUsuario.usFecBaja = FechaGlobal;
-
-                    if (datoscrud.AltaUsuarios(NuevoUsuario))
-                    {
-                        if (NuevoUsuario.usCodigo>0)
-                        {
-
-                            NuevoCliente.idCliente=NuevoUsuario.usCodigo;
-
-                        }
-                        else
-                        {
-                            plnPrincipal.JSProperties["cp_swMsg"] = "Error al intentar registrar el nuevo usuario, intente de nuevo.";
-                            plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.error ;
-                            plnPrincipal.JSProperties["cp_swClose"] = "";
-                            plnPrincipal.JSProperties["cp_Reload"] = "";
-                            return;
-
-
-                        }
-
-                    }
-
                     NuevoCliente.Activo = false;
                     NuevoCliente.FechaRegistro = DateTime.Now;
                     NuevoCliente.PrimerNombre = txtPrimerNombre.Text;
@@ -261,12 +211,48 @@ namespace BLS.Web.RegistroClientes
                     NuevoCliente.NombreNegocio = txtDespachoConsultoria.Text;
                     NuevoCliente.RFC = txtRFC.Text;
                     NuevoCliente.DomCalle = txtDomicilio.Text;
-                    NuevoCliente.DomNumeroInt = "";
-                    NuevoCliente.DomNumeroExt = "";
+                    NuevoCliente.DomNumeroInt = txtNumeroInterior.Text.Trim();
+                    NuevoCliente.DomNumeroExt = txtNumeroExterior.Text.Trim();
                     NuevoCliente.DomCiudad = txtDomCiudad.Text;
                     NuevoCliente.DomEstado = txtDomEstado.Text;
-                    NuevoCliente.DomCP = int.MaxValue;
+                    NuevoCliente.DomCP = Convert.ToInt32(txtDomCP.Text);
                     NuevoCliente.DomTelefono = txtTelefono.Text;
+
+
+                    //NuevoUsuario.usCodigo = 0;
+                    //NuevoUsuario.usMail 
+                    NuevoUsuario.usActivo = true;
+                    NuevoUsuario.usPWD = PasswordHasher.HashPassword(txtPassword.Text.Trim());
+                    NuevoUsuario.usNombre = NuevoCliente.PrimerNombre + " " + NuevoCliente.AppPaterno + " " + NuevoCliente.AppMaterno;
+                    NuevoUsuario.usFecAlta = DateTime.Now;
+                    NuevoUsuario.usFecBaja = FechaGlobal;
+
+                    Usuarios nuevoUsuarioTmp = new Usuarios();
+                    nuevoUsuarioTmp = NuevoUsuario;
+
+
+
+                    if (datoscrud.AltaUsuarios(ref nuevoUsuarioTmp))
+                    {
+                        if (nuevoUsuarioTmp.usCodigo > 0)
+                        {
+
+                            NuevoCliente.idCliente = nuevoUsuarioTmp.usCodigo;
+
+                        }
+                        else
+                        {
+                            plnPrincipal.JSProperties["cp_swMsg"] = "Error al intentar registrar el nuevo usuario, intente de nuevo.";
+                            plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.error;
+                            plnPrincipal.JSProperties["cp_swClose"] = "";
+                            plnPrincipal.JSProperties["cp_Reload"] = "";
+                            return;
+
+
+                        }
+
+                    }
+
 
 
                     if (!datoscrud.AltaClientes(NuevoCliente))
@@ -295,70 +281,7 @@ namespace BLS.Web.RegistroClientes
                     return;
                 }
 
-                if (e.Parameter.Contains("ValidadContraseña"))
-                {
-                    string password = txtPassword.Text;
-                    string confirmPassword = txtConfirPassword.Text;
 
-                    // 2️ Coincidencia
-                    if (password != confirmPassword)
-                    {
-                        lblErrorPassword.Text = "Las contraseñas no coinciden.";
-                        lblErrorPassword.Visible = true;
-                        return;
-                    }
-                    else
-                    {
-                        lblErrorPassword.Visible = false;
-                    }
-
-
-                    // 3️ Longitud mínima
-                    if (password.Length < 8)
-                    {
-                        plnPrincipal.JSProperties["cp_swMsg"] = "La contraseña debe tener al menos 8 caracteres.";
-                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
-                        plnPrincipal.JSProperties["cp_swClose"] = "";
-                        plnPrincipal.JSProperties["cp_Reload"] = "";
-
-                        //lblErrorTerminos.Text = "";
-                        //lblErrorTerminos.Visible = true;
-                        return;
-                    }
-
-                    // 4️ Reglas de seguridad
-                    if (!Regex.IsMatch(password, @"[A-Z]"))
-                    {
-                        lblErrorTerminos.Text = "La contraseña debe contener al menos una letra mayúscula.";
-                        lblErrorTerminos.Visible = true;
-                        return;
-                    }
-
-                    if (!Regex.IsMatch(password, @"[a-z]"))
-                    {
-                        lblErrorTerminos.Text = "La contraseña debe contener al menos una letra minúscula.";
-                        lblErrorTerminos.Visible = true;
-                        return;
-                    }
-
-                    if (!Regex.IsMatch(password, @"\d"))
-                    {
-                        lblErrorTerminos.Text = "La contraseña debe contener al menos un número.";
-                        lblErrorTerminos.Visible = true;
-                        return;
-                    }
-
-                    if (!Regex.IsMatch(password, @"[\W_]"))
-                    {
-                        lblErrorTerminos.Text = "La contraseña debe contener al menos un símbolo.";
-                        lblErrorTerminos.Visible = true;
-                        return;
-                    }
-
-                    ContraseñaValida = true;
-
-                    return;
-                }
 
 
 
@@ -371,8 +294,18 @@ namespace BLS.Web.RegistroClientes
 
         }
 
+        protected void cbPwdSession_Callback(object source, DevExpress.Web.CallbackEventArgs e)
+        {
+      
+            if (e.Parameter == "1")
+            {
+                ContraseñaValida = true;
+            }
+            else
+            {
+                ContraseñaValida = false;
+            }
 
-
-  
+        }
     }
 }

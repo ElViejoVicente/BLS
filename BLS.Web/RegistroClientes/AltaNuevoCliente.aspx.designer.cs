@@ -132,13 +132,13 @@ namespace BLS.Web.RegistroClientes
         protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtNumeroInterior;
 
         /// <summary>
-        /// Control txtNumDomcilio.
+        /// Control txtNumeroExterior.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtNumDomcilio;
+        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtNumeroExterior;
 
         /// <summary>
         /// Control txtDomCiudad.
@@ -231,15 +231,6 @@ namespace BLS.Web.RegistroClientes
         protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtPassword;
 
         /// <summary>
-        /// Control lblErrorPassword.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorPassword;
-
-        /// <summary>
         /// Control txtConfirPassword.
         /// </summary>
         /// <remarks>
@@ -258,39 +249,21 @@ namespace BLS.Web.RegistroClientes
         protected global::DevExpress.Web.Bootstrap.BootstrapButton btnConfirmar;
 
         /// <summary>
-        /// Control lblErrorTerminos.
+        /// Control hfPasswordOk.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorTerminos;
+        protected global::DevExpress.Web.ASPxHiddenField hfPasswordOk;
 
         /// <summary>
-        /// Control pnlResumen.
+        /// Control cbPwdSession.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxPanel pnlResumen;
-
-        /// <summary>
-        /// Control lblPlan.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPlan;
-
-        /// <summary>
-        /// Control lblPrecio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPrecio;
+        protected global::DevExpress.Web.ASPxCallback cbPwdSession;
     }
 }
