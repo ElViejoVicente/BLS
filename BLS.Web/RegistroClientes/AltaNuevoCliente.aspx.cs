@@ -1,4 +1,6 @@
-﻿using BLS.Negocio.ORM;
+﻿using BLS.Negocio.CRUD;
+using BLS.Negocio.Operativa;
+using BLS.Negocio.ORM;
 using BLS.Web.Configuracion;
 using DevExpress.CodeParser;
 using System;
@@ -8,7 +10,9 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static BLS.Negocio.Operativa.Constantes;
 using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
+using static DevExpress.XtraEditors.Mask.MaskSettings;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 
@@ -17,7 +21,15 @@ namespace BLS.Web.RegistroClientes
     public partial class AltaNuevoCliente : System.Web.UI.Page
     {
         #region Propiedades
-        private Boolean ContraseñaValida = false;
+
+        DatosCrud datoscrud = new DatosCrud();
+
+
+        public bool ContraseñaValida
+        {
+            get => (Session["ssContraseñaValida"] as bool?) ?? false;
+            set => Session["ssContraseñaValida"] = value;
+        }
 
         // inicializar la clase para envio de tokens por email
 
@@ -229,10 +241,55 @@ namespace BLS.Web.RegistroClientes
                         plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
                         plnPrincipal.JSProperties["cp_swClose"] = "";
                         plnPrincipal.JSProperties["cp_Reload"] = "";
+                        return;
                     }
+
+                    if (TokenValidado ==false)
+                    {
+                        plnPrincipal.JSProperties["cp_swMsg"] = "Código inválido o excedió el número de intentos.";
+                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
+                        plnPrincipal.JSProperties["cp_swClose"] = "";
+                        plnPrincipal.JSProperties["cp_Reload"] = "";
+                        return;
+
+                    }
+
                     // Y MAS validaciones , entonces
 
                     // sin antes guardar el valos de los campos nuevos en la variable de session 
+
+
+                    var hastPwd  = 
+
+
+                    NuevoUsuario.usCodigo = 0;
+                    //NuevoUsuario.usMail 
+                    NuevoUsuario.usActivo = true;
+                    NuevoUsuario.usPWD = PasswordHasher.HashPassword(txtPassword.Text.Trim());
+                    NuevoUsuario.usNombre = NuevoCliente.PrimerNombre + " " + NuevoCliente.AppPaterno + " " + NuevoCliente.AppMaterno;
+                    NuevoUsuario.usFecAlta = DateTime.Now;
+                    NuevoUsuario.usFecBaja = FechaGlobal;
+
+                    if (datoscrud.AltaUsuarios(NuevoUsuario))
+                    {
+                        if (NuevoUsuario.usCodigo>0)
+                        {
+
+                            NuevoCliente.idCliente=NuevoUsuario.usCodigo;
+
+                        }
+                        else
+                        {
+                            plnPrincipal.JSProperties["cp_swMsg"] = "Error al intentar registrar el nuevo usuario, intente de nuevo.";
+                            plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.error ;
+                            plnPrincipal.JSProperties["cp_swClose"] = "";
+                            plnPrincipal.JSProperties["cp_Reload"] = "";
+                            return;
+
+
+                        }
+
+                    }
 
                     NuevoCliente.Activo = false;
                     NuevoCliente.FechaRegistro = DateTime.Now;
@@ -244,36 +301,34 @@ namespace BLS.Web.RegistroClientes
                     NuevoCliente.NombreNegocio = txtDespachoConsultoria.Text;
                     NuevoCliente.RFC = txtRFC.Text;
                     NuevoCliente.DomCalle = txtDomicilio.Text;
+                    NuevoCliente.DomNumeroInt = "";
+                    NuevoCliente.DomNumeroExt = "";
                     NuevoCliente.DomCiudad = txtDomCiudad.Text;
                     NuevoCliente.DomEstado = txtDomEstado.Text;
                     NuevoCliente.DomCP = int.MaxValue;
                     NuevoCliente.DomTelefono = txtTelefono.Text;
 
-                    //..
+
+                    if (!datoscrud.AltaClientes(NuevoCliente))
+                    {
+                        plnPrincipal.JSProperties["cp_swMsg"] = "Error al intentar registrar el nuevo cliente, intente de nuevo.";
+                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.error;
+                        plnPrincipal.JSProperties["cp_swClose"] = "";
+                        plnPrincipal.JSProperties["cp_Reload"] = "";
+                        return;
+
+                    }
 
 
+                    plnPrincipal.JSProperties["cp_swMsg"] = "Tu cuenta se ha creado correctamente. Ya puedes iniciar sesión y comenzar a usar el sistema.\r\n¡Bienvenido/a!";
+                    plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.success;
+                    plnPrincipal.JSProperties["cp_swClose"] = "";
+                    plnPrincipal.JSProperties["cp_Reload"] = "";
 
 
-                    //NuevoUsuario.Id = 0;
-                    //NuevoUsuario.UserName = "esto seria el correo ya validado";
-                    //NuevoUsuario.Contraseña = "la contaseña encriptada";
-                    //NuevoUsuario.Nombre = NuevoCliente.PrimerNombre + " " + NuevoCliente.AppPaterno + " " + NuevoCliente.AppMaterno;
-                    //NuevoUsuario.FechaAlta = DateTime.Now;
-                    //NuevoUsuario.Mail = "esto seria el correo ya validado";
-                    //NuevoUsuario.EsProyectista = false;
-                    //NuevoUsuario.EsCreditos = false;
+                    Session["usuario"] = null;
 
-
-
-
-
-
-
-
-                    pnlRegistro.ClientVisible = false;
-
-
-
+                    Response.Redirect("login.aspx");
 
 
 

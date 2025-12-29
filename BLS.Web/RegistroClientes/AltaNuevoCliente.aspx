@@ -196,7 +196,7 @@
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" Width="100%" ID="txtPrimerNombre">
                                                                             <ClientSideEvents KeyPress="SoloLetras" />
-                                                                            <ValidationSettings>
+                                                                            <ValidationSettings ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El nombre es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
@@ -207,11 +207,8 @@
                                                             <dx:BootstrapLayoutItem Caption="Segundo Nombre" ColSpanMd="12">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapTextBox runat="server" Width="100%" ID="txtSegundoNombre">
-                                                                            <ClientSideEvents KeyPress="SoloLetras" />
-                                                                            <ValidationSettings>
-                                                                                <RequiredField IsRequired="true" ErrorText="El nombre es obligatorio" />
-                                                                            </ValidationSettings>
+                                                                        <dx:BootstrapTextBox runat="server" Width="100%" ID="txtSegundoNombre" NullText="">
+                                                                            <ClientSideEvents KeyPress="SoloLetras" />                                                                  
                                                                         </dx:BootstrapTextBox>
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
@@ -222,7 +219,7 @@
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" Width="100%" ID="txtAppPaterno">
                                                                             <ClientSideEvents KeyPress="SoloLetras" />
-                                                                            <ValidationSettings>
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El apellido paterno es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
@@ -235,7 +232,7 @@
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" Width="100%" ID="txtAppMaterno">
                                                                             <ClientSideEvents KeyPress="SoloLetras" />
-                                                                            <ValidationSettings>
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El apellido materno es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
@@ -247,7 +244,7 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapDateEdit runat="server">
-                                                                            <ValidationSettings>
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="La fecha de nacimiento es obligatoria" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapDateEdit>
@@ -259,7 +256,7 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" ID="txtDespachoConsultoria">
-                                                                            <ValidationSettings>
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="Este campo es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
@@ -271,7 +268,7 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" MaxLength="13" ID="txtRFC">
-                                                                            <ValidationSettings>
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El RFC es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
@@ -283,7 +280,7 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" ID="txtDomicilio">
-                                                                            <ValidationSettings>
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El domicilio es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
@@ -295,8 +292,8 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" ID="txtNumeroInterior">
-                                                                            <ValidationSettings>
-                                                                                <RequiredField IsRequired="true" ErrorText="" />
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
+                                                                                <RequiredField IsRequired="true" ErrorText="El campo es oligatorio." />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
                                                                     </dx:ContentControl>
@@ -305,8 +302,8 @@
                                                             <dx:BootstrapLayoutItem Caption="N° Exterior" ColSpanMd="6">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapTextBox runat="server" ID="txtNumDomcilio">
-                                                                            <ValidationSettings>
+                                                                        <dx:BootstrapTextBox runat="server" ID="txtNumDomcilio" NullText="NA">
+                                                                            <ValidationSettings ValidationGroup="TodosLosCampos" >
                                                                                 <RequiredField IsRequired="false" ErrorText="" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
@@ -318,7 +315,7 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" ID="txtDomCiudad">
-                                                                            <ValidationSettings>
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="La ciudad es obligatoria" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
@@ -330,8 +327,8 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" ID="txtDomEstado">
-                                                                            <ValidationSettings>
-                                                                                <RequiredField IsRequired="true" ErrorText="El estado es obligatorio" />
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
+                                                                                <RequiredField IsRequired="true" ErrorText="El Estado es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
                                                                     </dx:ContentControl>
@@ -343,7 +340,7 @@
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" MaxLength="5" ID="txtDomCP">
                                                                             <ClientSideEvents KeyPress="SoloNumeros" />
-                                                                            <ValidationSettings>
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El código postal es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
@@ -355,7 +352,7 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox runat="server" MaxLength="15" ID="txtTelefono">
-                                                                            <ValidationSettings>
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El teléfono es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
@@ -366,8 +363,10 @@
 
                                                             <dx:BootstrapLayoutItem Caption="Terminos y condiciones">
                                                                 <ContentCollection>
-                                                                    <dx:ContentControl runat="server">
-                                                                        <dx:BootstrapCheckBox runat="server" CheckState="Unchecked" ID="frmAltaCliente_E3"></dx:BootstrapCheckBox>
+                                                                    <dx:ContentControl runat="server" >
+                                                                        <dx:BootstrapCheckBox runat="server" CheckState="Unchecked" ID="frmAltaCliente_E3">
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos" ErrorText="Debe aceptar los terminos y condiciones"></ValidationSettings>
+                                                                        </dx:BootstrapCheckBox>
 
 
                                                                     </dx:ContentControl>
@@ -381,15 +380,19 @@
                                                             <dx:BootstrapLayoutItem Caption="email" ColSpanMd="9">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapTextBox runat="server" ID="txtCorreoCliente" />
+                                                                        <dx:BootstrapTextBox runat="server" ID="txtCorreoCliente">
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos"  ErrorText="Campos oblogatorio">
+                                                                                <RequiredField IsRequired="true" />
+                                                                            </ValidationSettings>
+                                                                        </dx:BootstrapTextBox>
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
                                                             </dx:BootstrapLayoutItem>
 
-                                                            <dx:BootstrapLayoutItem Caption="Validar Correo" ShowCaption="False" ColSpanMd="3" FieldName="EnviarCodVerificiacionEmail">
+                                                            <dx:BootstrapLayoutItem  ShowCaption="False" ColSpanMd="3" FieldName="EnviarCodVerificiacionEmail">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapButton runat="server" AutoPostBack="false" SettingsBootstrap-RenderOption="Secondary" Text="Enviar Correo:" ID="btnEnviarCodVerificiacionEmail">
+                                                                        <dx:BootstrapButton runat="server" AutoPostBack="false" SettingsBootstrap-RenderOption="Secondary" Text="Enviar Codigo:" ID="btnEnviarCodVerificiacionEmail">
                                                                             <ClientSideEvents Click=" function(s, e) { plnPrincipal.PerformCallback('EnviarCodigoValidacionEmail') }" />
                                                                         </dx:BootstrapButton>
 
@@ -401,6 +404,9 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapTextBox ID="txtCodVerificacionEmail" AutoPostBack="false"   runat="server">
+                                                                            <ValidationSettings  ValidationGroup="TodosLosCampos" ErrorText="el campo es oblogatorio , este te llegara por correo">
+                                                                                <RequiredField IsRequired="true"  />
+                                                                            </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
@@ -421,6 +427,9 @@
                                                                     <dx:ContentControl runat="server">
                                                                         <div class="password-container">
                                                                             <dx:BootstrapTextBox runat="server" Password="True" ID="txtPassword" AutoPostBack="false" >
+                                                                                <ValidationSettings ValidationGroup="TodosLosCampos" ErrorText="Campo obligatorio"  >
+                                                                                             <RequiredField IsRequired="true"  />
+                                                                                </ValidationSettings>
                                                                                 <ClientSideEvents KeyUp="validarPasswordVisual" />
                                                                             </dx:BootstrapTextBox>
                                                                             <div id="passwordRules" class="mt-2">
@@ -435,10 +444,13 @@
                                                                 </ContentCollection>
                                                             </dx:BootstrapLayoutItem>
 
-                                                            <dx:BootstrapLayoutItem Caption="Confirmar Contrase&#241;a (requerido)">
+                                                            <dx:BootstrapLayoutItem Caption="Confirmar Contrase&#241;a">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl runat="server">
                                                                         <dx:BootstrapTextBox runat="server" AutoPostBack="false" Password="True" ID="txtConfirPassword">
+                                                                            <ValidationSettings ValidationGroup="TodosLosCampos" ErrorText="Campo obligatorio" >
+                                                                                         <RequiredField IsRequired="true"  />
+                                                                            </ValidationSettings>
                                                                             <ClientSideEvents TextChanged="function(s, e) { plnPrincipal.PerformCallback(&#39;ValidadContrase&#241;a&#39;) }"></ClientSideEvents>
                                                                         </dx:BootstrapTextBox>
 
@@ -458,7 +470,12 @@
                                                         <ContentCollection>
                                                             <dx:ContentControl>
                                                                 <dx:BootstrapButton ID="btnConfirmar" runat="server" Text="Confirmar" SettingsBootstrap-RenderOption="Primary" AutoPostBack="false">
-                                                                    <ClientSideEvents Click="function(s, e) { plnPrincipal.PerformCallback('GuardarDatosIniciales')   }" />
+                                                                    <ClientSideEvents Click="function(s, e) { 
+                                                                             if (ASPxClientEdit.ValidateGroup('TodosLosCampos'))
+                                                                            {
+                                                                                 plnPrincipal.PerformCallback('GuardarDatosIniciales'); 
+                                                                            }                                                                         
+                                                                                                            }" />
                                                                 </dx:BootstrapButton>
                                                            
 

@@ -8,7 +8,7 @@ namespace BLS.Negocio.ORM
 {
     public class Clientes
     {
-        public int idCliente { get; set; }
+        public long idCliente { get; set; }
         public bool Activo { get; set; }
         public DateTime FechaRegistro { get; set; }
         public string PrimerNombre { get; set; }
