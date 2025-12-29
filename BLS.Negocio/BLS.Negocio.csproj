@@ -120,7 +120,6 @@
     <Compile Include="Expediente\DatosExpedientes.cs" />
     <Compile Include="Expediente\ListaExpedientes.cs" />
     <Compile Include="Expediente\ListaHojaDatos.cs" />
-    <Compile Include="Inventarios\DatosInventario.cs" />
     <Compile Include="Operativa\EmailTokenService.cs" />
     <Compile Include="Operativa\PasswordHasher.cs" />
     <Compile Include="Operativa\PerfilXOperaciones.cs" />

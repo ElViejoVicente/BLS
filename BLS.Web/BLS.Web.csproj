@@ -247,7 +247,6 @@
     <Content Include="imagenes\Produccion\PR4.png" />
     <Content Include="imagenes\Produccion\PR5.png" />
     <Content Include="imagenes\Produccion\segob.png" />
-    <Content Include="Inventarios\PanelInventario.aspx" />
     <Content Include="paginaConstruccion.aspx" />
     <Content Include="assets\css\fullcalendar.css" />
     <Content Include="assets\css\fullcalendar.print.css" />
@@ -614,13 +613,6 @@
     </Compile>
     <Compile Include="ExpedienteUnico\PanelExpedienteUnico.aspx.designer.cs">
       <DependentUpon>PanelExpedienteUnico.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Inventarios\PanelInventario.aspx.cs">
-      <DependentUpon>PanelInventario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Inventarios\PanelInventario.aspx.designer.cs">
-      <DependentUpon>PanelInventario.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginaConstruccion.aspx.cs">
       <DependentUpon>paginaConstruccion.aspx</DependentUpon>
