@@ -21,6 +21,7 @@ namespace BLS.Negocio.ORM
         public string DomCalle { get; set; }
         public string DomNumeroInt { get; set; }
         public string DomNumeroExt { get; set; }
+        public string DomAsentamiento { get; set; }
         public string DomCiudad { get; set; }
         public string DomEstado { get; set; }
         public int DomCP { get; set; }
