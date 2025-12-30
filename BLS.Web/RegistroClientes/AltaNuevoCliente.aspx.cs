@@ -95,6 +95,7 @@ namespace BLS.Web.RegistroClientes
 
             cmbEstado.DataBind();
             cmbCiudad.DataBind();
+            
 
         }
 
@@ -249,9 +250,9 @@ namespace BLS.Web.RegistroClientes
                     NuevoCliente.DomCalle = txtDomicilio.Text;
                     NuevoCliente.DomNumeroInt = txtNumeroInterior.Text.Trim();
                     NuevoCliente.DomNumeroExt = txtNumeroExterior.Text.Trim();
-                    NuevoCliente.DomCiudad = txtDomCiudad.Text;
-                    NuevoCliente.DomEstado = txtDomEstado.Text;
-                    NuevoCliente.DomCP = Convert.ToInt32(txtDomCP.Text);
+                    NuevoCliente.DomCiudad = cmbEstado.Text;
+                    NuevoCliente.DomEstado = cmbCiudad.Text;
+                    NuevoCliente.DomCP = Convert.ToInt32(cmbCodigoPostal.Text);
                     NuevoCliente.DomTelefono = txtTelefono.Text;
 
 
@@ -370,6 +371,16 @@ namespace BLS.Web.RegistroClientes
             //cmbCiudad.DataBind();
         }
 
-      
+
+        protected void cmbCodigoPostal_Callback1(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        {
+           var nombreCiudadSelect = e.Parameter;
+
+            foreach (var item in CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim() && x.d_asenta.Trim()==nombreCiudadSelect).ToList())
+            {
+                cmbCodigoPostal.Items.Add(item.d_codigo.ToString());
+
+            }
+        }
     }
 }

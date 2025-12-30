@@ -378,7 +378,8 @@
                                                             <dx:BootstrapLayoutItem Caption="Ciudad/Asentamiento" ColSpanMd="6">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapComboBox runat="server" ID="cmbCiudad" ClientInstanceName="cmbCiudad" OnCallback="cmbCiudad_Callback">                                                                      
+                                                                        <dx:BootstrapComboBox runat="server" ID="cmbCiudad" ClientInstanceName="cmbCiudad" OnCallback="cmbCiudad_Callback">    
+                                                                           <ClientSideEvents SelectedIndexChanged="function(s, e) { cmbCodigoPostal.PerformCallback( cmbCiudad.GetText() ); }" />
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="La ciudad o asentamiento es obligatoria" />
                                                                             </ValidationSettings>
@@ -387,42 +388,19 @@
                                                                 </ContentCollection>
                                                             </dx:BootstrapLayoutItem>
 
-                                                            <dx:BootstrapLayoutItem Caption="Ciudad" ColSpanMd="6">
+                                                            <dx:BootstrapLayoutItem Caption="Codigo Postal" ColSpanMd="6">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapTextBox runat="server" ID="txtDomCiudad">
+                                                                        <dx:BootstrapComboBox runat="server" ID="cmbCodigoPostal"  ClientInstanceName="cmbCodigoPostal" OnCallback="cmbCodigoPostal_Callback1">
+                                                                      
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
-                                                                                <RequiredField IsRequired="true" ErrorText="La ciudad es obligatoria" />
+                                                                                <RequiredField IsRequired="true" ErrorText="El Codigo Postal es obligatorio" />
                                                                             </ValidationSettings>
-                                                                        </dx:BootstrapTextBox>
+                                                                        </dx:BootstrapComboBox>
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
                                                             </dx:BootstrapLayoutItem>
 
-                                                            <dx:BootstrapLayoutItem Caption="Estado" ColSpanMd="6">
-                                                                <ContentCollection>
-                                                                    <dx:ContentControl>
-                                                                        <dx:BootstrapTextBox runat="server" ID="txtDomEstado">
-                                                                            <ValidationSettings ValidationGroup="TodosLosCampos">
-                                                                                <RequiredField IsRequired="true" ErrorText="El Estado es obligatorio" />
-                                                                            </ValidationSettings>
-                                                                        </dx:BootstrapTextBox>
-                                                                    </dx:ContentControl>
-                                                                </ContentCollection>
-                                                            </dx:BootstrapLayoutItem>
-
-                                                            <dx:BootstrapLayoutItem Caption="Código Postal" ColSpanMd="6">
-                                                                <ContentCollection>
-                                                                    <dx:ContentControl>
-                                                                        <dx:BootstrapTextBox runat="server" MaxLength="5" ID="txtDomCP">
-                                                                            <ClientSideEvents KeyPress="SoloNumeros" />
-                                                                            <ValidationSettings ValidationGroup="TodosLosCampos">
-                                                                                <RequiredField IsRequired="true" ErrorText="El código postal es obligatorio" />
-                                                                            </ValidationSettings>
-                                                                        </dx:BootstrapTextBox>
-                                                                    </dx:ContentControl>
-                                                                </ContentCollection>
-                                                            </dx:BootstrapLayoutItem>
 
                                                             <dx:BootstrapLayoutItem Caption="Teléfono de contacto" ColSpanMd="6">
                                                                 <ContentCollection>
