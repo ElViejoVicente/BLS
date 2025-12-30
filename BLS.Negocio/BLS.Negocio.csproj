@@ -108,18 +108,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APP\DatosAPP.cs" />
-    <Compile Include="APP\ListaConsultaFolio.cs" />
-    <Compile Include="Bitacora\DatosBitacora.cs" />
     <Compile Include="CRUD\DatosCrud.cs" />
-    <Compile Include="Estadistica\DatosEstadisticas.cs" />
-    <Compile Include="Estadistica\ListaEstatusExpedientes.cs" />
-    <Compile Include="ExpedienteUnico\DatosExpedienteUnico.cs" />
-    <Compile Include="ExpedienteUnico\ListaConsultaBasicaLN.cs" />
-    <Compile Include="ExpedienteUnico\ListaExpedienteUnico.cs" />
-    <Compile Include="Expediente\DatosExpedientes.cs" />
-    <Compile Include="Expediente\ListaExpedientes.cs" />
-    <Compile Include="Expediente\ListaHojaDatos.cs" />
     <Compile Include="Operativa\EmailTokenService.cs" />
     <Compile Include="Operativa\PasswordHasher.cs" />
     <Compile Include="Operativa\PerfilXOperaciones.cs" />
@@ -150,7 +139,6 @@
     <Compile Include="ORM\PerfilesXestatus.cs" />
     <Compile Include="ORM\RecibosDePago.cs" />
     <Compile Include="ORM\Usuarios.cs" />
-    <Compile Include="PLD\DatosPld.cs" />
     <Compile Include="Operativa\Constantes.cs" />
     <Compile Include="Operativa\DatosUsuario.cs" />
     <Compile Include="Operativa\Funcioneslog.cs" />
@@ -255,7 +243,6 @@
     <Content Include="DLL\Microsoft.Exchange.WebServices.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Produccion\" />
     <Folder Include="RegistroClientes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

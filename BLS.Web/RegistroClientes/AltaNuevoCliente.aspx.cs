@@ -1,7 +1,7 @@
 ﻿using BLS.Negocio.CRUD;
 using BLS.Negocio.Operativa;
 using BLS.Negocio.ORM;
-using BLS.Web.Configuracion;
+
 using DevExpress.CodeParser;
 using System;
 using System.Collections.Generic;
