@@ -2003,8 +2003,9 @@ namespace BLS.Negocio.CRUD
                     db.Execute(sql: "sp_CRUD_Cat_EstadosRepublica_Insert", param: new
                     {
 
-                        values.IdEstado,
-                        values.TextoEstado,
+                        values.Codigo,
+                        values.Asentamiento,
+                        values.Estado,
 
                     }, commandType: CommandType.StoredProcedure);
                 }
@@ -2027,8 +2028,9 @@ namespace BLS.Negocio.CRUD
                 {
                     db.Execute(sql: "sp_CRUD_Cat_EstadosRepublica_Update", param: new
                     {
-                        values.IdEstado,
-                        values.TextoEstado,
+                        values.Codigo,
+                        values.Asentamiento,    
+                        values.Estado,
 
 
                     }, commandType: CommandType.StoredProcedure);
@@ -2050,7 +2052,9 @@ namespace BLS.Negocio.CRUD
                 {
                     db.Execute(sql: "sp_CRUD_Cat_EstadosRepublica_Delete", param: new
                     {
-                        values.IdEstado
+                        values.Codigo,
+                        values.Asentamiento,
+                        values.Estado,
 
                     }, commandType: CommandType.StoredProcedure);
                 }

@@ -8,7 +8,8 @@ namespace BLS.Negocio.ORM
 {
     public class Cat_EstadosRepublica
     {
-        public int IdEstado { get; set; }
-        public string TextoEstado { get; set; }
+        public string Codigo { get; set; }
+        public string Asentamiento { get; set; }
+        public string Estado { get; set; }
     }
 }

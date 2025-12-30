@@ -25,6 +25,24 @@ namespace BLS.Web.RegistroClientes
 
         DatosCrud datoscrud = new DatosCrud();
 
+        public List<Cat_EstadosRepublica> CatEstadosRepublica
+        {
+            get
+            {
+                List<Cat_EstadosRepublica> sseCatEstadosRepublica = new List<Cat_EstadosRepublica>();
+                if (this.Session["sseCatEstadosRepublica"] != null)
+                {
+                    sseCatEstadosRepublica = (List<Cat_EstadosRepublica>)this.Session["sseCatEstadosRepublica"];
+                }
+                return sseCatEstadosRepublica;
+            }
+
+            set
+            {
+                this.Session["sseCatEstadosRepublica"] = value;
+            }
+        }
+
 
         public bool ContraseñaValida
         {
@@ -66,7 +84,12 @@ namespace BLS.Web.RegistroClientes
 
 
 
+        private void DameCatalogos()
+        {
+            CatEstadosRepublica = datoscrud.ConsultaCatEstadosRepublica();
 
+            cbEstadosRepublica.DataBind();
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -333,6 +333,7 @@
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
                                                             </dx:BootstrapLayoutItem>
+
                                                             <dx:BootstrapLayoutItem Caption="N° Exterior" ColSpanMd="6">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
@@ -341,6 +342,31 @@
                                                                                 <RequiredField IsRequired="false" ErrorText="" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapTextBox>
+                                                                    </dx:ContentControl>
+                                                                </ContentCollection>
+                                                            </dx:BootstrapLayoutItem>
+
+                                                            <dx:BootstrapLayoutItem Caption="Estado" ColSpanMd="6">
+                                                                <ContentCollection>
+                                                                    <dx:ContentControl>
+                                                                        <dx:BootstrapComboBox runat="server" ID="cmbEstado">
+                                                                             
+                                                                            <ValidationSettings ValidationGroup="TodosLosCampos">
+                                                                                <RequiredField IsRequired="true" ErrorText="El Estado es obligatorio" />
+                                                                            </ValidationSettings>
+                                                                        </dx:BootstrapComboBox>
+                                                                    </dx:ContentControl>
+                                                                </ContentCollection>
+                                                            </dx:BootstrapLayoutItem>
+
+                                                            <dx:BootstrapLayoutItem Caption="Ciudad/Asentamiento" ColSpanMd="6">
+                                                                <ContentCollection>
+                                                                    <dx:ContentControl>
+                                                                        <dx:BootstrapComboBox runat="server" ID="cmbCiudad">
+                                                                            <ValidationSettings ValidationGroup="TodosLosCampos">
+                                                                                <RequiredField IsRequired="true" ErrorText="La ciudad o asentamiento es obligatoria" />
+                                                                            </ValidationSettings>
+                                                                        </dx:BootstrapComboBox>
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
                                                             </dx:BootstrapLayoutItem>
