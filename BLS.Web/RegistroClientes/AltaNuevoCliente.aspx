@@ -21,24 +21,40 @@
 
         function VerAlertasCondicional(s, e) {
 
-
             if (s.cp_swType != null) {
 
-
                 if (s.cp_swClose != '') {
-
                 }
 
                 if (s.cp_Reload != '') {
-
                 }
 
-                mostrarMensajeSweet(s.cp_swType, s.cp_swMsg);
+                // Si hay redirect, usa el swal con contador y redirige al finalizar
+                if (s.cp_RedirectUrl) {
+                    var url = s.cp_RedirectUrl;
+
+                    // limpia para evitar que se dispare otra vez
+                    s.cp_RedirectUrl = null;
+
+                    // muestra mensaje con cuenta regresiva de 10 segundos
+                    mostrarMensajeSweetCount(
+                        s.cp_swType,
+                        s.cp_swMsg,
+                        10,
+                        function () { window.location.href = url; },
+                        { confirmButtonText: "Ir al login" }
+                    );
+
+                } else {
+                    // si no hay redirect, usa tu swal normal
+                    mostrarMensajeSweet(s.cp_swType, s.cp_swMsg);
+                }
+
                 s.cp_swType = null;
                 s.cp_swMsg = null;
-
             }
         }
+
 
         function SoloLetras(s, e) {
             var key = e.htmlEvent.key;

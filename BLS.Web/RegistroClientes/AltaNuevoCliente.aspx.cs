@@ -80,6 +80,13 @@ namespace BLS.Web.RegistroClientes
         }
 
 
+
+        //public List<Cat_estados>  CatEstadosRepublica
+        //{
+        //    get => Session["ssCatEstadosRepublica"] as List<Cat_estados> (() )?? new List<Cat_estados>();
+        //    set => Session["ssCatEstadosRepublica"] = value;
+        //}
+
         #endregion
 
 
@@ -110,6 +117,11 @@ namespace BLS.Web.RegistroClientes
 
                 _tokenService = new EmailTokenService(smtpHost, smtpPort, smtpUser, smtpPass, smtpSsl, fromEmail, fromName);
 
+
+
+
+
+                /// aqui se llena CatEstadosRepublica    = DA
 
             }
 
@@ -289,17 +301,14 @@ namespace BLS.Web.RegistroClientes
                     }
 
 
-                    plnPrincipal.JSProperties["cp_swMsg"] = "Tu cuenta se ha creado correctamente. Ya puedes iniciar sesión y comenzar a usar el sistema.\r\n¡Bienvenido/a!";
+                    plnPrincipal.JSProperties["cp_swMsg"] = "Tu cuenta se ha creado correctamente. Ya puedes iniciar sesión y comenzar a usar el sistema. Bienvenido.!";
                     plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.success;
                     plnPrincipal.JSProperties["cp_swClose"] = "";
                     plnPrincipal.JSProperties["cp_Reload"] = "";
+                    plnPrincipal.JSProperties["cp_RedirectUrl"] = "../login.aspx";
 
 
                     Session["usuario"] = null;
-
-                    Response.Redirect("login.aspx");
-
-
 
                     return;
                 }
