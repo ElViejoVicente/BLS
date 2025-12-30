@@ -1,8 +1,10 @@
 ﻿using BLS.Negocio.CRUD;
 using BLS.Negocio.Operativa;
 using BLS.Negocio.ORM;
+using BLS.Negocio.RegistroClientes;
 using BLS.Web.Configuracion;
 using DevExpress.CodeParser;
+using DevExpress.XtraRichEdit.Import.OpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -34,28 +36,30 @@ namespace BLS.Web.RegistroClientes
         }
 
 
-        public string IdEstadoRepublicaSelect
+        //public List<CodigosMunicipios> CatCodigosPotalesXEstado
+        //{
+        //    get => Session["sseCatCodigosPotalesXEstado"] as List<CodigosMunicipios> ?? new List<CodigosMunicipios>();
+        //    set => Session["sseCatCodigosPotalesXEstado"] = value;
+        //}
+        public List<CodigosMunicipios> CatCodigosPotalesXEstadoMunicipio
         {
-            get => (Session["ssIdEstadoRepublicaSelect"] as string) ?? "";
-            set => Session["ssIdEstadoRepublicaSelect"] = value;
-        }
-        public string IdMunicipioSelect
-        {
-            get => (Session["ssIdMunicipioSelect"] as string) ?? "";
-            set => Session["ssIdMunicipioSelect"] = value;
-        }
-
-        public string NombreAsentamientoSelect
-        {
-            get => (Session["ssNombreAsentamientoSelect"] as string) ?? "";
-            set => Session["ssNombreAsentamientoSelect"] = value;
+            get => Session["sseCatCodigosPotalesXEstadoMunicipio"] as List<CodigosMunicipios> ?? new List<CodigosMunicipios>();
+            set => Session["sseCatCodigosPotalesXEstadoMunicipio"] = value;
         }
 
-        public string CPSelect
+        public List<CodigosAsentamientos> CatCodigosPotalesXEstadoMunicipioAsentamiento
         {
-            get => (Session["ssCPSelect"] as string) ?? "";
-            set => Session["ssCPSelect"] = value;
+            get => Session["ssCatCodigosPotalesXEstadoMunicipioAsentamiento"] as List<CodigosAsentamientos> ?? new List<CodigosAsentamientos>();
+            set => Session["ssCatCodigosPotalesXEstadoMunicipioAsentamiento"] = value;
         }
+
+        public List<CodigosPostales> CatCodigosPotalesXEstadoMunicipioAsentamientoCP
+        {
+            get => Session["ssCatCodigosPotalesXEstadoMunicipioAsentamientoCP"] as List<CodigosPostales> ?? new List<CodigosPostales>();
+            set => Session["ssCatCodigosPotalesXEstadoMunicipioAsentamientoCP"] = value;
+        }
+
+
 
 
         public bool ContraseñaValida
@@ -95,12 +99,6 @@ namespace BLS.Web.RegistroClientes
 
 
 
-        //public List<Cat_estados>  CatEstadosRepublica
-        //{
-        //    get => Session["ssCatEstadosRepublica"] as List<Cat_estados> (() )?? new List<Cat_estados>();
-        //    set => Session["ssCatEstadosRepublica"] = value;
-        //}
-
         #endregion
 
 
@@ -112,8 +110,9 @@ namespace BLS.Web.RegistroClientes
 
 
             cmbEstado.DataBind();
+            cmbMunicipio.DataBind();
             cmbCiudad.DataBind();
-            
+            cmbCodigoPostal.DataBind();
 
         }
 
@@ -125,10 +124,8 @@ namespace BLS.Web.RegistroClientes
                 NuevoUsuario = new Usuarios();
                 ContraseñaValida = false;
                 TokenValidado = false;
-                IdEstadoRepublicaSelect = "";
-                IdMunicipioSelect = "";
-                NombreAsentamientoSelect = "";
-                CPSelect = "";
+
+
 
                 var smtpHost = System.Configuration.ConfigurationManager.AppSettings["smtp.host"] ?? "mail.consultoria-it.com";
                 var smtpPort = int.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.port"], out var p) ? p : 465;
@@ -255,14 +252,14 @@ namespace BLS.Web.RegistroClientes
                     }
 
 
-                    if (IdEstadoRepublicaSelect=="" || IdMunicipioSelect =="" || NombreAsentamientoSelect=="" || CPSelect=="")  // valida que todas las variables tenga datos 
-                    {
-                        plnPrincipal.JSProperties["cp_swMsg"] = "Error el procesar los codigos de minucipios / intente de nuevo";
-                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
-                        plnPrincipal.JSProperties["cp_swClose"] = "";
-                        plnPrincipal.JSProperties["cp_Reload"] = "";
-                        return;
-                    }
+                    //if (IdEstadoRepublicaSelect == "" || IdMunicipioSelect == "" || NombreAsentamientoSelect == "" || CPSelect == "")  // valida que todas las variables tenga datos 
+                    //{
+                    //    plnPrincipal.JSProperties["cp_swMsg"] = "Error el procesar los codigos de minucipios / intente de nuevo";
+                    //    plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
+                    //    plnPrincipal.JSProperties["cp_swClose"] = "";
+                    //    plnPrincipal.JSProperties["cp_Reload"] = "";
+                    //    return;
+                    //}
 
                     // Y MAS validaciones , entonces
 
@@ -281,11 +278,11 @@ namespace BLS.Web.RegistroClientes
                     NuevoCliente.DomCalle = txtDomicilio.Text;
                     NuevoCliente.DomNumeroInt = txtNumeroInterior.Text.Trim();
                     NuevoCliente.DomNumeroExt = txtNumeroExterior.Text.Trim();
-                    NuevoCliente.DomAsentamiento = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect &&
-                                                                           x.c_mnpio == IdMunicipioSelect && x.d_asenta== NombreAsentamientoSelect).FirstOrDefault().d_asenta;
-                    NuevoCliente.DomCiudad = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect && x.c_mnpio== IdMunicipioSelect).FirstOrDefault().D_mnpio;
-                    NuevoCliente.DomEstado = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect).FirstOrDefault().d_estado;
-                    NuevoCliente.DomCP = Convert.ToInt32(CPSelect);
+                    //NuevoCliente.DomAsentamiento = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect &&
+                    //                                                       x.c_mnpio == IdMunicipioSelect && x.d_asenta == NombreAsentamientoSelect).FirstOrDefault().d_asenta;
+                    //NuevoCliente.DomCiudad = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect && x.c_mnpio == IdMunicipioSelect).FirstOrDefault().D_mnpio;
+                    //NuevoCliente.DomEstado = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect).FirstOrDefault().d_estado;
+                    //NuevoCliente.DomCP = Convert.ToInt32(CPSelect);
                     NuevoCliente.DomTelefono = txtTelefono.Text;
 
 
@@ -390,93 +387,109 @@ namespace BLS.Web.RegistroClientes
 
         }
 
+
+
+        protected void cmbMunicipio_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        {
+            var IdEstadoRepublicaSelect = e.Parameter;
+
+
+
+            CatCodigosPotalesXEstadoMunicipio = CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim()).GroupBy(x => new 
+            {
+                D_mnpio = x.D_mnpio.Trim(),
+                c_mnpio = x.c_mnpio.Trim()
+            }).Select(g => new CodigosMunicipios { D_mnpio= g.Key.D_mnpio, c_mnpio=g.Key.c_mnpio }).OrderBy(x => x.c_mnpio).ToList();
+
+
+            cmbMunicipio.TextField = "D_mnpio";
+            cmbMunicipio.ValueField = "c_mnpio";
+
+            cmbMunicipio.DataSource = CatCodigosPotalesXEstadoMunicipio;
+
+
+            cmbMunicipio.DataBind();
+
+
+        }
+
+
+
+
+        protected void cmbMunicipio_DataBinding1(object sender, EventArgs e)
+        {
+
+            cmbMunicipio.TextField = "D_mnpio";
+            cmbMunicipio.ValueField = "c_mnpio";
+
+            cmbMunicipio.DataSource = CatCodigosPotalesXEstadoMunicipio;
+        }
+
+
         protected void cmbCiudad_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
         {
             // filtrar ciudades por estado seleccionado
-            IdMunicipioSelect = e.Parameter; 
+            var IdMunicipioSelect = e.Parameter;
+            var IdEstadoRepublicaSelect = cmbEstado.Value.ToString();
 
-            foreach (var item in CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim() && x.c_mnpio.Trim() == IdMunicipioSelect).ToList())
-            {
-                cmbCiudad.Items.Add(item.d_asenta.Trim(), item.Indice.ToString());
 
-            }
+            CatCodigosPotalesXEstadoMunicipioAsentamiento = CatCodigosPotales
+                .Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim()
+                         && x.c_mnpio.Trim() == IdMunicipioSelect)
+                .Select(x => new CodigosAsentamientos
+                {
+                    d_asenta = x.d_asenta,
+                    Indice = x.Indice.ToString()
+                })
+                .ToList();
+
+            cmbCiudad.TextField = "d_asenta";
+            cmbCiudad.ValueField = "Indice";
+            cmbCiudad.DataSource = CatCodigosPotalesXEstadoMunicipioAsentamiento;
+
+
+            cmbCiudad.DataBind();
 
             //cmbCiudad.DataBind();
         }
 
 
+
+
+        protected void cmbCiudad_DataBinding1(object sender, EventArgs e)
+        {
+            cmbCiudad.TextField = "d_asenta";
+            cmbCiudad.ValueField = "Indice";
+            cmbCiudad.DataSource = CatCodigosPotalesXEstadoMunicipioAsentamiento;
+        }
+
+
+
+
         protected void cmbCodigoPostal_Callback1(object sender, DevExpress.Web.CallbackEventArgsBase e)
         {
+            var NombreAsentamientoSelect = e.Parameter.Split('~')[0].ToString();
+
+            var IdEstadoRepublicaSelect = cmbEstado.Value.ToString();
+            var IdMunicipioSelect = cmbMunicipio.Value.ToString();
 
 
-            if (e.Parameter.Contains("Carga"))
-            {
-                NombreAsentamientoSelect = e.Parameter.Split('~')[1].ToString();
+            CatCodigosPotalesXEstadoMunicipioAsentamientoCP = CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim() &&
+            x.c_mnpio.Trim() == IdMunicipioSelect && x.d_asenta == NombreAsentamientoSelect).ToList().Select (x=> new CodigosPostales { d_codigo = x.d_codigo }).ToList();
 
+            cmbCodigoPostal.DataBind();
 
-                foreach (var item in CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim() && x.c_mnpio.Trim() == IdMunicipioSelect && x.d_asenta == NombreAsentamientoSelect).ToList())
-                {
-                    cmbCodigoPostal.Items.Add( item.d_codigo.ToString(), item.d_codigo.ToString());
-
-                }
-
-                //if (cmbCodigoPostal.Items.Count > 0)
-                //{
-                //    cmbCodigoPostal.SelectedIndex = 0;
-                //    CPSelect = cmbCodigoPostal.Items[0].Text;
-                //}
-
-                return;
-
-            }
-
-            //if (e.Parameter.Contains("Seleccion"))
-            //{
-            //    CPSelect = e.Parameter.Split('~')[1].ToString();
-
-               
-            //    foreach (var item in CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim() && x.c_mnpio.Trim() == IdMunicipioSelect && x.d_asenta == NombreAsentamientoSelect).ToList())
-            //    {
-            //        cmbCodigoPostal.Items.Add(item.d_codigo.ToString(), item.d_codigo.ToString());
-
-            //    }
-
-            //    cmbCodigoPostal.Text = CPSelect;
-            //    cmbCodigoPostal.SelectedIndex = CatCodigosPotales.FindIndex( w=> w.d_codigo== CPSelect);
-
-            //    return;
-            //}
-
-
-     
-
-            
+            return;
 
         }
 
-        protected void cmbMunicipio_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        protected void cmbCodigoPostal_DataBinding1(object sender, EventArgs e)
         {
-            IdEstadoRepublicaSelect = e.Parameter;
+            cmbCodigoPostal.TextField = "d_codigo";
+            cmbCodigoPostal.ValueField = "d_codigo";
 
-            IdMunicipioSelect = "";
-            NombreAsentamientoSelect = "";
-            CPSelect = "";
-
-
-            var ListaXMunicipio = CatCodigosPotales.Where(x=> x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim()).GroupBy(x => new
-            {
-                D_mnpio = x.D_mnpio.Trim(),
-                c_mnpio = x.c_mnpio.Trim()
-            }).Select(g => new { g.Key.D_mnpio, g.Key.c_mnpio }).OrderBy(x => x.c_mnpio).ToList();
-
-
-
-
-            foreach (var item in ListaXMunicipio)
-            {
-                cmbMunicipio.Items.Add(item.D_mnpio.Trim(), item.c_mnpio.ToString());
-               
-            }
+            cmbCodigoPostal.DataSource = CatCodigosPotalesXEstadoMunicipioAsentamientoCP;
         }
+
     }
 }
