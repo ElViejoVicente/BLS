@@ -25,24 +25,20 @@ namespace BLS.Web.RegistroClientes
 
         DatosCrud datoscrud = new DatosCrud();
 
-        public List<Cat_EstadosRepublica> CatEstadosRepublica
-        {
-            get
-            {
-                List<Cat_EstadosRepublica> sseCatEstadosRepublica = new List<Cat_EstadosRepublica>();
-                if (this.Session["sseCatEstadosRepublica"] != null)
-                {
-                    sseCatEstadosRepublica = (List<Cat_EstadosRepublica>)this.Session["sseCatEstadosRepublica"];
-                }
-                return sseCatEstadosRepublica;
-            }
 
-            set
-            {
-                this.Session["sseCatEstadosRepublica"] = value;
-            }
+
+        public List<Cat_CodigosPostales> CatCodigosPotales
+        {
+            get => Session["sseCatCodigosPotales"] as List<Cat_CodigosPostales> ?? new List<Cat_CodigosPostales>();
+            set => Session["sseCatCodigosPotales"] = value;
         }
 
+
+        public string IdEstadoRepublicaSelect
+        {
+            get => (Session["IdEstadoRepublicaSelect"] as string) ?? "";
+            set => Session["IdEstadoRepublicaSelect"] = value;
+        }
 
         public bool ContraseñaValida
         {
@@ -93,9 +89,13 @@ namespace BLS.Web.RegistroClientes
 
         private void DameCatalogos()
         {
-            CatEstadosRepublica = datoscrud.ConsultaCatEstadosRepublica();
+            CatCodigosPotales = datoscrud.ConsultaCatCodigosPostales();
 
-            cbEstadosRepublica.DataBind();
+
+
+            cmbEstado.DataBind();
+            cmbCiudad.DataBind();
+
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -106,6 +106,7 @@ namespace BLS.Web.RegistroClientes
                 NuevoUsuario = new Usuarios();
                 ContraseñaValida = false;
                 TokenValidado = false;
+                IdEstadoRepublicaSelect = "";
 
                 var smtpHost = System.Configuration.ConfigurationManager.AppSettings["smtp.host"] ?? "mail.consultoria-it.com";
                 var smtpPort = int.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.port"], out var p) ? p : 465;
@@ -117,7 +118,7 @@ namespace BLS.Web.RegistroClientes
 
                 _tokenService = new EmailTokenService(smtpHost, smtpPort, smtpUser, smtpPass, smtpSsl, fromEmail, fromName);
 
-
+                DameCatalogos();
 
 
 
@@ -328,7 +329,7 @@ namespace BLS.Web.RegistroClientes
 
         protected void cbPwdSession_Callback(object source, DevExpress.Web.CallbackEventArgs e)
         {
-      
+
             if (e.Parameter == "1")
             {
                 ContraseñaValida = true;
@@ -339,5 +340,36 @@ namespace BLS.Web.RegistroClientes
             }
 
         }
+
+        protected void cmbEstado_DataBinding(object sender, EventArgs e)
+        {
+            cmbEstado.TextField = "d_estado";
+            cmbEstado.ValueField = "c_estado";
+
+            cmbEstado.DataSource = CatCodigosPotales.GroupBy(x => new
+            {
+                d_estado = x.d_estado.Trim(),
+                c_estado = x.c_estado.Trim()
+            }).Select(g => new { g.Key.d_estado, g.Key.c_estado }).OrderBy(x => x.d_estado).ToList();
+
+
+
+        }
+
+        protected void cmbCiudad_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        {
+            // filtrar ciudades por estado seleccionado
+            IdEstadoRepublicaSelect = e.Parameter; 
+
+            foreach (var item in CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim()).ToList())
+            {
+                cmbCiudad.Items.Add(item.d_asenta.Trim(), item.Indice.ToString());
+
+            }
+
+            //cmbCiudad.DataBind();
+        }
+
+      
     }
 }

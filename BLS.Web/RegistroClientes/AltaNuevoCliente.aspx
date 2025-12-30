@@ -365,8 +365,8 @@
                                                             <dx:BootstrapLayoutItem Caption="Estado" ColSpanMd="6">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapComboBox runat="server" ID="cmbEstado">
-                                                                             
+                                                                        <dx:BootstrapComboBox runat="server" ID="cmbEstado" ClientInstanceName="cmbEstado" OnDataBinding="cmbEstado_DataBinding">   
+                                                                            <ClientSideEvents SelectedIndexChanged=" function(s, e) { cmbCiudad.PerformCallback( cmbEstado.GetValue() ); } " />
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El Estado es obligatorio" />
                                                                             </ValidationSettings>
@@ -378,7 +378,7 @@
                                                             <dx:BootstrapLayoutItem Caption="Ciudad/Asentamiento" ColSpanMd="6">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapComboBox runat="server" ID="cmbCiudad">
+                                                                        <dx:BootstrapComboBox runat="server" ID="cmbCiudad" ClientInstanceName="cmbCiudad" OnCallback="cmbCiudad_Callback">                                                                      
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="La ciudad o asentamiento es obligatoria" />
                                                                             </ValidationSettings>

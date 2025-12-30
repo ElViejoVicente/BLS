@@ -130,6 +130,7 @@
     <Compile Include="ORM\Cat_Actos.cs" />
     <Compile Include="ORM\Cat_AreaOficina.cs" />
     <Compile Include="ORM\Cat_Clientes.cs" />
+    <Compile Include="ORM\Cat_CodigosPostales.cs" />
     <Compile Include="ORM\Cat_DocumentosPorActo.cs" />
     <Compile Include="ORM\Cat_EstadosRepublica.cs" />
     <Compile Include="ORM\Cat_Estatus.cs" />
