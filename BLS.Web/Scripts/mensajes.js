@@ -96,3 +96,97 @@ function msgGPBQuestionJSV2(mensaje, yesCallback, noCallback) {
         }
     });
 }
+
+/**
+* Muestra un mensaje SweetAlert2 con cuenta regresiva y ejecuta un callback al finalizar el timer
+* (ideal para redirecciones después de mostrar un "success").
+*
+* @param {string} type - info|success|warning|error|question
+* @param {string} message - mensaje principal
+* @param {number} seconds - segundos de cuenta regresiva (ej. 10)
+* @param {function} onFinish - función a ejecutar al terminar (ej. redirect)
+* @param {object} options - opcional: overrides para Swal.fire (title, confirmButtonText, etc.)
+*/
+function mostrarMensajeSweetCount(type, message, seconds, onFinish, options) {
+    if (type == null || message == null) {
+        console.log("Parametros nulos en mostrarMensajeSweetCount");
+        return;
+    }
+
+    var ms = (Number(seconds) > 0 ? Number(seconds) : 10) * 1000;
+    var swalTitle = (options && options.title) ? options.title : getDefaultTitleByType(type);
+    var confirmText = (options && options.confirmButtonText) ? options.confirmButtonText : "Ir ahora";
+    var showConfirm = (options && typeof options.showConfirmButton === "boolean") ? options.showConfirmButton : true;
+
+    let intervalId = null;
+
+    swalTop.fire(Object.assign({
+        title: swalTitle,
+        html: `
+            <div style="text-align:center; white-space:pre-line;">${escapeHtml(message)}</div>
+            <div style="margin-top:10px; font-size:12px; opacity:.85;">
+                Redirigiendo en <b><span id="swal-countdown">${Math.ceil(ms / 1000)}</span></b> segundos...
+            </div>
+        `,
+        icon: type,
+        timer: ms,
+        timerProgressBar: true,
+        showConfirmButton: showConfirm,
+        confirmButtonText: confirmText,
+        allowOutsideClick: false,
+        allowEscapeKey: true,
+        didOpen: () => {
+            // Actualiza el contador cada 250ms aprox (suave)
+            const countdownEl = Swal.getHtmlContainer().querySelector('#swal-countdown');
+            intervalId = setInterval(() => {
+                const left = Swal.getTimerLeft();
+                if (countdownEl && left != null) {
+                    countdownEl.textContent = String(Math.max(0, Math.ceil(left / 1000)));
+                }
+            }, 250);
+        },
+        willClose: () => {
+            if (intervalId) clearInterval(intervalId);
+        }
+    }, (options || {})))
+        .then((result) => {
+            // Si se confirmó (clic en botón) o se cerró por timer, ejecuta callback
+            if (result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
+                if (typeof onFinish === "function") onFinish();
+            }
+        });
+}
+
+/** Helper: título por defecto según el tipo (puedes ajustar a tu gusto) */
+function getDefaultTitleByType(type) {
+    switch (type) {
+        case "info": return "Información importante!";
+        case "success": return "Proceso realizado con éxito!";
+        case "warning": return "Precaución!";
+        case "error": return "Ha ocurrido un error en sistema!";
+        case "question": return "Confirmación";
+        default: return "Mensaje";
+    }
+}
+
+/**
+ * Escapa HTML básico para evitar que un mensaje con < > rompa el swal (o inyecte HTML).
+ * Si tú controlas 100% el contenido del mensaje, podrías omitirlo, pero es más seguro así.
+ */
+function escapeHtml(text) {
+    if (text == null) return "";
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+/** Ejemplo “atajo” para success con contador (opcional) */
+function msgSuccessCount(mensaje, seconds, onFinish) {
+    mostrarMensajeSweetCount("success", mensaje, seconds, onFinish, {
+        title: "Proceso realizado con éxito!",
+        confirmButtonText: "Ir al login"
+    });
+}
