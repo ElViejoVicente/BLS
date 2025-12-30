@@ -36,9 +36,27 @@ namespace BLS.Web.RegistroClientes
 
         public string IdEstadoRepublicaSelect
         {
-            get => (Session["IdEstadoRepublicaSelect"] as string) ?? "";
-            set => Session["IdEstadoRepublicaSelect"] = value;
+            get => (Session["ssIdEstadoRepublicaSelect"] as string) ?? "";
+            set => Session["ssIdEstadoRepublicaSelect"] = value;
         }
+        public string IdMunicipioSelect
+        {
+            get => (Session["ssIdMunicipioSelect"] as string) ?? "";
+            set => Session["ssIdMunicipioSelect"] = value;
+        }
+
+        public string NombreAsentamientoSelect
+        {
+            get => (Session["ssNombreAsentamientoSelect"] as string) ?? "";
+            set => Session["ssNombreAsentamientoSelect"] = value;
+        }
+
+        public string CPSelect
+        {
+            get => (Session["ssCPSelect"] as string) ?? "";
+            set => Session["ssCPSelect"] = value;
+        }
+
 
         public bool ContraseñaValida
         {
@@ -108,6 +126,9 @@ namespace BLS.Web.RegistroClientes
                 ContraseñaValida = false;
                 TokenValidado = false;
                 IdEstadoRepublicaSelect = "";
+                IdMunicipioSelect = "";
+                NombreAsentamientoSelect = "";
+                CPSelect = "";
 
                 var smtpHost = System.Configuration.ConfigurationManager.AppSettings["smtp.host"] ?? "mail.consultoria-it.com";
                 var smtpPort = int.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.port"], out var p) ? p : 465;
@@ -233,6 +254,16 @@ namespace BLS.Web.RegistroClientes
 
                     }
 
+
+                    if (IdEstadoRepublicaSelect=="" || IdMunicipioSelect =="" || NombreAsentamientoSelect=="" || CPSelect=="")  // valida que todas las variables tenga datos 
+                    {
+                        plnPrincipal.JSProperties["cp_swMsg"] = "Error el procesar los codigos de minucipios / intente de nuevo";
+                        plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
+                        plnPrincipal.JSProperties["cp_swClose"] = "";
+                        plnPrincipal.JSProperties["cp_Reload"] = "";
+                        return;
+                    }
+
                     // Y MAS validaciones , entonces
 
                     // sin antes guardar el valos de los campos nuevos en la variable de session 
@@ -250,9 +281,11 @@ namespace BLS.Web.RegistroClientes
                     NuevoCliente.DomCalle = txtDomicilio.Text;
                     NuevoCliente.DomNumeroInt = txtNumeroInterior.Text.Trim();
                     NuevoCliente.DomNumeroExt = txtNumeroExterior.Text.Trim();
-                    NuevoCliente.DomCiudad = cmbEstado.Text;
-                    NuevoCliente.DomEstado = cmbCiudad.Text;
-                    NuevoCliente.DomCP = Convert.ToInt32(cmbCodigoPostal.Text);
+                    NuevoCliente.DomAsentamiento = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect &&
+                                                                           x.c_mnpio == IdMunicipioSelect && x.d_asenta== NombreAsentamientoSelect).FirstOrDefault().d_asenta;
+                    NuevoCliente.DomCiudad = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect && x.c_mnpio== IdMunicipioSelect).FirstOrDefault().D_mnpio;
+                    NuevoCliente.DomEstado = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect).FirstOrDefault().d_estado;
+                    NuevoCliente.DomCP = Convert.ToInt32(CPSelect);
                     NuevoCliente.DomTelefono = txtTelefono.Text;
 
 
@@ -360,9 +393,9 @@ namespace BLS.Web.RegistroClientes
         protected void cmbCiudad_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
         {
             // filtrar ciudades por estado seleccionado
-            IdEstadoRepublicaSelect = e.Parameter; 
+            IdMunicipioSelect = e.Parameter; 
 
-            foreach (var item in CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim()).ToList())
+            foreach (var item in CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim() && x.c_mnpio.Trim() == IdMunicipioSelect).ToList())
             {
                 cmbCiudad.Items.Add(item.d_asenta.Trim(), item.Indice.ToString());
 
@@ -374,12 +407,75 @@ namespace BLS.Web.RegistroClientes
 
         protected void cmbCodigoPostal_Callback1(object sender, DevExpress.Web.CallbackEventArgsBase e)
         {
-           var nombreCiudadSelect = e.Parameter;
 
-            foreach (var item in CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim() && x.d_asenta.Trim()==nombreCiudadSelect).ToList())
+
+            if (e.Parameter.Contains("Carga"))
             {
-                cmbCodigoPostal.Items.Add(item.d_codigo.ToString());
+                NombreAsentamientoSelect = e.Parameter.Split('~')[1].ToString();
 
+
+                foreach (var item in CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim() && x.c_mnpio.Trim() == IdMunicipioSelect && x.d_asenta == NombreAsentamientoSelect).ToList())
+                {
+                    cmbCodigoPostal.Items.Add( item.d_codigo.ToString(), item.d_codigo.ToString());
+
+                }
+
+                //if (cmbCodigoPostal.Items.Count > 0)
+                //{
+                //    cmbCodigoPostal.SelectedIndex = 0;
+                //    CPSelect = cmbCodigoPostal.Items[0].Text;
+                //}
+
+                return;
+
+            }
+
+            //if (e.Parameter.Contains("Seleccion"))
+            //{
+            //    CPSelect = e.Parameter.Split('~')[1].ToString();
+
+               
+            //    foreach (var item in CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim() && x.c_mnpio.Trim() == IdMunicipioSelect && x.d_asenta == NombreAsentamientoSelect).ToList())
+            //    {
+            //        cmbCodigoPostal.Items.Add(item.d_codigo.ToString(), item.d_codigo.ToString());
+
+            //    }
+
+            //    cmbCodigoPostal.Text = CPSelect;
+            //    cmbCodigoPostal.SelectedIndex = CatCodigosPotales.FindIndex( w=> w.d_codigo== CPSelect);
+
+            //    return;
+            //}
+
+
+     
+
+            
+
+        }
+
+        protected void cmbMunicipio_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        {
+            IdEstadoRepublicaSelect = e.Parameter;
+
+            IdMunicipioSelect = "";
+            NombreAsentamientoSelect = "";
+            CPSelect = "";
+
+
+            var ListaXMunicipio = CatCodigosPotales.Where(x=> x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim()).GroupBy(x => new
+            {
+                D_mnpio = x.D_mnpio.Trim(),
+                c_mnpio = x.c_mnpio.Trim()
+            }).Select(g => new { g.Key.D_mnpio, g.Key.c_mnpio }).OrderBy(x => x.c_mnpio).ToList();
+
+
+
+
+            foreach (var item in ListaXMunicipio)
+            {
+                cmbMunicipio.Items.Add(item.D_mnpio.Trim(), item.c_mnpio.ToString());
+               
             }
         }
     }

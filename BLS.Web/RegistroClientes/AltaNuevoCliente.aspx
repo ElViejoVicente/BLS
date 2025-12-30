@@ -366,9 +366,22 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapComboBox runat="server" ID="cmbEstado" ClientInstanceName="cmbEstado" OnDataBinding="cmbEstado_DataBinding">   
-                                                                            <ClientSideEvents SelectedIndexChanged=" function(s, e) { cmbCiudad.PerformCallback( cmbEstado.GetValue() ); } " />
+                                                                            <ClientSideEvents SelectedIndexChanged=" function(s, e) { cmbMunicipio.PerformCallback( cmbEstado.GetValue() ); } " />
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El Estado es obligatorio" />
+                                                                            </ValidationSettings>
+                                                                        </dx:BootstrapComboBox>
+                                                                    </dx:ContentControl>
+                                                                </ContentCollection>
+                                                            </dx:BootstrapLayoutItem>
+                                                            
+                                                            <dx:BootstrapLayoutItem Caption="Municipio" ColSpanMd="6">
+                                                                <ContentCollection>
+                                                                    <dx:ContentControl>
+                                                                        <dx:BootstrapComboBox runat="server" ID="cmbMunicipio" ClientInstanceName="cmbMunicipio" OnCallback="cmbMunicipio_Callback">
+                                                                            <ClientSideEvents SelectedIndexChanged="function(s, e) { cmbCiudad.PerformCallback( cmbMunicipio.GetValue() ); }" />
+                                                                            <ValidationSettings ValidationGroup="TodosLosCampos">
+                                                                                <RequiredField IsRequired="true" ErrorText=" El Municipio es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapComboBox>
                                                                     </dx:ContentControl>
@@ -379,7 +392,7 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapComboBox runat="server" ID="cmbCiudad" ClientInstanceName="cmbCiudad" OnCallback="cmbCiudad_Callback">    
-                                                                           <ClientSideEvents SelectedIndexChanged="function(s, e) { cmbCodigoPostal.PerformCallback( cmbCiudad.GetText() ); }" />
+                                                                           <ClientSideEvents SelectedIndexChanged="function(s, e) { cmbCodigoPostal.PerformCallback( 'Carga~'+cmbCiudad.GetText() ); }" />
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="La ciudad o asentamiento es obligatoria" />
                                                                             </ValidationSettings>
@@ -391,8 +404,8 @@
                                                             <dx:BootstrapLayoutItem Caption="Codigo Postal" ColSpanMd="6">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapComboBox runat="server" ID="cmbCodigoPostal"  ClientInstanceName="cmbCodigoPostal" OnCallback="cmbCodigoPostal_Callback1">
-                                                                      
+                                                                        <dx:BootstrapComboBox runat="server" ID="cmbCodigoPostal"   ClientInstanceName="cmbCodigoPostal" OnCallback="cmbCodigoPostal_Callback1">
+                                                                   
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El Codigo Postal es obligatorio" />
                                                                             </ValidationSettings>
