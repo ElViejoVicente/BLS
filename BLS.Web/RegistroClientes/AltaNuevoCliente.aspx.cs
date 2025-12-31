@@ -347,11 +347,10 @@ namespace BLS.Web.RegistroClientes
                     NuevoCliente.DomCalle = txtDomicilio.Text;
                     NuevoCliente.DomNumeroInt = txtNumeroInterior.Text.Trim();
                     NuevoCliente.DomNumeroExt = txtNumeroExterior.Text.Trim();
-                    //NuevoCliente.DomAsentamiento = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect &&
-                    //                                                       x.c_mnpio == IdMunicipioSelect && x.d_asenta == NombreAsentamientoSelect).FirstOrDefault().d_asenta;
-                    //NuevoCliente.DomCiudad = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect && x.c_mnpio == IdMunicipioSelect).FirstOrDefault().D_mnpio;
-                    //NuevoCliente.DomEstado = CatCodigosPotales.Where(x => x.c_estado == IdEstadoRepublicaSelect).FirstOrDefault().d_estado;
-                    //NuevoCliente.DomCP = Convert.ToInt32(CPSelect);
+                    NuevoCliente.DomAsentamiento = cmbCiudad.Text;
+                    NuevoCliente.DomCiudad = cmbMunicipio.Text ;
+                    NuevoCliente.DomEstado = cmbEstado.Text;
+                    NuevoCliente.DomCP = Convert.ToInt32(cmbCodigoPostal.Text);
                     NuevoCliente.DomTelefono = txtTelefono.Text;
 
 
