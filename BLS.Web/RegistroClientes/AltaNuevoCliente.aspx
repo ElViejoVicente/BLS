@@ -52,7 +52,7 @@
 
 
         <div style="margin-top: 110px;">
-
+            <dx:ASPxHiddenField runat="server" ID="hfDireccion" ClientInstanceName="hfDireccion" />
 
             <dx:ASPxCallbackPanel runat="server" ID="plnPrincipal" ClientInstanceName="plnPrincipal" OnCallback="plnPrincipal_Callback">
                 <ClientSideEvents EndCallback="VerAlertasCondicional" />
@@ -198,8 +198,12 @@
                                                             <dx:BootstrapLayoutItem Caption="Estado" ColSpanMd="6">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapComboBox runat="server" ID="cmbEstado" ClientInstanceName="cmbEstado" AutoPostBack="false"  OnDataBinding="cmbEstado_DataBinding">   
-                                                                            <ClientSideEvents SelectedIndexChanged=" function(s, e) { cmbMunicipio.PerformCallback( cmbEstado.GetValue() ); } " />
+                                                                        <dx:BootstrapComboBox runat="server"
+                                                                            ID="cmbEstado"
+                                                                            ClientInstanceName="cmbEstado"
+                                                                            AutoPostBack="false"
+                                                                            OnDataBinding="cmbEstado_DataBinding">
+                                                                            <ClientSideEvents SelectedIndexChanged="onEstadoChanged" />
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="El Estado es obligatorio" />
                                                                             </ValidationSettings>
@@ -207,14 +211,19 @@
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
                                                             </dx:BootstrapLayoutItem>
-                                                            
+
                                                             <dx:BootstrapLayoutItem Caption="Municipio" ColSpanMd="6">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapComboBox runat="server" ID="cmbMunicipio" ClientInstanceName="cmbMunicipio" AutoPostBack="false"  OnCallback="cmbMunicipio_Callback" OnDataBinding="cmbMunicipio_DataBinding1">
-                                                                            <ClientSideEvents SelectedIndexChanged="function(s, e) { cmbCiudad.PerformCallback( cmbMunicipio.GetValue() ); }" />
+                                                                        <dx:BootstrapComboBox runat="server"
+                                                                            ID="cmbMunicipio"
+                                                                            ClientInstanceName="cmbMunicipio"
+                                                                            AutoPostBack="false"
+                                                                            OnCallback="cmbMunicipio_Callback"
+                                                                            OnDataBinding="cmbMunicipio_DataBinding1">
+                                                                            <ClientSideEvents SelectedIndexChanged="onMunicipioChanged" />
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
-                                                                                <RequiredField IsRequired="true" ErrorText=" El Municipio es obligatorio" />
+                                                                                <RequiredField IsRequired="true" ErrorText="El Municipio es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapComboBox>
                                                                     </dx:ContentControl>
@@ -224,8 +233,13 @@
                                                             <dx:BootstrapLayoutItem Caption="Ciudad/Asentamiento" ColSpanMd="6">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
-                                                                        <dx:BootstrapComboBox runat="server" ID="cmbCiudad" ClientInstanceName="cmbCiudad"  AutoPostBack="false"  OnCallback="cmbCiudad_Callback" OnDataBinding="cmbCiudad_DataBinding1">    
-                                                                           <ClientSideEvents SelectedIndexChanged="function(s, e) { cmbCodigoPostal.PerformCallback( cmbCiudad.GetText() ); }" />
+                                                                        <dx:BootstrapComboBox runat="server"
+                                                                            ID="cmbCiudad"
+                                                                            ClientInstanceName="cmbCiudad"
+                                                                            AutoPostBack="false"
+                                                                            OnCallback="cmbCiudad_Callback"
+                                                                            OnDataBinding="cmbCiudad_DataBinding1">
+                                                                            <ClientSideEvents SelectedIndexChanged="onCiudadChanged" />
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
                                                                                 <RequiredField IsRequired="true" ErrorText="La ciudad o asentamiento es obligatoria" />
                                                                             </ValidationSettings>
@@ -236,11 +250,16 @@
 
                                                             <dx:BootstrapLayoutItem Caption="Codigo Postal" ColSpanMd="6">
                                                                 <ContentCollection>
-                                                                    <dx:ContentControl>==
-                                                                        <dx:BootstrapComboBox runat="server" ID="cmbCodigoPostal"   ClientInstanceName="cmbCodigoPostal"  AutoPostBack="false"  OnCallback="cmbCodigoPostal_Callback1" OnDataBinding="cmbCodigoPostal_DataBinding1">
-                                                                   
+                                                                    <dx:ContentControl>
+                                                                        <dx:BootstrapComboBox runat="server"
+                                                                            ID="cmbCodigoPostal"
+                                                                            ClientInstanceName="cmbCodigoPostal"
+                                                                            AutoPostBack="false"
+                                                                            OnCallback="cmbCodigoPostal_Callback1"
+                                                                            OnDataBinding="cmbCodigoPostal_DataBinding1">
+                                                                            <ClientSideEvents SelectedIndexChanged="onCodigoPostalChanged" />
                                                                             <ValidationSettings ValidationGroup="TodosLosCampos">
-                                                                                <RequiredField IsRequired="true" ErrorText="El Codigo Postal es obligatorio" />
+                                                                                <RequiredField IsRequired="true" ErrorText="El Código Postal es obligatorio" />
                                                                             </ValidationSettings>
                                                                         </dx:BootstrapComboBox>
                                                                     </dx:ContentControl>
@@ -293,7 +312,9 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapButton runat="server" AutoPostBack="false" SettingsBootstrap-RenderOption="Secondary" Text="Enviar Codigo:" ID="btnEnviarCodVerificiacionEmail">
-                                                                            <ClientSideEvents Click=" function(s, e) { plnPrincipal.PerformCallback('EnviarCodigoValidacionEmail') }" />
+                                                                            <ClientSideEvents Click=" function(s, e) { 
+                                                                                AltaNuevoCliente_BeforeAction();
+                                                                                plnPrincipal.PerformCallback('EnviarCodigoValidacionEmail') }" />
                                                                         </dx:BootstrapButton>
 
                                                                     </dx:ContentControl>
@@ -316,7 +337,9 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl>
                                                                         <dx:BootstrapButton runat="server" AutoPostBack="false" SettingsBootstrap-RenderOption="Secondary" Text="Validar codigo:" ID="btnValidarCodigoNewCliente">
-                                                                            <ClientSideEvents Click=" function(s, e) { plnPrincipal.PerformCallback('ValidarCodigoNewCliente') }" />
+                                                                            <ClientSideEvents Click=" function(s, e) { 
+                                                                                AltaNuevoCliente_BeforeAction();
+                                                                                plnPrincipal.PerformCallback('ValidarCodigoNewCliente') }" />
                                                                         </dx:BootstrapButton>
                                                                     </dx:ContentControl>
                                                                 </ContentCollection>
@@ -373,7 +396,8 @@
                                                                     <ClientSideEvents Click="function(s, e) { 
                                                                              if (ASPxClientEdit.ValidateGroup('TodosLosCampos'))
                                                                             {
-                                                                                 plnPrincipal.PerformCallback('GuardarDatosIniciales'); 
+                                                                        AltaNuevoCliente_BeforeAction();         
+                                                                        plnPrincipal.PerformCallback('GuardarDatosIniciales'); 
                                                                             }                                                                         
                                                                                                             }" />
                                                                 </dx:BootstrapButton>

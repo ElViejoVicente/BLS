@@ -116,6 +116,70 @@ namespace BLS.Web.RegistroClientes
 
         }
 
+        private void EnsureCatalogosYCombos()
+        {
+            if (CatCodigosPotales == null || CatCodigosPotales.Count == 0)
+                CatCodigosPotales = datoscrud.ConsultaCatCodigosPostales();
+
+            string estado = hfDireccion.Contains("estado") ? (hfDireccion["estado"]?.ToString() ?? "") : "";
+            string municipio = hfDireccion.Contains("municipio") ? (hfDireccion["municipio"]?.ToString() ?? "") : "";
+            string ciudad = hfDireccion.Contains("ciudad") ? (hfDireccion["ciudad"]?.ToString() ?? "") : "";
+            string ciudadText = hfDireccion.Contains("ciudadText") ? (hfDireccion["ciudadText"]?.ToString() ?? "") : "";
+            string cp = hfDireccion.Contains("cp") ? (hfDireccion["cp"]?.ToString() ?? "") : "";
+
+            cmbEstado.DataBind();
+            if (!string.IsNullOrWhiteSpace(estado))
+                cmbEstado.Value = estado;
+
+            CatCodigosPotalesXEstadoMunicipio = new List<CodigosMunicipios>();
+            if (!string.IsNullOrWhiteSpace(estado))
+            {
+                CatCodigosPotalesXEstadoMunicipio = CatCodigosPotales
+                    .Where(x => x.c_estado.Trim() == estado.Trim())
+                    .GroupBy(x => new { D_mnpio = x.D_mnpio.Trim(), c_mnpio = x.c_mnpio.Trim() })
+                    .Select(g => new CodigosMunicipios { D_mnpio = g.Key.D_mnpio, c_mnpio = g.Key.c_mnpio })
+                    .OrderBy(x => x.D_mnpio)
+                    .ToList();
+            }
+            cmbMunicipio.DataBind();
+            if (!string.IsNullOrWhiteSpace(municipio))
+                cmbMunicipio.Value = municipio;
+
+            CatCodigosPotalesXEstadoMunicipioAsentamiento = new List<CodigosAsentamientos>();
+            if (!string.IsNullOrWhiteSpace(estado) && !string.IsNullOrWhiteSpace(municipio))
+            {
+                CatCodigosPotalesXEstadoMunicipioAsentamiento = CatCodigosPotales
+                    .Where(x => x.c_estado.Trim() == estado.Trim() && x.c_mnpio.Trim() == municipio.Trim())
+                    .Select(x => new CodigosAsentamientos { d_asenta = x.d_asenta, Indice = x.Indice.ToString() })
+                    .OrderBy(x => x.d_asenta)
+                    .ToList();
+            }
+            cmbCiudad.DataBind();
+            if (!string.IsNullOrWhiteSpace(ciudad))
+                cmbCiudad.Value = ciudad;
+            else if (!string.IsNullOrWhiteSpace(ciudadText))
+                cmbCiudad.Text = ciudadText;
+
+            CatCodigosPotalesXEstadoMunicipioAsentamientoCP = new List<CodigosPostales>();
+            string asentamiento = !string.IsNullOrWhiteSpace(ciudadText) ? ciudadText : cmbCiudad.Text;
+
+            if (!string.IsNullOrWhiteSpace(estado) && !string.IsNullOrWhiteSpace(municipio) && !string.IsNullOrWhiteSpace(asentamiento))
+            {
+                CatCodigosPotalesXEstadoMunicipioAsentamientoCP = CatCodigosPotales
+                    .Where(x => x.c_estado.Trim() == estado.Trim()
+                             && x.c_mnpio.Trim() == municipio.Trim()
+                             && x.d_asenta == asentamiento)
+                    .Select(x => new CodigosPostales { d_codigo = x.d_codigo })
+                    .OrderBy(x => x.d_codigo)
+                    .ToList();
+            }
+            cmbCodigoPostal.DataBind();
+            if (!string.IsNullOrWhiteSpace(cp))
+                cmbCodigoPostal.Value = cp;
+        }
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -144,6 +208,10 @@ namespace BLS.Web.RegistroClientes
                 /// aqui se llena CatEstadosRepublica    = DA
 
             }
+            else
+            {
+                EnsureCatalogosYCombos();
+            }
 
         }
 
@@ -163,6 +231,7 @@ namespace BLS.Web.RegistroClientes
         {
             try
             {
+                EnsureCatalogosYCombos();
                 OcultarControlesValidacion();
 
 
