@@ -1251,6 +1251,7 @@ namespace BLS.Negocio.CRUD
                         values.DomCalle,
                         values.DomNumeroInt,
                         values.DomNumeroExt,
+                        values.DomAsentamiento,
                         values.DomCiudad,
                         values.DomEstado,
                         values.DomCP,
@@ -1291,6 +1292,7 @@ namespace BLS.Negocio.CRUD
                         values.DomCalle,
                         values.DomNumeroInt,
                         values.DomNumeroExt,
+                        values.DomAsentamiento,
                         values.DomCiudad,
                         values.DomEstado,
                         values.DomCP,
@@ -2152,6 +2154,30 @@ namespace BLS.Negocio.CRUD
 
 
 
+        #endregion
+
+
+        #region Cat_CodigosPostales
+        public List<Cat_CodigosPostales> ConsultaCatCodigosPostales()
+        {
+            try
+            {
+                List<Cat_CodigosPostales> resultado = new List<Cat_CodigosPostales>();
+                using (var db = new SqlConnection(cnn))
+                {
+                    resultado = db.Query<Cat_CodigosPostales>(
+                        sql: "sp_CRUD_Cat_CodigosPostales_Select",
+                        param: new { Indice = (int?)null },
+                        commandType: CommandType.StoredProcedure
+                    ).ToList();
+                }
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_CRUD_Cat_CodigosPostales_Select, detalle: \n" + ex.Message, ex);
+            }
+        }
         #endregion
 
         #region Usuarios

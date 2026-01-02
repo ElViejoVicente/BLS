@@ -33,6 +33,15 @@ namespace BLS.Web.RegistroClientes
         protected global::System.Web.UI.WebControls.Image imgLogo;
 
         /// <summary>
+        /// Control hfDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxHiddenField hfDireccion;
+
+        /// <summary>
         /// Control plnPrincipal.
         /// </summary>
         /// <remarks>
@@ -141,31 +150,40 @@ namespace BLS.Web.RegistroClientes
         protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtNumeroExterior;
 
         /// <summary>
-        /// Control txtDomCiudad.
+        /// Control cmbEstado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtDomCiudad;
+        protected global::DevExpress.Web.Bootstrap.BootstrapComboBox cmbEstado;
 
         /// <summary>
-        /// Control txtDomEstado.
+        /// Control cmbMunicipio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtDomEstado;
+        protected global::DevExpress.Web.Bootstrap.BootstrapComboBox cmbMunicipio;
 
         /// <summary>
-        /// Control txtDomCP.
+        /// Control cmbCiudad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.Bootstrap.BootstrapTextBox txtDomCP;
+        protected global::DevExpress.Web.Bootstrap.BootstrapComboBox cmbCiudad;
+
+        /// <summary>
+        /// Control cmbCodigoPostal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.Bootstrap.BootstrapComboBox cmbCodigoPostal;
 
         /// <summary>
         /// Control txtTelefono.

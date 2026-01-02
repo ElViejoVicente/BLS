@@ -119,6 +119,7 @@
     <Compile Include="ORM\Cat_Actos.cs" />
     <Compile Include="ORM\Cat_AreaOficina.cs" />
     <Compile Include="ORM\Cat_Clientes.cs" />
+    <Compile Include="ORM\Cat_CodigosPostales.cs" />
     <Compile Include="ORM\Cat_DocumentosPorActo.cs" />
     <Compile Include="ORM\Cat_EstadosRepublica.cs" />
     <Compile Include="ORM\Cat_Estatus.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Operativa\Sociedad.cs" />
     <Compile Include="Operativa\SociedadXUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistroClientes\CodigosPostalesETX.cs" />
     <Compile Include="Reportes\dsAvisoNotarial.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

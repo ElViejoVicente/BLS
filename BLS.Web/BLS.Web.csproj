@@ -277,6 +277,7 @@
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <Content Include="RegistroClientes\AltaNuevoCliente.aspx" />
+    <Content Include="RegistroClientes\AltaNuevoCliente.js" />
     <Content Include="RegistroClientes\ComprarCreditos.aspx" />
     <Content Include="RegistroClientes\ResumenCreditos.aspx" />
     <Content Include="Reportes\reporteAcuseConsultaListaNegra.aspx" />

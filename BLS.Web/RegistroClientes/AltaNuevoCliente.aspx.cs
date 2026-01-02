@@ -1,8 +1,10 @@
 ﻿using BLS.Negocio.CRUD;
 using BLS.Negocio.Operativa;
 using BLS.Negocio.ORM;
-
+using BLS.Negocio.RegistroClientes;
+using BLS.Web.Configuracion;
 using DevExpress.CodeParser;
+using DevExpress.XtraRichEdit.Import.OpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,6 +26,40 @@ namespace BLS.Web.RegistroClientes
         #region Propiedades
 
         DatosCrud datoscrud = new DatosCrud();
+
+
+
+        public List<Cat_CodigosPostales> CatCodigosPotales
+        {
+            get => Session["sseCatCodigosPotales"] as List<Cat_CodigosPostales> ?? new List<Cat_CodigosPostales>();
+            set => Session["sseCatCodigosPotales"] = value;
+        }
+
+
+        //public List<CodigosMunicipios> CatCodigosPotalesXEstado
+        //{
+        //    get => Session["sseCatCodigosPotalesXEstado"] as List<CodigosMunicipios> ?? new List<CodigosMunicipios>();
+        //    set => Session["sseCatCodigosPotalesXEstado"] = value;
+        //}
+        public List<CodigosMunicipios> CatCodigosPotalesXEstadoMunicipio
+        {
+            get => Session["sseCatCodigosPotalesXEstadoMunicipio"] as List<CodigosMunicipios> ?? new List<CodigosMunicipios>();
+            set => Session["sseCatCodigosPotalesXEstadoMunicipio"] = value;
+        }
+
+        public List<CodigosAsentamientos> CatCodigosPotalesXEstadoMunicipioAsentamiento
+        {
+            get => Session["ssCatCodigosPotalesXEstadoMunicipioAsentamiento"] as List<CodigosAsentamientos> ?? new List<CodigosAsentamientos>();
+            set => Session["ssCatCodigosPotalesXEstadoMunicipioAsentamiento"] = value;
+        }
+
+        public List<CodigosPostales> CatCodigosPotalesXEstadoMunicipioAsentamientoCP
+        {
+            get => Session["ssCatCodigosPotalesXEstadoMunicipioAsentamientoCP"] as List<CodigosPostales> ?? new List<CodigosPostales>();
+            set => Session["ssCatCodigosPotalesXEstadoMunicipioAsentamientoCP"] = value;
+        }
+
+
 
 
         public bool ContraseñaValida
@@ -63,15 +99,84 @@ namespace BLS.Web.RegistroClientes
 
 
 
-        //public List<Cat_estados>  CatEstadosRepublica
-        //{
-        //    get => Session["ssCatEstadosRepublica"] as List<Cat_estados> (() )?? new List<Cat_estados>();
-        //    set => Session["ssCatEstadosRepublica"] = value;
-        //}
-
         #endregion
 
 
+
+        private void DameCatalogos()
+        {
+            CatCodigosPotales = datoscrud.ConsultaCatCodigosPostales();
+
+
+
+            cmbEstado.DataBind();
+            cmbMunicipio.DataBind();
+            cmbCiudad.DataBind();
+            cmbCodigoPostal.DataBind();
+
+        }
+
+        private void EnsureCatalogosYCombos()
+        {
+            if (CatCodigosPotales == null || CatCodigosPotales.Count == 0)
+                CatCodigosPotales = datoscrud.ConsultaCatCodigosPostales();
+
+            string estado = hfDireccion.Contains("estado") ? (hfDireccion["estado"]?.ToString() ?? "") : "";
+            string municipio = hfDireccion.Contains("municipio") ? (hfDireccion["municipio"]?.ToString() ?? "") : "";
+            string ciudad = hfDireccion.Contains("ciudad") ? (hfDireccion["ciudad"]?.ToString() ?? "") : "";
+            string ciudadText = hfDireccion.Contains("ciudadText") ? (hfDireccion["ciudadText"]?.ToString() ?? "") : "";
+            string cp = hfDireccion.Contains("cp") ? (hfDireccion["cp"]?.ToString() ?? "") : "";
+
+            cmbEstado.DataBind();
+            if (!string.IsNullOrWhiteSpace(estado))
+                cmbEstado.Value = estado;
+
+            CatCodigosPotalesXEstadoMunicipio = new List<CodigosMunicipios>();
+            if (!string.IsNullOrWhiteSpace(estado))
+            {
+                CatCodigosPotalesXEstadoMunicipio = CatCodigosPotales
+                    .Where(x => x.c_estado.Trim() == estado.Trim())
+                    .GroupBy(x => new { D_mnpio = x.D_mnpio.Trim(), c_mnpio = x.c_mnpio.Trim() })
+                    .Select(g => new CodigosMunicipios { D_mnpio = g.Key.D_mnpio, c_mnpio = g.Key.c_mnpio })
+                    .OrderBy(x => x.D_mnpio)
+                    .ToList();
+            }
+            cmbMunicipio.DataBind();
+            if (!string.IsNullOrWhiteSpace(municipio))
+                cmbMunicipio.Value = municipio;
+
+            CatCodigosPotalesXEstadoMunicipioAsentamiento = new List<CodigosAsentamientos>();
+            if (!string.IsNullOrWhiteSpace(estado) && !string.IsNullOrWhiteSpace(municipio))
+            {
+                CatCodigosPotalesXEstadoMunicipioAsentamiento = CatCodigosPotales
+                    .Where(x => x.c_estado.Trim() == estado.Trim() && x.c_mnpio.Trim() == municipio.Trim())
+                    .Select(x => new CodigosAsentamientos { d_asenta = x.d_asenta, Indice = x.Indice.ToString() })
+                    .OrderBy(x => x.d_asenta)
+                    .ToList();
+            }
+            cmbCiudad.DataBind();
+            if (!string.IsNullOrWhiteSpace(ciudad))
+                cmbCiudad.Value = ciudad;
+            else if (!string.IsNullOrWhiteSpace(ciudadText))
+                cmbCiudad.Text = ciudadText;
+
+            CatCodigosPotalesXEstadoMunicipioAsentamientoCP = new List<CodigosPostales>();
+            string asentamiento = !string.IsNullOrWhiteSpace(ciudadText) ? ciudadText : cmbCiudad.Text;
+
+            if (!string.IsNullOrWhiteSpace(estado) && !string.IsNullOrWhiteSpace(municipio) && !string.IsNullOrWhiteSpace(asentamiento))
+            {
+                CatCodigosPotalesXEstadoMunicipioAsentamientoCP = CatCodigosPotales
+                    .Where(x => x.c_estado.Trim() == estado.Trim()
+                             && x.c_mnpio.Trim() == municipio.Trim()
+                             && x.d_asenta == asentamiento)
+                    .Select(x => new CodigosPostales { d_codigo = x.d_codigo })
+                    .OrderBy(x => x.d_codigo)
+                    .ToList();
+            }
+            cmbCodigoPostal.DataBind();
+            if (!string.IsNullOrWhiteSpace(cp))
+                cmbCodigoPostal.Value = cp;
+        }
 
 
 
@@ -84,6 +189,8 @@ namespace BLS.Web.RegistroClientes
                 ContraseñaValida = false;
                 TokenValidado = false;
 
+
+
                 var smtpHost = System.Configuration.ConfigurationManager.AppSettings["smtp.host"] ?? "mail.consultoria-it.com";
                 var smtpPort = int.TryParse(System.Configuration.ConfigurationManager.AppSettings["smtp.port"], out var p) ? p : 465;
                 var smtpUser = System.Configuration.ConfigurationManager.AppSettings["smtp.user"] ?? "no-responder@consultoria-it.com";
@@ -94,12 +201,16 @@ namespace BLS.Web.RegistroClientes
 
                 _tokenService = new EmailTokenService(smtpHost, smtpPort, smtpUser, smtpPass, smtpSsl, fromEmail, fromName);
 
-
+                DameCatalogos();
 
 
 
                 /// aqui se llena CatEstadosRepublica    = DA
 
+            }
+            else
+            {
+                EnsureCatalogosYCombos();
             }
 
         }
@@ -120,6 +231,7 @@ namespace BLS.Web.RegistroClientes
         {
             try
             {
+                EnsureCatalogosYCombos();
                 OcultarControlesValidacion();
 
 
@@ -208,6 +320,16 @@ namespace BLS.Web.RegistroClientes
 
                     }
 
+
+                    //if (IdEstadoRepublicaSelect == "" || IdMunicipioSelect == "" || NombreAsentamientoSelect == "" || CPSelect == "")  // valida que todas las variables tenga datos 
+                    //{
+                    //    plnPrincipal.JSProperties["cp_swMsg"] = "Error el procesar los codigos de minucipios / intente de nuevo";
+                    //    plnPrincipal.JSProperties["cp_swType"] = Controles.Usuario.InfoMsgBox.tipoMsg.warning;
+                    //    plnPrincipal.JSProperties["cp_swClose"] = "";
+                    //    plnPrincipal.JSProperties["cp_Reload"] = "";
+                    //    return;
+                    //}
+
                     // Y MAS validaciones , entonces
 
                     // sin antes guardar el valos de los campos nuevos en la variable de session 
@@ -225,9 +347,10 @@ namespace BLS.Web.RegistroClientes
                     NuevoCliente.DomCalle = txtDomicilio.Text;
                     NuevoCliente.DomNumeroInt = txtNumeroInterior.Text.Trim();
                     NuevoCliente.DomNumeroExt = txtNumeroExterior.Text.Trim();
-                    NuevoCliente.DomCiudad = txtDomCiudad.Text;
-                    NuevoCliente.DomEstado = txtDomEstado.Text;
-                    NuevoCliente.DomCP = Convert.ToInt32(txtDomCP.Text);
+                    NuevoCliente.DomAsentamiento = cmbCiudad.Text;
+                    NuevoCliente.DomCiudad = cmbMunicipio.Text ;
+                    NuevoCliente.DomEstado = cmbEstado.Text;
+                    NuevoCliente.DomCP = Convert.ToInt32(cmbCodigoPostal.Text);
                     NuevoCliente.DomTelefono = txtTelefono.Text;
 
 
@@ -305,7 +428,7 @@ namespace BLS.Web.RegistroClientes
 
         protected void cbPwdSession_Callback(object source, DevExpress.Web.CallbackEventArgs e)
         {
-      
+
             if (e.Parameter == "1")
             {
                 ContraseñaValida = true;
@@ -316,5 +439,125 @@ namespace BLS.Web.RegistroClientes
             }
 
         }
+
+        protected void cmbEstado_DataBinding(object sender, EventArgs e)
+        {
+            cmbEstado.TextField = "d_estado";
+            cmbEstado.ValueField = "c_estado";
+
+            cmbEstado.DataSource = CatCodigosPotales.GroupBy(x => new
+            {
+                d_estado = x.d_estado.Trim(),
+                c_estado = x.c_estado.Trim()
+            }).Select(g => new { g.Key.d_estado, g.Key.c_estado }).OrderBy(x => x.d_estado).ToList();
+
+
+
+        }
+
+
+
+        protected void cmbMunicipio_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        {
+            var IdEstadoRepublicaSelect = e.Parameter;
+
+
+
+            CatCodigosPotalesXEstadoMunicipio = CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim()).GroupBy(x => new 
+            {
+                D_mnpio = x.D_mnpio.Trim(),
+                c_mnpio = x.c_mnpio.Trim()
+            }).Select(g => new CodigosMunicipios { D_mnpio= g.Key.D_mnpio, c_mnpio=g.Key.c_mnpio }).OrderBy(x => x.c_mnpio).ToList();
+
+
+            cmbMunicipio.TextField = "D_mnpio";
+            cmbMunicipio.ValueField = "c_mnpio";
+
+            cmbMunicipio.DataSource = CatCodigosPotalesXEstadoMunicipio;
+
+
+            cmbMunicipio.DataBind();
+
+
+        }
+
+
+
+
+        protected void cmbMunicipio_DataBinding1(object sender, EventArgs e)
+        {
+
+            cmbMunicipio.TextField = "D_mnpio";
+            cmbMunicipio.ValueField = "c_mnpio";
+
+            cmbMunicipio.DataSource = CatCodigosPotalesXEstadoMunicipio;
+        }
+
+
+        protected void cmbCiudad_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        {
+            // filtrar ciudades por estado seleccionado
+            var IdMunicipioSelect = e.Parameter;
+            var IdEstadoRepublicaSelect = cmbEstado.Value.ToString();
+
+
+            CatCodigosPotalesXEstadoMunicipioAsentamiento = CatCodigosPotales
+                .Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim()
+                         && x.c_mnpio.Trim() == IdMunicipioSelect)
+                .Select(x => new CodigosAsentamientos
+                {
+                    d_asenta = x.d_asenta,
+                    Indice = x.Indice.ToString()
+                })
+                .ToList();
+
+            cmbCiudad.TextField = "d_asenta";
+            cmbCiudad.ValueField = "Indice";
+            cmbCiudad.DataSource = CatCodigosPotalesXEstadoMunicipioAsentamiento;
+
+
+            cmbCiudad.DataBind();
+
+            //cmbCiudad.DataBind();
+        }
+
+
+
+
+        protected void cmbCiudad_DataBinding1(object sender, EventArgs e)
+        {
+            cmbCiudad.TextField = "d_asenta";
+            cmbCiudad.ValueField = "Indice";
+            cmbCiudad.DataSource = CatCodigosPotalesXEstadoMunicipioAsentamiento;
+        }
+
+
+
+
+        protected void cmbCodigoPostal_Callback1(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        {
+            var NombreAsentamientoSelect = e.Parameter.Split('~')[0].ToString();
+
+            var IdEstadoRepublicaSelect = cmbEstado.Value.ToString();
+            var IdMunicipioSelect = cmbMunicipio.Value.ToString();
+
+
+            CatCodigosPotalesXEstadoMunicipioAsentamientoCP = CatCodigosPotales.Where(x => x.c_estado.Trim() == IdEstadoRepublicaSelect.Trim() &&
+            x.c_mnpio.Trim() == IdMunicipioSelect && x.d_asenta == NombreAsentamientoSelect).ToList().Select (x=> new CodigosPostales { d_codigo = x.d_codigo }).ToList();
+
+            cmbCodigoPostal.DataBind();
+
+            return;
+
+        }
+
+        protected void cmbCodigoPostal_DataBinding1(object sender, EventArgs e)
+        {
+            cmbCodigoPostal.TextField = "d_codigo";
+            cmbCodigoPostal.ValueField = "d_codigo";
+
+            cmbCodigoPostal.DataSource = CatCodigosPotalesXEstadoMunicipioAsentamientoCP;
+        }
+
     }
 }
