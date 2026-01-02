@@ -136,16 +136,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="APP\ConsultaExpediente.aspx" />
-    <Content Include="Bitacora\HistoricoCambios.aspx" />
-    <Content Include="Catalogos\CatActos.aspx" />
-    <Content Include="Catalogos\CatClientes.aspx" />
-    <Content Include="Catalogos\CatDocumentosXVariante.aspx" />
-    <Content Include="Catalogos\CatEstadosRepublica.aspx" />
-    <Content Include="Catalogos\CatRolParticipantesXActo.aspx" />
-    <Content Include="Catalogos\CatVariantesXActo.aspx" />
-    <Content Include="Configuracion\modulos.aspx" />
-    <Content Include="Configuracion\sociedades.aspx" />
     <Content Include="Content\generic\pageMinimalStyle.css" />
     <Content Include="Content\NuevoMenu\header.css" />
     <Content Include="Content\NuevoMenu\login.css" />
@@ -153,12 +143,7 @@
     <Content Include="Content\paginas\flujo-procesos.css" />
     <Content Include="Content\paginas\flujo-procesos.js" />
     <Content Include="Controles\paginas\Error.aspx" />
-    <Content Include="Estadisticas\panelInicial.aspx" />
-    <Content Include="ExpedientesTramites\ArchivosExpedientes.aspx" />
-    <Content Include="ExpedientesTramites\HojaDeDatos.aspx" />
-    <Content Include="ExpedientesTramites\PanelExpedientes.aspx" />
     <Content Include="ExpedienteUnico\ConsultaSimpleListaNegra.aspx" />
-    <Content Include="ExpedienteUnico\PanelExpedienteUnico.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="imagenes\ExUnico\DatosCompletos.png" />
     <Content Include="imagenes\ExUnico\FaltanDatos.png" />
@@ -262,8 +247,6 @@
     <Content Include="build\images\loading.gif" />
     <Content Include="build\js\custom.js" />
     <Content Include="build\js\custom.min.js" />
-    <Content Include="Configuracion\perfiles.aspx" />
-    <Content Include="Configuracion\usuarios.aspx" />
     <Content Include="Content\all.css" />
     <Content Include="Content\generic\pageStyle.css" />
     <Content Include="Content\generic\StylesMovil.css" />
@@ -293,17 +276,12 @@
     <Content Include="build\Generate-WebConfig.ps1" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
-    <Content Include="PLD\ActiviadesVulnerables.aspx" />
     <Content Include="RegistroClientes\AltaNuevoCliente.aspx" />
     <Content Include="RegistroClientes\AltaNuevoCliente.js" />
     <Content Include="RegistroClientes\ComprarCreditos.aspx" />
     <Content Include="RegistroClientes\ResumenCreditos.aspx" />
     <Content Include="Reportes\reporteAcuseConsultaListaNegra.aspx" />
     <Content Include="Reportes\reporteAcuseConsultaListaNegraSimple.aspx" />
-    <Content Include="Reportes\reporteAvisoNotarial.aspx" />
-    <Content Include="Reportes\reporteExUnico.aspx" />
-    <Content Include="Reportes\reporteFormConociendoCliente.aspx" />
-    <Content Include="Reportes\reporteHojaDatos.aspx" />
     <Content Include="Scripts\bootstrap\css\bootstrap-grid.css.map" />
     <Content Include="Scripts\bootstrap\css\bootstrap-grid.min.css.map" />
     <Content Include="Scripts\bootstrap\css\bootstrap-reboot.css.map" />
@@ -480,112 +458,14 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APP\ConsultaExpediente.aspx.cs">
-      <DependentUpon>ConsultaExpediente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="APP\ConsultaExpediente.aspx.designer.cs">
-      <DependentUpon>ConsultaExpediente.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Bitacora\HistoricoCambios.aspx.cs">
-      <DependentUpon>HistoricoCambios.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Bitacora\HistoricoCambios.aspx.designer.cs">
-      <DependentUpon>HistoricoCambios.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Catalogos\CatActos.aspx.cs">
-      <DependentUpon>CatActos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Catalogos\CatActos.aspx.designer.cs">
-      <DependentUpon>CatActos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Catalogos\CatClientes.aspx.cs">
-      <DependentUpon>CatClientes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Catalogos\CatClientes.aspx.designer.cs">
-      <DependentUpon>CatClientes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Catalogos\CatDocumentosXVariante.aspx.cs">
-      <DependentUpon>CatDocumentosXVariante.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Catalogos\CatDocumentosXVariante.aspx.designer.cs">
-      <DependentUpon>CatDocumentosXVariante.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Catalogos\CatEstadosRepublica.aspx.cs">
-      <DependentUpon>CatEstadosRepublica.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Catalogos\CatEstadosRepublica.aspx.designer.cs">
-      <DependentUpon>CatEstadosRepublica.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Catalogos\CatRolParticipantesXActo.aspx.cs">
-      <DependentUpon>CatRolParticipantesXActo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Catalogos\CatRolParticipantesXActo.aspx.designer.cs">
-      <DependentUpon>CatRolParticipantesXActo.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Catalogos\CatVariantesXActo.aspx.cs">
-      <DependentUpon>CatVariantesXActo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Catalogos\CatVariantesXActo.aspx.designer.cs">
-      <DependentUpon>CatVariantesXActo.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Configuracion\modulos.aspx.cs">
-      <DependentUpon>modulos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Configuracion\modulos.aspx.designer.cs">
-      <DependentUpon>modulos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Configuracion\sociedades.aspx.cs">
-      <DependentUpon>sociedades.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Configuracion\sociedades.aspx.designer.cs">
-      <DependentUpon>sociedades.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Controles\paginas\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controles\paginas\Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Estadisticas\panelInicial.aspx.cs">
-      <DependentUpon>panelInicial.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Estadisticas\panelInicial.aspx.designer.cs">
-      <DependentUpon>panelInicial.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ExpedientesTramites\ArchivosExpedientes.aspx.cs">
-      <DependentUpon>ArchivosExpedientes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ExpedientesTramites\ArchivosExpedientes.aspx.designer.cs">
-      <DependentUpon>ArchivosExpedientes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ExpedientesTramites\HojaDeDatos.aspx.cs">
-      <DependentUpon>HojaDeDatos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ExpedientesTramites\HojaDeDatos.aspx.designer.cs">
-      <DependentUpon>HojaDeDatos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ExpedientesTramites\PanelExpedientes.aspx.cs">
-      <DependentUpon>PanelExpedientes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ExpedientesTramites\PanelExpedientes.aspx.designer.cs">
-      <DependentUpon>PanelExpedientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExpedienteUnico\ConsultaSimpleListaNegra.aspx.cs">
       <DependentUpon>ConsultaSimpleListaNegra.aspx</DependentUpon>
@@ -594,33 +474,12 @@
     <Compile Include="ExpedienteUnico\ConsultaSimpleListaNegra.aspx.designer.cs">
       <DependentUpon>ConsultaSimpleListaNegra.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ExpedienteUnico\PanelExpedienteUnico.aspx.cs">
-      <DependentUpon>PanelExpedienteUnico.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ExpedienteUnico\PanelExpedienteUnico.aspx.designer.cs">
-      <DependentUpon>PanelExpedienteUnico.aspx</DependentUpon>
-    </Compile>
     <Compile Include="paginaConstruccion.aspx.cs">
       <DependentUpon>paginaConstruccion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="paginaConstruccion.aspx.designer.cs">
       <DependentUpon>paginaConstruccion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Configuracion\perfiles.aspx.cs">
-      <DependentUpon>perfiles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Configuracion\perfiles.aspx.designer.cs">
-      <DependentUpon>perfiles.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Configuracion\usuarios.aspx.cs">
-      <DependentUpon>usuarios.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Configuracion\usuarios.aspx.designer.cs">
-      <DependentUpon>usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controles\Servidor\PageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -663,13 +522,6 @@
     <Compile Include="menu.aspx.designer.cs">
       <DependentUpon>menu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PLD\ActiviadesVulnerables.aspx.cs">
-      <DependentUpon>ActiviadesVulnerables.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PLD\ActiviadesVulnerables.aspx.designer.cs">
-      <DependentUpon>ActiviadesVulnerables.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -711,69 +563,11 @@
     <Compile Include="Reportes\reporteAcuseConsultaListaNegraSimple.aspx.designer.cs">
       <DependentUpon>reporteAcuseConsultaListaNegraSimple.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\reporteAvisoNotarial.aspx.cs">
-      <DependentUpon>reporteAvisoNotarial.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reportes\reporteAvisoNotarial.aspx.designer.cs">
-      <DependentUpon>reporteAvisoNotarial.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\reporteExUnico.aspx.cs">
-      <DependentUpon>reporteExUnico.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reportes\reporteExUnico.aspx.designer.cs">
-      <DependentUpon>reporteExUnico.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\reporteFormConociendoCliente.aspx.cs">
-      <DependentUpon>reporteFormConociendoCliente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reportes\reporteFormConociendoCliente.aspx.designer.cs">
-      <DependentUpon>reporteFormConociendoCliente.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\reporteHojaDatos.aspx.cs">
-      <DependentUpon>reporteHojaDatos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reportes\reporteHojaDatos.aspx.designer.cs">
-      <DependentUpon>reporteHojaDatos.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Reportes\XtraAcuseListaNegra.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\XtraAcuseListaNegra.Designer.cs">
       <DependentUpon>XtraAcuseListaNegra.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraExUnicoPersonaFisica.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraExUnicoPersonaFisica.Designer.cs">
-      <DependentUpon>XtraExUnicoPersonaFisica.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraSolicitudPropiedadTerritorial.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraSolicitudPropiedadTerritorial.Designer.cs">
-      <DependentUpon>XtraSolicitudPropiedadTerritorial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraAvisoNotarialHoja2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraAvisoNotarialHoja2.Designer.cs">
-      <DependentUpon>XtraAvisoNotarialHoja2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraExUnicoFideicomiso.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraExUnicoFideicomiso.Designer.cs">
-      <DependentUpon>XtraExUnicoFideicomiso.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraExUnicoApoderado.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraExUnicoApoderado.Designer.cs">
-      <DependentUpon>XtraExUnicoApoderado.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\XtraAcuseConsultaListaNegra.cs">
       <SubType>Component</SubType>
@@ -781,67 +575,10 @@
     <Compile Include="Reportes\XtraAcuseConsultaListaNegra.Designer.cs">
       <DependentUpon>XtraAcuseConsultaListaNegra.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\XtraExUnicoPersonaMoral.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraExUnicoPersonaMoral.Designer.cs">
-      <DependentUpon>XtraExUnicoPersonaMoral.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraFormConocCliente.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraFormConocCliente.Designer.cs">
-      <DependentUpon>XtraFormConocCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraAvisoNotarialHoja1.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraAvisoNotarialHoja1.Designer.cs">
-      <DependentUpon>XtraAvisoNotarialHoja1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraTrasladosSoloOtorga.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraTrasladosSoloOtorga.Designer.cs">
-      <DependentUpon>XtraTrasladosSoloOtorga.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraTrasladosSoloFavorDe.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraTrasladosSoloFavorDe.Designer.cs">
-      <DependentUpon>XtraTrasladosSoloFavorDe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraTraslados.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraTraslados.Designer.cs">
-      <DependentUpon>XtraTraslados.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraHojaDatosSoloFavorDe.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraHojaDatosSoloFavorDe.Designer.cs">
-      <DependentUpon>XtraHojaDatosSoloFavorDe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraHojaDatosSoloOtorga.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraHojaDatosSoloOtorga.Designer.cs">
-      <DependentUpon>XtraHojaDatosSoloOtorga.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\XtraHojaDatos.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\XtraHojaDatos.Designer.cs">
-      <DependentUpon>XtraHojaDatos.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fonts\" />
-    <Folder Include="NewFolder1\" />
-    <Folder Include="NewFolder2\" />
-    <Folder Include="Produccion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -873,50 +610,8 @@
     <EmbeddedResource Include="Reportes\XtraAcuseListaNegra.resx">
       <DependentUpon>XtraAcuseListaNegra.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraExUnicoPersonaFisica.resx">
-      <DependentUpon>XtraExUnicoPersonaFisica.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraSolicitudPropiedadTerritorial.resx">
-      <DependentUpon>XtraSolicitudPropiedadTerritorial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraAvisoNotarialHoja2.resx">
-      <DependentUpon>XtraAvisoNotarialHoja2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraExUnicoFideicomiso.resx">
-      <DependentUpon>XtraExUnicoFideicomiso.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraExUnicoApoderado.resx">
-      <DependentUpon>XtraExUnicoApoderado.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\XtraAcuseConsultaListaNegra.resx">
       <DependentUpon>XtraAcuseConsultaListaNegra.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraExUnicoPersonaMoral.resx">
-      <DependentUpon>XtraExUnicoPersonaMoral.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraFormConocCliente.resx">
-      <DependentUpon>XtraFormConocCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraAvisoNotarialHoja1.resx">
-      <DependentUpon>XtraAvisoNotarialHoja1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraTrasladosSoloOtorga.resx">
-      <DependentUpon>XtraTrasladosSoloOtorga.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraTrasladosSoloFavorDe.resx">
-      <DependentUpon>XtraTrasladosSoloFavorDe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraTraslados.resx">
-      <DependentUpon>XtraTraslados.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraHojaDatosSoloFavorDe.resx">
-      <DependentUpon>XtraHojaDatosSoloFavorDe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraHojaDatosSoloOtorga.resx">
-      <DependentUpon>XtraHojaDatosSoloOtorga.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\XtraHojaDatos.resx">
-      <DependentUpon>XtraHojaDatos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
