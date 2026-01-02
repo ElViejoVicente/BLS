@@ -280,7 +280,6 @@
     <Content Include="RegistroClientes\AltaNuevoCliente.js" />
     <Content Include="RegistroClientes\ComprarCreditos.aspx" />
     <Content Include="RegistroClientes\ResumenCreditos.aspx" />
-    <Content Include="Reportes\reporteAcuseConsultaListaNegra.aspx" />
     <Content Include="Reportes\reporteAcuseConsultaListaNegraSimple.aspx" />
     <Content Include="Scripts\bootstrap\css\bootstrap-grid.css.map" />
     <Content Include="Scripts\bootstrap\css\bootstrap-grid.min.css.map" />
@@ -548,13 +547,6 @@
     </Compile>
     <Compile Include="RegistroClientes\ResumenCreditos.aspx.designer.cs">
       <DependentUpon>ResumenCreditos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\reporteAcuseConsultaListaNegra.aspx.cs">
-      <DependentUpon>reporteAcuseConsultaListaNegra.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reportes\reporteAcuseConsultaListaNegra.aspx.designer.cs">
-      <DependentUpon>reporteAcuseConsultaListaNegra.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reportes\reporteAcuseConsultaListaNegraSimple.aspx.cs">
       <DependentUpon>reporteAcuseConsultaListaNegraSimple.aspx</DependentUpon>

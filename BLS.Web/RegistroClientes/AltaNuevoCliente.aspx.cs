@@ -2,7 +2,7 @@
 using BLS.Negocio.Operativa;
 using BLS.Negocio.ORM;
 using BLS.Negocio.RegistroClientes;
-using BLS.Web.Configuracion;
+
 using DevExpress.CodeParser;
 using DevExpress.XtraRichEdit.Import.OpenXml;
 using System;
