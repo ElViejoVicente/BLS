@@ -4,86 +4,108 @@
 <html>
 <head runat="server"> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>SISTEMA SGN</title>
-   <%-- <link rel="stylesheet" href="Content/bootstrap.min.css" crossorigin="anonymous" />--%>
-<%--    <script type="text/javascript" src="Scripts/jquery-3.3.1.min.js"></script>--%>
-<%--    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>--%>
+    <title>SISTEMA</title>
+
 
     <link rel="shortcut icon" href="imagenes/header/LogoNotariaRecorte.png" type="image/x-icon" />
 
-<style>
+<style type="text/css" >
     html, body {
         width: 100%;
-		height: 100%;
-        margin:0px;
-        padding:0px;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
     }
 
     .embed-container {
-		position: relative;
-		height: 100%;
+        position: relative;
+        height: 100%;
         width: 100%;
-		overflow: hidden;
-        border:0px solid green;
-	}
-   
+        overflow: hidden;
+        border: 0px solid green;
+    }
+
 
     .embed-container1 {
-		position: relative;
-		height: 5%;
+        position: relative;
+        height: 5%;
         width: 100%;
-		overflow: hidden;
-        border:0px solid red;
-	}
+        overflow: hidden;
+        border: 0px solid red;
+    }
 
-	#headerGPB {
-		position: absolute;
-		top:0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-        overflow: hidden; 
-        border:0px solid blue;
-	}
-
-     .embed-container2 {
-		position: relative;
-		height: 96%;
+    #headerGPB {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-		overflow: hidden;
-        border:0px solid #2A385D;
-	}
+        height: 100%;
+        overflow: hidden;
+        border: 0px solid blue;
+    }
+
+    .embed-container2 {
+        position: relative;
+        height: 96%;
+        width: 100%;
+        overflow: hidden;
+        border: 0px solid #2A385D;
+    }
 
     #menu {
-		position: absolute;
-		top:0;
-		left: 0;
-		width: 13%;
-		height:98.5%;
-        border-bottom:2px solid #2A385D;
-        border-right:4px solid #2A385D;
-	}
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 13%;
+        height: 98.5%;
+        border-bottom: 2px solid #2A385D;
+        border-right: 4px solid #2A385D;
+    }
 
-     #basefrm {
-		position: absolute;
-		top:0;
-		left: 0;
-		width: 86.5%;
-		height: 98.5%;
-        margin-left:13.4%;
-        border-bottom:2px solid #2A385D;
-        border-right:2px solid #2A385D;
-	}
+    #basefrm {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 86.5%;
+        height: 98.5%;
+        margin-left: 13.4%;
+        border-bottom: 2px solid #2A385D;
+        border-right: 2px solid #2A385D;
+    }
 
-    @media screen and (max-width:1520px){
-        #menu{
-		    width: 200px;
-	    }
+    @media screen and (max-width:1520px) {
+        #menu {
+            width: 200px;
+        }
+
         #basefrm {
-              margin-left:202px;
+            margin-left: 202px;
         }
     }
 </style>
+
+    <script type="text/javascript">
+        (function () {
+            const CHECK_EVERY_MS = 60 * 1000; // cada minuto (ajústalo)
+            const LOGIN_URL = "/login.aspx";
+            const CHECK_URL = "/SessionCheck.aspx";
+
+            function redirectLogin() {
+                // rompe iframes: siempre manda al login en ventana principal
+                window.top.location.href = LOGIN_URL;
+            }
+
+            function checkSession() {
+                fetch(CHECK_URL, { method: "GET", cache: "no-store", credentials: "same-origin" })
+                    .then(r => r.json())
+                    .then(d => { if (!d.alive) redirectLogin(); })
+                    .catch(() => redirectLogin()); // si falla, mejor fuera
+            }
+
+            setInterval(checkSession, CHECK_EVERY_MS);
+        })();
+    </script>
+
 
 </head>
 
@@ -94,7 +116,7 @@
        </div>
        <div class="embed-container2">
             
-           <iframe name="menu" id="menu" src="Menu.aspx" frameborder="0"  scrolling="no" allowfullscreen ></iframe>
+           <iframe name="menu" id="menu" src="Menu.aspx" frameborder="0"  scrolling="no" allowfullscreen="" ></iframe>
            <iframe name="basefrm" id="basefrm" src="RegistroClientes/ResumenCreditos.aspx" frameborder="0" allowfullscreen></iframe>
       </div>
   </div>

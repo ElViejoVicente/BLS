@@ -22,7 +22,7 @@ namespace BLS.Web
         private List<SociedadXUsuario> ListaSociedadesAutorizadas = null;
         // token service instance - read SMTP settings from web.config appSettings or use defaults
         private EmailTokenService _tokenService;
-
+        protected override bool RequiereSesion => false;
 
         protected void Page_Load(object sender, EventArgs e)
         {

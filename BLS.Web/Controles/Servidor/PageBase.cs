@@ -16,7 +16,8 @@ namespace BLS.Web.Controles.Servidor
     {
         #region Variables privadas
         public DatosUsuario datosUsuario = new DatosUsuario();
-        
+        protected virtual bool RequiereSesion => true;
+
         public UsuariosEXT UsuarioPagina
         {
             get
@@ -88,33 +89,35 @@ namespace BLS.Web.Controles.Servidor
                 return resultado;
             }
         }
+      
 
         protected override void OnLoad(EventArgs e)
         {
-            InitializeComponent();
-            string path = HttpContext.Current.Request.Url.AbsolutePath;
-            if (path != "/index" && path != "/login")
+            base.OnLoad(e);
+             InitializeComponent();
+
+            // ✅ Si la página no requiere sesión, NO validamos
+            if (!RequiereSesion) return;
+
+            // Aquí tu validación real
+            if (UsuarioPagina == null) // o tu Session["usuario"] == null
             {
-                if (UsuarioPagina == null)
+                // ✅ Evita llenar historial y rompe frames
+                var js = "window.top.location.replace('/login.aspx');";
+
+                // Si es callback/async postback usa JS
+                bool isAsync = this.IsCallback || (System.Web.UI.ScriptManager.GetCurrent(this)?.IsInAsyncPostBack ?? false);
+                if (isAsync)
                 {
-                    //string str_Script = @" <script type='text/javascript'> window.parent.location.href='/login.aspx'; </script>";
-                    //ClientScript.RegisterClientScriptBlock(this.GetType(), "Redirect", str_Script);
-                    ////Page.ClientScript.RegisterStartupScript(this.GetType(), "Redirect", str_Script, true);
-
-
-                    ////Server.Transfer("/Controles/paginas/Error.aspx", true);
-                    ////window.location.href
-
-                    ////Session.Clear();
-                    ////Session.RemoveAll();
-                    ////Session.Abandon();
-                    ////ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), Guid.NewGuid().ToString(), "window.parent.location.href='/login.aspx'; ", true);
-
-                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), Guid.NewGuid().ToString(), "window.parent.location.href='/login.aspx'; ", true);
-
+                    System.Web.UI.ScriptManager.RegisterClientScriptBlock(
+                        this, this.GetType(), Guid.NewGuid().ToString(), js, true);
+                }
+                else
+                {
+                    // request normal: redirect servidor (más estable)
+                    Response.Redirect("~/login.aspx", true);
                 }
             }
-            base.OnLoad(e);
         }
         private void Pagina_Error(object sender, EventArgs e)
         {

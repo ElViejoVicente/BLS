@@ -419,6 +419,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="SessionCheck.aspx" />
     <Content Include="SwitcherResources\Content\bootstrap.min.css" />
     <Content Include="SwitcherResources\Content\Cerulean\bootstrap.min.css" />
     <Content Include="SwitcherResources\Content\Cosmo\bootstrap.min.css" />
@@ -566,6 +567,13 @@
     </Compile>
     <Compile Include="Reportes\XtraAcuseConsultaListaNegra.Designer.cs">
       <DependentUpon>XtraAcuseConsultaListaNegra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SessionCheck.aspx.cs">
+      <DependentUpon>SessionCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionCheck.aspx.designer.cs">
+      <DependentUpon>SessionCheck.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
